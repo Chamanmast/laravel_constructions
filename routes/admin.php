@@ -11,15 +11,18 @@ use App\Http\Controllers\Backend\BlogcategoryController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogtagController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\ImagePresetsController;
 use App\Http\Controllers\Backend\MegaMenuController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\MenugroupController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\UserRoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -88,6 +91,21 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class)->middleware('can:category.index, category.create, category.update');
     Route::post('/category/status', [CategoryController::class, 'StatusUpdate'])->middleware('can:category.status')->name('category.status');
     Route::post('/category/delete', [CategoryController::class, 'Delete'])->middleware('can:category.delete')->name('category.delete');
+
+    // Product All Routes
+    Route::resource('product', ProductController::class)->middleware('can:product.index, product.create, product.update');
+    Route::post('/product/status', [ProductController::class, 'StatusUpdate'])->middleware('can:product.status')->name('product.status');
+    Route::post('/product/delete', [ProductController::class, 'Delete'])->middleware('can:product.delete')->name('product.delete');
+
+    // Product All Routes
+    Route::resource('gallery', GalleryController::class)->middleware('can:gallery.index, gallery.create, gallery.update');
+    Route::post('/gallery/status', [GalleryController::class, 'StatusUpdate'])->middleware('can:gallery.status')->name('gallery.status');
+    Route::post('/gallery/delete', [GalleryController::class, 'Delete'])->middleware('can:gallery.delete')->name('gallery.delete');
+
+    // Testimonials All Routes
+    Route::resource('testimonials', TestimonialController::class)->middleware('can:testimonials.index, testimonials.create, testimonials.update');
+    Route::post('/testimonials/status', [TestimonialController::class, 'StatusUpdate'])->middleware('can:testimonials.status')->name('testimonials.status');
+    Route::post('/testimonials/delete', [TestimonialController::class, 'DeletewithImage'])->middleware('can:testimonials.delete')->name('testimonials.delete');
 
     // SMTP and Site Setting  All Route
     Route::controller(SettingController::class)->group(function () {

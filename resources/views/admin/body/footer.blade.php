@@ -1,7 +1,15 @@
+
+@php
+    $template = App\Models\SiteSetting::select(
+        'site_title'        
+    )->find(1);
+	
+@endphp
+
 <div class="footer-wrapper">
     <div class="footer-section f-section-1">
         <p class="">Copyright © <span class="dynamic-year">{{ date('Y') }}</span> <a target="_blank"
-                href="#">Masthead Technologies</a>, All rights reserved.</p>
+                href="#">{{$template->site_title }}</a>, All rights reserved.</p>
     </div>
     <div class="footer-section f-section-2">
         <p class="">L:{{ Illuminate\Foundation\Application::VERSION }} - Php:{{ phpversion() }} -Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

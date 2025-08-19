@@ -22,7 +22,6 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th class="text-center">Status</th>
-                                        <th>Created / Updated</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -42,10 +41,7 @@
                                                     data-original-title="Status">{{ $cat->status == 1 ? 'Deactive' : 'Active' }}</button>
 
                                             </td>
-                                            <td><strong>C:</strong>{{ $cat->created_at->format('l d M Y h:i:s A') }}
-                                                <br>
-                                                <strong>U:</strong>{{ $cat->updated_at->format('l d M Y h:i:s A') }}
-                                            </td>
+
 
                                             <td class="text-center">
                                                 <div class="action-btns">
@@ -102,7 +98,7 @@
                     }
                 });
                 if (checkedValues.length === 0) {
-                    // Display an alert if none are checked               
+                    // Display an alert if none are checked
                     toastr.warning("Please check at least one checkbox.");
                 } else {
                     // Output the array to the console (you can do whatever you want with the array)
@@ -111,7 +107,7 @@
                         if (checkbox.checked) {
                             // Add the value to the array
                             checkedValues.push(checkbox.value);
-                            var elems = document.catrySelector('.social-' + checkbox.value);
+                            var elems = document.catrySelector('.category-' + checkbox.value);
                             elems.remove();
                         }
                     });

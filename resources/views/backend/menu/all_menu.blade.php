@@ -22,6 +22,7 @@
                                     <th>Type</th>
                                     <th>Position</th>
                                     <th>Title</th>
+                                    <th>Mega</th>
                                     <th>Url</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
@@ -39,7 +40,9 @@
                                         <td> <span class="badge badge-light-{{BADGE[$menu->type] }} mb-2 me-4">{{ MENUTYPE[$menu->type] }}</span></td>
                                         <td>{{ $menu->position }}</td>
                                         <td>{{ !empty($menu->title) ? $menu->title : '-' }}</td>
-                                        <td>{{ $menu->url }}</td>
+                                        <td>{!! $menu->megamenu ? '<span class="shadow-none badge badge-success">Yes</span>' :'-' !!}</td>
+                                        <td> {!! $menu->type==1 ?'<a href="'.$menu->url.'" class="btn btn-sm btn-info">Link</a>' : ''!!}</td>
+                                        
                                         <td class="text-center">
                                             <button type="button" onClick="statusFunction({{ $menu->id }},'Menu')"
                                                 class="shadow-none badge badge-light-{{ $menu->status == 1 ? 'danger' : 'success' }} warning changestatus{{ $menu->id }}  bs-tooltip"

@@ -4,12 +4,7 @@
 
          <div class="navbar-nav theme-brand flex-row  text-center">
              <div class="nav-logo">
-                 <div class="nav-item theme-logos">
-                     <a href="{{ route('admin.dashboard') }}">
-                         <img src="{{ asset(App\Models\SiteSetting::select('favicon')->find(1)->favicon) }}"
-                             alt="logo">
-                     </a>
-                 </div>
+
                  <div class="nav-item theme-text">
                      <a href="{{ route('admin.dashboard') }}" class="nav-link"> Admin Panel</a>
                  </div>
@@ -92,18 +87,40 @@
                      ['route' => 'modules.index', 'label' => 'Show Module', 'permission' => 'module.index'],
                  ]" :activeRoutes="['admin/module']" />
 
-              <x-backend.backend_component.side-menu-item permission="slider.menu" routeId="slider" icon="menu"
+             <x-backend.backend_component.side-menu-item permission="slider.menu" routeId="slider" icon="menu"
                  label="Slider" :submenu="[
                      ['route' => 'slider.create', 'label' => 'Add Slider', 'permission' => 'slider.create'],
                      ['route' => 'slider.index', 'label' => 'Show Slider', 'permission' => 'slider.index'],
                  ]" :activeRoutes="['admin/slider']" />
 
-
-             <x-backend.backend_component.side-menu-item permission="category.menu" routeId="category" icon="menu"
-                 label="Product" :submenu="[
+             <x-backend.backend_component.side-menu-item permission="testimonials.menu" routeId="testimonials"
+                 icon="menu" label="Testimonials" :submenu="[
+                     [
+                         'route' => 'testimonials.create',
+                         'label' => 'Add Testimonials',
+                         'permission' => 'testimonials.create',
+                     ],
+                     [
+                         'route' => 'testimonials.index',
+                         'label' => 'Show Testimonials',
+                         'permission' => 'testimonials.index',
+                     ],
+                 ]" :activeRoutes="['admin/testimonials']" />
+                   <x-backend.backend_component.side-menu-item permission="category.menu" routeId="category" icon="menu"
+                 label="Category" :submenu="[
                      ['route' => 'category.create', 'label' => 'Add Category', 'permission' => 'category.create'],
                      ['route' => 'category.index', 'label' => 'Show Category', 'permission' => 'category.index'],
                  ]" :activeRoutes="['admin/category']" />
+             <x-backend.backend_component.side-menu-item permission="product.menu" routeId="product" icon="menu"
+                 label="Product" :submenu="[
+                     ['route' => 'product.create', 'label' => 'Add Product', 'permission' => 'product.create'],
+                     ['route' => 'product.index', 'label' => 'Show Product', 'permission' => 'product.index'],
+                 ]" :activeRoutes="[ 'admin/product']" />
+                  <x-backend.backend_component.side-menu-item permission="gallery.menu" routeId="gallery" icon="menu"
+                 label="Gallery" :submenu="[
+                     ['route' => 'gallery.create', 'label' => 'Add Gallery', 'permission' => 'gallery.create'],
+                     ['route' => 'gallery.index', 'label' => 'Show Gallery', 'permission' => 'gallery.index'],
+                 ]" :activeRoutes="['admin/gallery']" />
              <x-backend.backend_component.side-menu-item permission="blog.menu" routeId="blog" icon="menu"
                  label="Blog" :submenu="[
                      ['route' => 'blog.create', 'label' => 'Add Blog', 'permission' => 'blog.create'],
@@ -149,8 +166,8 @@
 
              <x-backend.backend_component.side-menu-item permission="smtp.menu" routeId="smtp.setting" icon="send"
                  label="SMTP Settings" :submenu="[]" :activeRoutes="[]" :expandedRoutes="[]" />
-             <x-backend.backend_component.side-menu-item permission="site.menu" routeId="site.setting"
-                 icon="settings" label="Settings" :submenu="[]" :activeRoutes="[]" :expandedRoutes="[]" />
+             <x-backend.backend_component.side-menu-item permission="site.menu" routeId="site.setting" icon="settings"
+                 label="Settings" :submenu="[]" :activeRoutes="[]" :expandedRoutes="[]" />
 
 
          </ul>

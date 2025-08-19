@@ -8,6 +8,8 @@ class Category extends Model
 {
     protected $table = 'categories';
 
+    public $timestamps = false;
+
     protected $guarded = [];
 
     public function scopeActive($query)
@@ -15,8 +17,8 @@ class Category extends Model
         return $query->where('status', 1);
     }
 
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class);
-    // }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

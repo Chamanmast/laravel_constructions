@@ -85,6 +85,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        dd( $request);
         $request->validate([
             'title' => 'required|max:255|unique:menus,title,'.$menu->id,
             'type' => 'required',

@@ -23,4 +23,15 @@
         </div>
 
     </div>
+    @section('script')
+       
+        <script>
+            $(".taggings").select2({
+                placeholder: $(this).data('placeholder'),
+                closeOnSelect: false,
+                tags: true,
+                allowClear: true,
+            });
+        </script>
+    @stop
 </x-main-layout>

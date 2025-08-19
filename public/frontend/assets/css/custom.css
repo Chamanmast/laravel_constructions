@@ -1,0 +1,38 @@
+.header-bg {
+    background: var(--bs-dark);
+}
+
+.tabs-bg {
+    border-color: transparent;
+    box-shadow: 0 0 0 0.05rem rgba(8, 60, 130, 0.06), 0rem 0rem 1.25rem rgba(30, 34, 40, 0.04);
+    border-radius: 0.4rem;    
+}
+.tab-content .card div{ color:#000}
+
+.nav-pills .nav-link {
+    color:#fff;
+   background-color: #24bfff;
+}
+.nav-pills .nav-link.active{
+    color:#fff;
+    background-color: #000;
+}
+#services .card-body{
+    height: 350px;
+}
+@media (max-width: 480px) {
+
+    .logo-light,
+    .logo-dark {
+        width: 40px;
+        /* Adjust the width as needed */
+    }
+
+    .mlogo {
+        font-size: 20px !important;
+    }
+
+    .slogo {
+        font-size: 12px !important;
+    }
+}

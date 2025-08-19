@@ -14,7 +14,7 @@ class CategoryController extends Controller
 {
     use CommonTrait, ImageGenTrait;
 
-    public $path = 'upload/module/thumbnail/';
+    public $path = 'upload/category/thumbnail/';
 
     public $image_preset;
 
@@ -33,7 +33,7 @@ class CategoryController extends Controller
     {
         return $this->executeWithNotification(
             function () {
-                $category = Category::latest()->get(['id', 'name', 'image', 'created_at']);
+                $category = Category::get();
 
                 return view('backend.category.all_category', compact('category'));
             },
@@ -74,6 +74,7 @@ class CategoryController extends Controller
             Category::create([
                 'name' => $request->name,
                 'image' => $save_url,
+                'front' => $request->front,
                 'slug' => Str::slug($request->name),
                 'text' => $request->text,
             ]);
@@ -122,6 +123,7 @@ class CategoryController extends Controller
             $category->update([
                 'name' => $request->name,
                 'image' => $save_url,
+                'front' => $request->front,
                 'slug' => Str::slug($request->name),
                 'text' => $request->text,
             ]);
