@@ -1,16 +1,15 @@
 @props(['template'])
 @php
     $modal = App\Models\SiteSetting::select(
-        'company_address',
+        'address',
         'site_title',
         'email',
+        'about',
         'logo',
-        'support_phone',
+        'phone',
         'facebook',
         'twitter',
-        'gplus',
-        'linkdin',
-        'map',
+        'pinterest',
         'about',
         'copywrite',
     )->find(1);
@@ -25,16 +24,16 @@
       <div class="row gy-6 gy-lg-0">
         <div class="col-md-4 col-lg-3">
           <div class="widget">
-            <img class="mb-4" src="{{asset($modal->logo)}}" srcset="{{asset($modal->logo)}} 2x" alt="" />
-            <span class="text-white fw-light  fs-18 ">{{$modal->site_title}}</span>
-            <p class="mb-4">© {{ $modal->copywrite }} <br class="d-none d-lg-block" />All rights reserved.</p>
+            <img class="mb-4" src="{{asset($modal->logo)}}" srcset="{{asset($modal->logo)}} 1x" alt="" />
+            <p class="fs-12">{!! $modal->about !!}</p>
+            <p class="mb-4">© {{ date('Y') }} {{ $modal->site_title }}  <br class="d-none d-lg-block" />All rights reserved.</p>
             <nav class="nav social social-white">
                 <a href="{{ $modal->facebook }}" class="uil uil-facebook-f" target="_blank"></a>
                 <a href="{{ $modal->twitter }}" class="uil uil-twitter" target="_blank"></a>
-                {{-- <a href="{{ $modal->gplus }}" class="uil uil-gplus" target="_blank"></a> --}}
-                <a href="{{ $modal->linkdin }}" class="uil uil-linkedin" target="_blank"></a>
-              
-              
+
+                <a href="{{ $modal->pinterest }}" class="uil uil-linkedin" target="_blank"></a>
+
+
             </nav>
             <!-- /.social -->
           </div>
@@ -44,8 +43,8 @@
         <div class="col-md-4 col-lg-3">
           <div class="widget">
             <h4 class="widget-title text-white mb-3">Get in Touch</h4>
-            <address class="pe-xl-15 pe-xxl-17">{!! $modal->company_address !!}</address>
-            <a href="mailto:{{ $modal->email }}">{{ $modal->email }}</a><br /> <a href="tel:{{ '+91'.$phone }}">+91-{{ $phone }}</a>
+            <address class="pe-xl-15 pe-xxl-17">{!! $modal->address !!}</address>
+            <a href="mailto:{{ $modal->email }}">{{ $modal->email }}</a><br /> <a href="tel:{{ '+'.$modal->phone }}">+{{ $modal->phone }}</a>
           </div>
           <!-- /.widget -->
         </div>
@@ -54,10 +53,10 @@
           <div class="widget">
             <h4 class="widget-title text-white mb-3">Learn More</h4>
             <ul class="list-unstyled  mb-0">
-                @foreach (App\Models\Menu::select('title', 'url')->where('group_id', 1)->where('status', 0)->where('type', 2)->get() as $menu)
+                @foreach (App\Models\Menu::select('title', 'url')->where('group_id', 1)->where('parent_id', 0)->where('status', 0)->where('type', 2)->get() as $menu)
                 <li><a href="{{ $menu->url }}">{{ $menu->title }}</a></li>
             @endforeach
-             
+
             </ul>
           </div>
           <!-- /.widget -->
@@ -106,4 +105,3 @@
     </div>
     <script src="{{ asset('frontend/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/theme.js') }}"></script>
- 

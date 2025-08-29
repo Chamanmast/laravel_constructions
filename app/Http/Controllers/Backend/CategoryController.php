@@ -72,9 +72,10 @@ class CategoryController extends Controller
             }
 
             Category::create([
+                'type' => $request->type,
                 'name' => $request->name,
                 'image' => $save_url,
-                'front' => $request->front,
+                'front' => $request->front ? $request->front : 0,
                 'slug' => Str::slug($request->name),
                 'text' => $request->text,
             ]);
@@ -121,6 +122,7 @@ class CategoryController extends Controller
             }
 
             $category->update([
+                'type' => $request->type,
                 'name' => $request->name,
                 'image' => $save_url,
                 'front' => $request->front,

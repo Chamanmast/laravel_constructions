@@ -1,8 +1,11 @@
 @charset "UTF-8";
-
+/*!
+Theme Name: Sandbox - Modern & Multipurpose Bootstrap 5 Template
+Theme URI:	https://sandbox.elemisthemes.com/
+Version:	3.3.0
+Author:		elemis
+*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 :root {
   --bs-gray-100: #fefefe;
   --bs-gray-200: #f6f7f9;
@@ -135,7 +138,7 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 96, 105, 123;
   --bs-body-bg-rgb: 254, 254, 254;
-  --bs-font-sans-serif:  "Poppins", sans-serif;
+  --bs-font-sans-serif: "Manrope", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-root-font-size: 20px;
@@ -4893,7 +4896,7 @@ fieldset:disabled .btn {
   --bs-dropdown-item-padding-x: 1.5rem;
   --bs-dropdown-item-padding-y: 0.2rem;
   --bs-dropdown-header-color: #3f78e0;
-  --bs-dropdown-header-padding-x: 1.5rem;
+  --bs-dropdown-header-padding-x: 1rem;
   --bs-dropdown-header-padding-y: 0.5rem;
   position: absolute;
   z-index: var(--bs-dropdown-zindex);
@@ -5372,7 +5375,7 @@ fieldset:disabled .btn {
   --bs-navbar-brand-font-size: 0.7rem;
   --bs-navbar-brand-color: #3f78e0;
   --bs-navbar-brand-hover-color: #3f78e0;
-  --bs-navbar-nav-link-padding-x: .4rem;
+  --bs-navbar-nav-link-padding-x: 0.5rem;
   --bs-navbar-toggler-padding-y: 0.25rem;
   --bs-navbar-toggler-padding-x: 0.75rem;
   --bs-navbar-toggler-font-size: 1rem;
@@ -5414,7 +5417,7 @@ fieldset:disabled .btn {
 }
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
-  --bs-nav-link-padding-y: 1.2rem;
+  --bs-nav-link-padding-y: 0.6rem;
   --bs-nav-link-font-size: 0.8rem;
   --bs-nav-link-font-weight: 700;
   --bs-nav-link-color: var(--bs-navbar-color);
@@ -5782,8 +5785,8 @@ fieldset:disabled .btn {
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='45' height='32' viewBox='0 0 45 32'%3e%3cpath fill='%23fff' d='M26.88 29.888c-1.076 1.289-2.683 2.103-4.48 2.103s-3.404-0.814-4.472-2.093l-0.008-0.009-5.12-7.040-8.192-10.048-3.52-4.608c-0.646-0.848-1.036-1.922-1.036-3.087 0-2.828 2.292-5.12 5.12-5.12 0.139 0 0.277 0.006 0.413 0.016l-0.018-0.001h33.664c0.118-0.010 0.256-0.015 0.396-0.015 2.828 0 5.12 2.292 5.12 5.12 0 1.165-0.389 2.239-1.045 3.1l0.009-0.013-3.52 4.608-7.872 10.048z'/%3e%3c/svg%3e");
 }
 .card {
-  --bs-card-spacer-y: 1rem;
-  --bs-card-spacer-x: 1rem;
+  --bs-card-spacer-y: 2rem;
+  --bs-card-spacer-x: 2rem;
   --bs-card-title-spacer-y: 0.5rem;
   --bs-card-border-width: 1px;
   --bs-card-border-color: rgba(164, 174, 198, 0.2);
@@ -22139,7 +22142,7 @@ h6,
 .h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 700;
   color: #343f52;
   word-spacing: 0.1rem;
   letter-spacing: -0.01rem;
@@ -28969,9 +28972,8 @@ button:focus {
   border: 0;
 }
 .dropdown-item {
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -0.01rem;
-  padding-left: 40px;
 }
 .dropdown-item:hover,
 .dropdown-item:focus {
@@ -30862,7 +30864,7 @@ button:focus {
   content: "\e931";
 }
 .nav-link {
-  --bs-nav-link-font-weight: 500;
+  --bs-nav-link-font-weight: 700;
   letter-spacing: -0.01rem;
 }
 .nav-link p {
@@ -31088,7 +31090,7 @@ button.hamburger {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--bs-gray-100);
+  color: #343f52;
   transition: all 0.2s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {

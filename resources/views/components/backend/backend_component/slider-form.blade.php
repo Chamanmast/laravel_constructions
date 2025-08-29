@@ -26,7 +26,7 @@
             {{-- Name --}}
             <div class="mb-3">
                 <x-form.input-label for="name" value="Name" />
-                <x-form.text-input name="name" :value="$slider->name ?? ''" required placeholder="Heading" />
+                <x-form.text-input name="name" :value="$slider->name ?? ''" required placeholder="Name" />
                 <x-form.input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
         </div>
@@ -34,14 +34,11 @@
             {{-- Title --}}
             <div class="mb-3">
                 <x-form.input-label for="title" value="Heading" />
-                <x-form.text-input name="title" :value="$slider->name ?? ''" required placeholder="Heading" />
+                <x-form.text-input name="title" :value="$slider->title ?? ''" required placeholder="Heading" />
                 <x-form.input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
         </div>
     </div>
-
-
-
     {{-- Sub title --}}
     <div class="mb-3">
         <x-form.input-label for="sub_title" value="Sub Heading" />

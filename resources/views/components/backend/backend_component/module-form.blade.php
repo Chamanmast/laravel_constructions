@@ -2,18 +2,25 @@
 
 <x-form.form :route="$isEdit ? route('modules.update', $module->id) : route('modules.store')" :isEdit="$isEdit" files="true">
 
-    {{-- Name Input --}}
-    <div class="mb-3">
-        <x-form.input-label for="name" value="Name" />
-        <x-form.text-input name="name" :value="$module->name ?? ''" required placeholder="Name" />
-        <x-form.input-error :messages="$errors->get('name')" class="pt-3" />
+    <div class="row">
+        <div class="col-6">
+            {{-- Name Input --}}
+            <div class="mb-3">
+                <x-form.input-label for="name" value="Name" />
+                <x-form.text-input name="name" :value="$module->name ?? ''" required placeholder="Name" />
+                <x-form.input-error :messages="$errors->get('name')" class="pt-3" />
+            </div>
+
+        </div>
+        <div class="col-6">
+            {{-- Heading Input --}}
+            <div class="mb-3">
+                <x-form.input-label for="heading" value="Heading" />
+                <x-form.text-input name="heading" :value="$module->heading ?? ''" required placeholder="Heading" />
+            </div>
+        </div>
     </div>
 
-    {{-- Heading Input --}}
-    <div class="mb-3">
-        <x-form.input-label for="heading" value="Heading" />
-        <x-form.text-input name="heading" :value="$module->heading ?? ''" required placeholder="Heading" />
-    </div>
 
     {{-- Link Input --}}
     <div class="mb-3">
@@ -31,7 +38,9 @@
     <div class="row">
         <div class="col-sm-10">
             @php
-                $small_img = !empty($module->image) ? explode('.', $module->image)[0] . '_thumb.' . explode('.', $module->image)[1] : '/upload/no_image.jpg';
+                $small_img = !empty($module->image)
+                    ? explode('.', $module->image)[0] . '_thumb.' . explode('.', $module->image)[1]
+                    : '/upload/no_image.jpg';
             @endphp
             <x-form.input-label for="image" value="Image" />
             <x-form.file-input name="image" onchange="mainThamUrl(this)" placeholder="Main Thumbnail" />

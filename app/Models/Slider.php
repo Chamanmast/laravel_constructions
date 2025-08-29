@@ -9,4 +9,9 @@ class Slider extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function scopeActive($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

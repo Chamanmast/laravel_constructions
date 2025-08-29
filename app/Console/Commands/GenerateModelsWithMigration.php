@@ -33,7 +33,7 @@ class GenerateModelsWithMigration extends Command
 
         foreach ($models as $model => $fields) {
             try {
-                  $this->generateModelResources($model, 0);
+                $this->generateModelResources($model, 0);
                 $this->createBladeFiles($model);
                 $this->createPermissions($model);
                 $this->createComponentWithDummyData($model);

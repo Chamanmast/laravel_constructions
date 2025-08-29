@@ -1,40 +1,37 @@
 {{-- resources/views/components/backend/backend_component/mega-menu-form.blade.php --}}
 
-{{ Form::open([
-    'route' => $isEdit ? ['megamenu.update', $megamenu->id] : 'megamenu.store',
-    'class' => 'forms-sample needs-validation',
-    'novalidate' => 'novalidate',
-    'method' => $isEdit ? 'put' : 'post',
-    'files' => true,
-]) }}
+{{-- Include the reusable form component --}}
+<x-form.form :route="$isEdit ? route('megamenu.update', $megamenu->id) : route('megamenu.store')" :isEdit="$isEdit" method="{{ $isEdit ? 'put' : 'post' }}" files="true">
 
-<div class="mb-3">
-    {!! Form::label('menu_id', 'Menu', ['class' => 'form-label']) !!}
-    {!! Form::select('menu_id',  $menus, $megamenu->menu_id ?? null, [
-        'class' => 'form-control',
-      
-        'required' => 'required',
-        'placeholder' => 'Menu',
-    ]) !!}
-</div>
-
-<div class="mb-3">
-    {!! Form::label('title', 'Title', ['class' => 'form-label']) !!}
-    {!! Form::text('title', $megamenu->title ?? null, ['class' => 'form-control','required' => 'required', 'placeholder' => 'Title']) !!}
-    @error('title')
-        <span class="text-danger pt-3">{{ $message }}</span>
-    @enderror
-</div>
-
-<div class="row">
+    {{-- Menu --}}
     <div class="mb-3">
-        {!! Form::label('links', 'More Menus', ['class' => 'form-label']) !!}
-        {!! Form::select('links[]', $services, isset($megamenu) ? explode(',', $megamenu->links) : null, [
-            'class' => 'form-control taggings',
-            'multiple' => true,
-        ]) !!}
+        <x-form.input-label for="menu_id" value="Menu" />
+        <x-form.select name="menu_id" :options="$menus" :selected="$megamenu->menu_id ?? null" placeholder="Menu" required />
+        <x-form.input-error :messages="$errors->get('menu_id')" class="mt-2" />
     </div>
-</div>
 
-{!! Form::submit('Submit', ['class' => 'btn btn-outline-primary btn-icon-text mb-2 mb-md-0']) !!}
-{{ Form::close() }}
+    {{-- Title --}}
+    <div class="mb-3">
+        <x-form.input-label for="title" value="Title" />
+        <x-form.text-input name="title" :value="$megamenu->title ?? ''" placeholder="Title" required />
+        <x-form.input-error :messages="$errors->get('title')" />
+    </div>
+
+    {{-- More Menus --}}
+
+    <div class="mb-3">
+        <x-form.input-label for="links" value="More Menus" />
+        <x-form.select name="links[]" 
+        class="form-control taggings" 
+        :options="$services" 
+        :selected="isset($megamenu) ? explode(',', $megamenu->links) : null" 
+        multiple />
+         <x-form.input-error :messages="$errors->get('links')" />
+    </div>
+
+    {{-- Submit Button --}}
+    <x-form.button type="submit">
+        Submit
+    </x-form.button>
+
+</x-form.form>

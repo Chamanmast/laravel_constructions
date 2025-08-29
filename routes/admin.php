@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\TestimonialController;
@@ -92,12 +93,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/category/status', [CategoryController::class, 'StatusUpdate'])->middleware('can:category.status')->name('category.status');
     Route::post('/category/delete', [CategoryController::class, 'Delete'])->middleware('can:category.delete')->name('category.delete');
 
+    // ervice All Routes
+    Route::resource('services', ServiceController::class)->middleware('can:services.index, services.create, services.update');
+    Route::post('/services/status', [ServiceController::class, 'StatusUpdate'])->middleware('can:services.status')->name('services.status');
+    Route::post('/services/delete', [ServiceController::class, 'Delete'])->middleware('can:services.delete')->name('services.delete');
+
     // Product All Routes
     Route::resource('product', ProductController::class)->middleware('can:product.index, product.create, product.update');
     Route::post('/product/status', [ProductController::class, 'StatusUpdate'])->middleware('can:product.status')->name('product.status');
     Route::post('/product/delete', [ProductController::class, 'Delete'])->middleware('can:product.delete')->name('product.delete');
 
-    // Product All Routes
+    // Gallery All Routes
     Route::resource('gallery', GalleryController::class)->middleware('can:gallery.index, gallery.create, gallery.update');
     Route::post('/gallery/status', [GalleryController::class, 'StatusUpdate'])->middleware('can:gallery.status')->name('gallery.status');
     Route::post('/gallery/delete', [GalleryController::class, 'Delete'])->middleware('can:gallery.delete')->name('gallery.delete');

@@ -48,6 +48,10 @@ class MenuController extends Controller
 
         return $this->executeWithNotification(
             function () use ($request) {
+                $groups = $request->group_ids;
+                if (is_array($groups)) {
+                    $groupids = implode(',', $groups);
+                }
                 $position = Menu::max('position') + 1;
                 $menu = Menu::create([
                     'parent_id' => $request->parent_id ?? 0,
@@ -55,7 +59,7 @@ class MenuController extends Controller
                     'url' => Str::slug($request->title),
                     'type' => $request->type,
                     'position' => $position,
-                    'group_id' => $request->group_id,
+                    'group_id' => $groupids,
                     'megamenu' => $request->megamenu ? 1 : 0,
                 ]);
                 $menu->meta()->create([
@@ -85,7 +89,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        dd( $request);
+
         $request->validate([
             'title' => 'required|max:255|unique:menus,title,'.$menu->id,
             'type' => 'required',
@@ -94,13 +98,17 @@ class MenuController extends Controller
 
         return $this->executeWithNotification(
             function () use ($request, $menu) {
+                $groups = $request->group_ids;
+                if (is_array($groups)) {
+                    $groupids = implode(',', $groups);
+                }
                 $menu->update([
                     'parent_id' => $request->parent_id ?? 0,
                     'title' => $request->title,
                     'url' => $request->url ?? Str::slug($request->title),
                     'type' => $request->type,
                     'position' => $request->position ?? $menu->position,
-                    'group_id' => $request->group_id,
+                    'group_id' => $groupids,
                     'megamenu' => $request->megamenu ? 1 : 0,
                 ]);
                 $menu->meta()->updateOrCreate([], [

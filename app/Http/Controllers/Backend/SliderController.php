@@ -30,7 +30,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $slider = Slider::latest()->get(['id', 'name', 'title', 'image', 'status', 'created_at']);
+        $slider = Slider::get(['id', 'name', 'title', 'image', 'status']);
 
         return view('backend.slider.all_slider', compact('slider'));
     }

@@ -49,6 +49,7 @@ class GalleryController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
+
         return view('backend.gallery.add_gallery', compact('categories'));
     }
 
@@ -153,7 +154,7 @@ class GalleryController extends Controller
         $extension = $img_parts[1];
 
         foreach ($this->image_preset as $preset) {
-            $preset_path = public_path($base_name . '_' . $preset->name . '.' . $extension);
+            $preset_path = public_path($base_name.'_'.$preset->name.'.'.$extension);
             if (file_exists($preset_path)) {
                 @unlink($preset_path);
             }

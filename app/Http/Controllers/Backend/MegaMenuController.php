@@ -62,11 +62,12 @@ class MegaMenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MegaMenu $megaMenu)
+    public function edit(MegaMenu $megamenu)
     {
         $menus = Menu::pluck('title', 'id');
+        $services = Service::pluck('name', 'id');
 
-        return view('backend.megamenu.edit_megamenu', compact('megaMenu', 'menus'));
+        return view('backend.megamenu.edit_megamenu', compact('megamenu', 'menus', 'services'));
     }
 
     /**

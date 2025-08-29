@@ -20,6 +20,7 @@
                                     <tr>
                                         <th>-</th>
                                         <th>ID</th>
+                                        <th>Type</th>
                                         <th>Name</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
@@ -32,6 +33,7 @@
                                                         class="form-check-input mixed_child "
                                                         value="{{ $cat->id }}" type="checkbox"></span></td>
                                             <td>{{ $cat->id }}</td>
+                                             <td>{{ TYPE[$cat->type] }}</td>
                                             <td>{{ $cat->name }}</td>
                                             <td class="text-center">
                                                 <button type="button"

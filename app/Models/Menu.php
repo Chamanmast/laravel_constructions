@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Menu extends Model
@@ -49,5 +50,38 @@ class Menu extends Model
             get: fn ($value) => (bool) $value,           // Cast 1/0 to true/false
             set: fn ($value) => $value ? 1 : 0
         );
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Menu::class, 'parent_id');
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Menu::class, 'parent_id')
+            ->where('status', 0)
+            ->orderBy('position');
+    }
+
+    public function megaMenus(): HasMany
+    {
+        return $this->hasMany(Megamenu::class, 'menu_id');
+    }
+
+    public function getUrl(): string
+    {
+        if ($this->url === '#') {
+            return '#';
+        }
+
+        return $this->type == 2 ? route($this->url) : $this->url;
+    }
+
+    public function scopeRootMenus($query)
+    {
+        return $query->whereNull('parent_id')
+            ->where('status', true)
+            ->orderBy('position');
     }
 }

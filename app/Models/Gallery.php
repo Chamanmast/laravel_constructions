@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Gallery extends Model
 {
-     public $timestamps = false;
+    public $timestamps = false;
 
     protected $guarded = [];
 

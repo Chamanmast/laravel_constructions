@@ -21,9 +21,8 @@
                                         <th>-</th>
                                         <th>ID</th>
                                         <th>Image</th>
-                                        <th>Name</th> 
-                                        <th>Style</th>                                           
-                                        <th>Status</th>                                        
+                                        <th>Name</th>
+                                        <th>Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -45,17 +44,17 @@
                                                 <img src="{{ asset($small_img) }}"
                                                     class="img-thumbnail img-fluid img-responsive w-10">
                                             </td>
-                                           
-                                            <td><span class="shadow-none badge badge-light-{{BADGE[$slide->style]}}">{{ SLIDER_STYLE[$slide->style] }}</span></td>
+
+
                                             <td>{{ $slide->name }}</td>
                                             <td class="text-center">
                                                 <button type="button" onClick="statusFunction( {{$slide->id}} ,'Slider')"
                                                     class="shadow-none badge badge-light-{{ $slide->status == 1 ? 'danger' : 'success' }} warning changestatus{{ $slide->id }}  bs-tooltip"
                                                     data-toggle="tooltip" data-placement="top" title="Status"
                                                     data-original-title="Status">{{ $slide->status == 1 ? 'Deactive' : 'Active' }}</button>
-        
+
                                             </td>
-                                           
+
                                             <td class="text-center">
                                                 <div class="action-btns">
                                                     <a href="{{ route('slider.edit', $slide->id) }}"
@@ -111,7 +110,7 @@
                     }
                 });
                 if (checkedValues.length === 0) {
-                    // Display an alert if none are checked               
+                    // Display an alert if none are checked
                     toastr.warning("Please check at least one checkbox.");
                 } else {
                     // Output the array to the console (you can do whatever you want with the array)
@@ -129,7 +128,7 @@
                     $.post("{{ route('slider.delete') }}", {
                         _token: crf,
                         id: checkedValues,
-                        table: table,                       
+                        table: table,
                     }, function(data) {
                         toastr.success("Selected Data Deleted");
                     });
@@ -237,7 +236,7 @@
                                 $.post("{{ route('slider.delete') }}", {
                                     _token: crf,
                                     id: id,
-                                    table: table,                                   
+                                    table: table,
                                 }, function(data) {
                                     toastr.success("Entry no " + id + " Deleted");
                                 });
