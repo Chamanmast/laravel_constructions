@@ -1,16 +1,7 @@
 <x-front-layout>
     @php
-        $template = App\Models\SiteSetting::select(
-            'site_title',
-            'meta_description',
-            'about',
-            'facebook',
-            'twitter',
-            'gplus',
-            'linkdin',
-            'meta_keywords',
-        )->find(1);
-        $banner = App\Models\Pagebanner::select('image', 'name')->where('status', 0)->where('menu_id', 5)->first();
+       $template = App\Models\SiteSetting::select('site_title', 'meta_description', 'meta_keywords')->find(1);
+
         $popular = App\Models\Blog::select('post_image', 'post_title', 'post_slug', 'short_descp', 'created_at')
             ->popular(1)
             ->active(0)
@@ -29,8 +20,8 @@
             $small_img = '/upload/no_image.jpg'; # code...
         }
     @endphp
-    <x-pagebanner :title='$blog->title' :image='asset($banner->image)'></x-pagebanner>
 
+   <x-include.breadcrumb :name="$blog->post_title"/>
     <div class="container py-14 py-md-16">
         <div class="row gx-lg-8 gx-xl-12">
             <div class="col-lg-8">
@@ -58,7 +49,7 @@
                                             </ul>
                                         </div>
                                         <div class="mb-0 mb-md-2">
-                                            
+
                                             <!--/.share-dropdown -->
                                         </div>
                                     </div>

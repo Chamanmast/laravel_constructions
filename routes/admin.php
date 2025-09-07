@@ -18,7 +18,8 @@ use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\MenugroupController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\PageController;
-use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\SettingController;
@@ -98,15 +99,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/services/status', [ServiceController::class, 'StatusUpdate'])->middleware('can:services.status')->name('services.status');
     Route::post('/services/delete', [ServiceController::class, 'Delete'])->middleware('can:services.delete')->name('services.delete');
 
-    // Product All Routes
-    Route::resource('product', ProductController::class)->middleware('can:product.index, product.create, product.update');
-    Route::post('/product/status', [ProductController::class, 'StatusUpdate'])->middleware('can:product.status')->name('product.status');
-    Route::post('/product/delete', [ProductController::class, 'Delete'])->middleware('can:product.delete')->name('product.delete');
+    // project All Routes
+    Route::resource('project', ProjectController::class)->middleware('can:project.index, project.create, project.update');
+    Route::post('/project/status', [ProjectController::class, 'StatusUpdate'])->middleware('can:project.status')->name('project.status');
+    Route::post('/project/delete', [ProjectController::class, 'Delete'])->middleware('can:project.delete')->name('project.delete');
 
-    // Gallery All Routes
-    Route::resource('gallery', GalleryController::class)->middleware('can:gallery.index, gallery.create, gallery.update');
-    Route::post('/gallery/status', [GalleryController::class, 'StatusUpdate'])->middleware('can:gallery.status')->name('gallery.status');
-    Route::post('/gallery/delete', [GalleryController::class, 'Delete'])->middleware('can:gallery.delete')->name('gallery.delete');
+   // brand All Routes
+    Route::resource('brand', BrandController::class)->middleware('can:brand.index, brand.create, brand.update');
+    Route::post('/brand/status', [BrandController::class, 'StatusUpdate'])->middleware('can:brand.status')->name('brand.status');
+    Route::post('/brand/delete', [BrandController::class, 'Delete'])->middleware('can:brand.delete')->name('brand.delete');
 
     // Testimonials All Routes
     Route::resource('testimonials', TestimonialController::class)->middleware('can:testimonials.index, testimonials.create, testimonials.update');

@@ -55,6 +55,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|unique:categories|max:200',
             'image' => 'mimes:jpeg,jpg,png|max:2048',
@@ -103,6 +104,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+
         $request->validate([
             'name' => 'required|max:200',
             'image' => 'mimes:jpeg,jpg,png|max:2048',
@@ -125,7 +127,7 @@ class CategoryController extends Controller
                 'type' => $request->type,
                 'name' => $request->name,
                 'image' => $save_url,
-                'front' => $request->front,
+                'front' => $request->front ? $request->front : 0,
                 'slug' => Str::slug($request->name),
                 'text' => $request->text,
             ]);

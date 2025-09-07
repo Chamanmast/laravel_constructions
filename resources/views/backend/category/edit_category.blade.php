@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <h6 class="card-title fw-bold">Edit {{ Str::title($name) }} </h6>
                        {{-- resources/views/components/backend/backend_component/category-form.blade.php --}}
-                        <x-backend.backend_component.category-form :$category   :isEdit="false" />
+                        <x-backend.backend_component.category-form :$category   :isEdit="true" />
 
                     </div>
                 </div>

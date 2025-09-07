@@ -56,9 +56,9 @@ class Blog extends Model
         return $query->where('status', $status);
     }
 
-    public function scopePopular($query, $status)
+    public function scopeFront($query, $status)
     {
-        return $query->where('popular', $status);
+        return $query->where('front', $status);
     }
 
     public function meta()

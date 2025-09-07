@@ -1,21 +1,11 @@
 <x-front-layout>
     @php
-        $template = App\Models\SiteSetting::select(
-            'site_title',
-            'company_address',
-            'email',
-            'support_phone',
-            'meta_description',
-            'meta_keywords',
-        )->find(1);
+       $template = App\Models\SiteSetting::select('site_title','meta_description','meta_keywords')->find(1);
         $modal1 = App\Models\Module::select('heading', 'small_text', 'image','text')->find(1);
-        $modal2 = App\Models\Module::select('heading', 'small_text', 'image')->find(2);       
+        $modal2 = App\Models\Module::select('heading', 'small_text', 'image')->find(2);
         $url = Route::getCurrentRoute()->uri;
         $menu = App\Models\Menu::select('title', 'id')->where('url', $url)->first();
-        $banner = App\Models\Pagebanner::select('image', 'name')
-            ->where('status', 0)
-            ->where('menu_id', $menu->id)
-            ->first();
+
 
         //dd($module2);
 
@@ -25,9 +15,10 @@
     @section('meta_description', $template->meta_description)
     @section('meta_keywords', $template->meta_keywords)
     @section('style')
-        {{ pagebanner(asset($banner->image)) }}
+
     @stop
-    <x-pagebanner :title='$menu->title' :image='asset($banner->image)'></x-pagebanner>
+    <x-include.breadcrumb :name="$menu->title"/>
+
     <div class="container py-14 py-md-16">
         <div class="row gy-10 gx-lg-8 gx-xl-12 mb-16 align-items-center">
             <div class="col-lg-7 position-relative">
@@ -51,7 +42,7 @@
                                     <div class="card-body py-11">
                                         <h3 class="counter text-nowrap">{{$modal1->small_text}}+</h3>
                                         {!!$modal1->text!!}
-                                       
+
                                     </div>
                                     <!--/.card-body -->
                                 </div>

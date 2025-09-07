@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2025 at 05:02 AM
+-- Generation Time: Sep 07, 2025 at 07:04 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,6 +35,15 @@ CREATE TABLE `blogcategories` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `blogcategories`
+--
+
+INSERT INTO `blogcategories` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
+(1, 'Sustainability', 'sustainability', '2023-12-08 07:17:53', '2025-09-05 23:36:28'),
+(2, 'Energy Efficiency', 'energy-efficiency', '2023-12-08 07:17:56', '2025-09-05 23:36:37'),
+(3, 'Compliance & Security', 'compliance-security', '2025-09-05 23:36:50', '2025-09-05 23:36:50');
+
 -- --------------------------------------------------------
 
 --
@@ -44,7 +53,6 @@ CREATE TABLE `blogcategories` (
 CREATE TABLE `blogs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `blogcat_id` int(11) NOT NULL,
-  `popular` tinyint(1) NOT NULL DEFAULT 0,
   `user_id` int(11) DEFAULT NULL,
   `post_title` varchar(255) DEFAULT NULL,
   `post_slug` varchar(255) DEFAULT NULL,
@@ -52,10 +60,20 @@ CREATE TABLE `blogs` (
   `short_descp` text DEFAULT NULL,
   `long_descp` text DEFAULT NULL,
   `post_tags` varchar(255) DEFAULT NULL,
+  `front` int(11) DEFAULT 0,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `blogcat_id`, `user_id`, `post_title`, `post_slug`, `post_image`, `short_descp`, `long_descp`, `post_tags`, `front`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'How Your Property Fits into Vision 2030', 'how-your-property-fits-into-vision-2030', 'upload/blog/thumbnail/1830359669066416.jpg', 'We\'re all seeing Saudi Arabia transform under Vision 2030. It\'s an exciting time of building a smarter, greener, and more vibrant nation. But did you know that the buildings we live and work in are a huge part of this story.', '<p>We\'re all seeing Saudi Arabia transform under Vision 2030. It\'s an exciting time of building a smarter, greener, and more vibrant nation. But did you know that the buildings we live and work in are a huge part of this story?</p><p>This is where \"smart buildings\" come in, and they\'re simpler than you might think.</p><p>So, What Makes a Building \"Smart\"?</p><p>Imagine your building had a brain. That\'s essentially a Building Management System (BMS). It\'s a central hub that connects everything—the AC, lights, security cameras, and elevators—and helps them work together intelligently.</p><p>Instead of wasting energy cooling an empty room or leaving lights on all night, a BMS automates everything for maximum efficiency and comfort. It\'s the secret sauce that turns a regular structure into a smart, responsive environment.</p>', '1,2', 0, 0, '2024-04-23 08:31:17', '2025-09-07 01:43:51'),
+(2, 2, 1, 'Why This Matters for Vision 2030', 'why-this-matters-for-vision-2030', 'upload/blog/thumbnail/1830359637658389.jpg', 'A huge part of Vision 2030 is sustainability. A smart building with a BMS is incredibly energy-efficient. It knows when to power down systems, which means', '<p>This isn\'t just about cool tech; it\'s about hitting the key goals for our country\'s future.</p><h2>Greener &amp; Smarter Spending</h2><p>A huge part of Vision 2030 is sustainability. A smart building with a BMS is incredibly energy-efficient. It knows when to power down systems, which means:</p><ul><li>&nbsp;Lower electricity bills: A direct impact on your bottom line.</li><li>&nbsp;A smaller carbon footprint: Helping meet the goals of the Saudi Green Initiative.</li><li>Less waste: The building only uses what it needs, when it needs it.</li></ul><h2>A Better Place to Live and Work</h2><p>Vision 2030 is also about improving our quality of life. Smart buildings create spaces that are simply better for people.</p>', '', 0, 0, '2024-04-23 10:15:49', '2025-09-07 01:48:05'),
+(3, 3, 1, 'BMS Cybersecurity: OT Segmentation Made Practical', 'bms-cybersecurity-ot-segmentation-made-practical', '', 'dadsdas', NULL, '13', 0, 0, '2025-09-05 23:53:47', '2025-09-05 23:53:47');
 
 -- --------------------------------------------------------
 
@@ -70,6 +88,58 @@ CREATE TABLE `blogtags` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogtags`
+--
+
+INSERT INTO `blogtags` (`id`, `tag_name`, `tag_slug`, `created_at`, `updated_at`) VALUES
+(1, 'iaq', 'iaq', '2023-12-08 07:15:41', '2025-09-05 23:38:05'),
+(2, 'smart buildings', 'smart-buildings', '2023-12-08 07:21:37', '2025-09-05 23:37:52'),
+(3, 'esg', 'esg', '2025-09-05 23:37:30', '2025-09-05 23:38:02'),
+(4, 'net zero', 'net-zero', '2025-09-05 23:38:15', '2025-09-05 23:38:15'),
+(5, 'ot security', 'ot-security', '2025-09-05 23:44:49', '2025-09-05 23:44:49'),
+(6, 'network segmentation', 'network-segmentation', '2025-09-05 23:44:54', '2025-09-05 23:44:54'),
+(7, 'zero trust', 'zero-trust', '2025-09-05 23:44:59', '2025-09-05 23:44:59'),
+(8, 'nist', 'nist', '2025-09-05 23:45:05', '2025-09-05 23:45:05'),
+(9, 'secure remote access', 'secure-remote-access', '2025-09-05 23:45:11', '2025-09-05 23:45:11'),
+(10, 'hvac optimization', 'hvac-optimization', '2025-09-05 23:45:23', '2025-09-05 23:45:23'),
+(11, 'fdd', 'fdd', '2025-09-05 23:45:30', '2025-09-05 23:45:30'),
+(12, 'tariff-based scheduling', 'tariff-based-scheduling', '2025-09-05 23:45:37', '2025-09-05 23:45:37'),
+(13, 'energy savings', 'energy-savings', '2025-09-05 23:45:42', '2025-09-05 23:45:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `small_text` varchar(255) DEFAULT NULL,
+  `text` mediumtext DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `service_id`, `name`, `image`, `small_text`, `text`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Deos AG', 'upload/brand/thumbnail/1842597856513136.jpg', NULL, NULL, 0, '2025-09-07 09:38:57', '2025-09-07 04:14:11'),
+(2, 1, 'Honeywell', 'upload/brand/thumbnail/1842597930282341.png', NULL, NULL, 0, '2025-09-07 09:45:21', '2025-09-07 09:45:21'),
+(3, 1, 'Johnson Controls', 'upload/brand/thumbnail/1842597971239413.jpg', NULL, NULL, 0, '2025-09-07 09:46:01', '2025-09-07 09:46:01'),
+(4, 2, 'Electron black', 'upload/brand/thumbnail/1842598001271614.jpg', NULL, NULL, 0, '2025-09-07 09:46:29', '2025-09-07 09:46:29'),
+(5, 2, 'eelectron white', 'upload/brand/thumbnail/1842598028409213.png', NULL, NULL, 0, '2025-09-07 09:46:59', '2025-09-07 09:46:59'),
+(6, 3, 'setra-logo', 'upload/brand/thumbnail/1842598048583291.png', NULL, NULL, 0, '2025-09-07 09:47:14', '2025-09-07 09:47:14'),
+(7, 4, 'Eelectron', 'upload/brand/thumbnail/1842598071519700.png', NULL, NULL, 0, '2025-09-07 09:47:36', '2025-09-07 09:47:36'),
+(8, 5, 'Axioma Metering Yellow', 'upload/brand/thumbnail/1842598091849424.jpeg', NULL, NULL, 0, '2025-09-07 09:47:55', '2025-09-07 09:47:55'),
+(9, 4, 'Kamstrup', 'upload/brand/thumbnail/1842598118050297.png', NULL, NULL, 0, '2025-09-07 09:48:20', '2025-09-07 09:48:20');
 
 -- --------------------------------------------------------
 
@@ -88,7 +158,7 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('construction_cache_spatie.permission.cache', 'a:3:{s:5:\"alias\";a:5:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"group_name\";s:1:\"d\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:102:{i:0;a:5:{s:1:\"a\";i:1;s:1:\"b\";s:9:\"smtp.menu\";s:1:\"c\";s:4:\"smtp\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:5:{s:1:\"a\";i:2;s:1:\"b\";s:12:\"smtp.setting\";s:1:\"c\";s:4:\"smtp\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:5:{s:1:\"a\";i:3;s:1:\"b\";s:9:\"site.menu\";s:1:\"c\";s:4:\"site\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:5:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"site.setting\";s:1:\"c\";s:4:\"site\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:5:{s:1:\"a\";i:5;s:1:\"b\";s:9:\"role.menu\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:5:{s:1:\"a\";i:6;s:1:\"b\";s:10:\"role.index\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:5:{s:1:\"a\";i:7;s:1:\"b\";s:11:\"role.create\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:5:{s:1:\"a\";i:8;s:1:\"b\";s:9:\"role.edit\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:5:{s:1:\"a\";i:9;s:1:\"b\";s:11:\"role.delete\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:5:{s:1:\"a\";i:10;s:1:\"b\";s:16:\"permission.index\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:5:{s:1:\"a\";i:11;s:1:\"b\";s:17:\"permission.create\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:5:{s:1:\"a\";i:12;s:1:\"b\";s:15:\"permission.edit\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:5:{s:1:\"a\";i:13;s:1:\"b\";s:17:\"permission.delete\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:5:{s:1:\"a\";i:14;s:1:\"b\";s:20:\"add.roles.permission\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:5:{s:1:\"a\";i:15;s:1:\"b\";s:20:\"all.roles.permission\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:5:{s:1:\"a\";i:16;s:1:\"b\";s:10:\"admin.menu\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:5:{s:1:\"a\";i:17;s:1:\"b\";s:9:\"all.admin\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:5:{s:1:\"a\";i:18;s:1:\"b\";s:9:\"add.admin\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:5:{s:1:\"a\";i:19;s:1:\"b\";s:9:\"all.users\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:5:{s:1:\"a\";i:20;s:1:\"b\";s:17:\"image_preset.menu\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:20;a:5:{s:1:\"a\";i:21;s:1:\"b\";s:18:\"image_preset.index\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:21;a:5:{s:1:\"a\";i:22;s:1:\"b\";s:19:\"image_preset.create\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:5:{s:1:\"a\";i:23;s:1:\"b\";s:17:\"image_preset.edit\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:5:{s:1:\"a\";i:24;s:1:\"b\";s:19:\"image_preset.status\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:5:{s:1:\"a\";i:25;s:1:\"b\";s:19:\"image_preset.delete\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:25;a:5:{s:1:\"a\";i:26;s:1:\"b\";s:11:\"module.menu\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:5:{s:1:\"a\";i:27;s:1:\"b\";s:12:\"module.index\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:5:{s:1:\"a\";i:28;s:1:\"b\";s:13:\"module.create\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:5:{s:1:\"a\";i:29;s:1:\"b\";s:13:\"module.delete\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:29;a:5:{s:1:\"a\";i:30;s:1:\"b\";s:10:\"pages.menu\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:5:{s:1:\"a\";i:31;s:1:\"b\";s:12:\"pages.create\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:5:{s:1:\"a\";i:32;s:1:\"b\";s:11:\"pages.index\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:5:{s:1:\"a\";i:33;s:1:\"b\";s:10:\"pages.edit\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:33;a:5:{s:1:\"a\";i:34;s:1:\"b\";s:12:\"pages.status\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:5:{s:1:\"a\";i:35;s:1:\"b\";s:12:\"pages.delete\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:5:{s:1:\"a\";i:36;s:1:\"b\";s:9:\"blog.menu\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:5:{s:1:\"a\";i:37;s:1:\"b\";s:10:\"blog.index\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:37;a:5:{s:1:\"a\";i:38;s:1:\"b\";s:11:\"blog.create\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:5:{s:1:\"a\";i:39;s:1:\"b\";s:9:\"blog.edit\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:39;a:5:{s:1:\"a\";i:40;s:1:\"b\";s:11:\"blog.delete\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:40;a:5:{s:1:\"a\";i:41;s:1:\"b\";s:8:\"tag.menu\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:41;a:5:{s:1:\"a\";i:42;s:1:\"b\";s:9:\"tag.index\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:42;a:5:{s:1:\"a\";i:43;s:1:\"b\";s:10:\"tag.create\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:5:{s:1:\"a\";i:44;s:1:\"b\";s:8:\"tag.edit\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:44;a:5:{s:1:\"a\";i:45;s:1:\"b\";s:10:\"tag.delete\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:45;a:5:{s:1:\"a\";i:46;s:1:\"b\";s:10:\"menus.menu\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:46;a:5:{s:1:\"a\";i:47;s:1:\"b\";s:11:\"menus.index\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:47;a:5:{s:1:\"a\";i:48;s:1:\"b\";s:12:\"menus.create\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:48;a:5:{s:1:\"a\";i:49;s:1:\"b\";s:10:\"menus.edit\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:49;a:5:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"menus.delete\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:50;a:5:{s:1:\"a\";i:51;s:1:\"b\";s:12:\"menus.status\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:51;a:5:{s:1:\"a\";i:52;s:1:\"b\";s:14:\"menugroup.menu\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:52;a:5:{s:1:\"a\";i:53;s:1:\"b\";s:15:\"menugroup.index\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:53;a:5:{s:1:\"a\";i:54;s:1:\"b\";s:16:\"menugroup.create\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:54;a:5:{s:1:\"a\";i:55;s:1:\"b\";s:14:\"menugroup.edit\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:55;a:5:{s:1:\"a\";i:56;s:1:\"b\";s:16:\"menugroup.delete\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:56;a:5:{s:1:\"a\";i:57;s:1:\"b\";s:17:\"blogcategory.menu\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:57;a:5:{s:1:\"a\";i:58;s:1:\"b\";s:19:\"blogcategory.create\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:58;a:5:{s:1:\"a\";i:59;s:1:\"b\";s:18:\"blogcategory.index\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:59;a:5:{s:1:\"a\";i:60;s:1:\"b\";s:17:\"blogcategory.edit\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:60;a:5:{s:1:\"a\";i:61;s:1:\"b\";s:19:\"blogcategory.delete\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:61;a:5:{s:1:\"a\";i:62;s:1:\"b\";s:19:\"blogcategory.status\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:62;a:5:{s:1:\"a\";i:63;s:1:\"b\";s:13:\"category.menu\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:63;a:5:{s:1:\"a\";i:64;s:1:\"b\";s:14:\"category.index\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:64;a:5:{s:1:\"a\";i:65;s:1:\"b\";s:15:\"category.create\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:65;a:5:{s:1:\"a\";i:66;s:1:\"b\";s:13:\"category.edit\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:66;a:5:{s:1:\"a\";i:67;s:1:\"b\";s:15:\"category.delete\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:67;a:5:{s:1:\"a\";i:68;s:1:\"b\";s:14:\"megamenu.index\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:68;a:5:{s:1:\"a\";i:69;s:1:\"b\";s:15:\"megamenu.create\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:69;a:5:{s:1:\"a\";i:70;s:1:\"b\";s:13:\"megamenu.edit\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:70;a:5:{s:1:\"a\";i:71;s:1:\"b\";s:15:\"megamenu.delete\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:71;a:5:{s:1:\"a\";i:72;s:1:\"b\";s:15:\"megamenu.status\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:72;a:5:{s:1:\"a\";i:73;s:1:\"b\";s:12:\"product.menu\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:73;a:5:{s:1:\"a\";i:74;s:1:\"b\";s:14:\"product.create\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:74;a:5:{s:1:\"a\";i:75;s:1:\"b\";s:13:\"product.index\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:75;a:5:{s:1:\"a\";i:76;s:1:\"b\";s:12:\"product.edit\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:76;a:5:{s:1:\"a\";i:77;s:1:\"b\";s:14:\"product.status\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:77;a:5:{s:1:\"a\";i:78;s:1:\"b\";s:14:\"product.delete\";s:1:\"c\";s:7:\"product\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:78;a:5:{s:1:\"a\";i:79;s:1:\"b\";s:17:\"testimonials.menu\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:79;a:5:{s:1:\"a\";i:80;s:1:\"b\";s:19:\"testimonials.create\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:80;a:5:{s:1:\"a\";i:81;s:1:\"b\";s:18:\"testimonials.index\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:81;a:5:{s:1:\"a\";i:82;s:1:\"b\";s:17:\"testimonials.edit\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:82;a:5:{s:1:\"a\";i:83;s:1:\"b\";s:19:\"testimonials.status\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:83;a:5:{s:1:\"a\";i:84;s:1:\"b\";s:19:\"testimonials.delete\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:84;a:5:{s:1:\"a\";i:85;s:1:\"b\";s:12:\"gallery.menu\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:85;a:5:{s:1:\"a\";i:86;s:1:\"b\";s:14:\"gallery.create\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:86;a:5:{s:1:\"a\";i:87;s:1:\"b\";s:13:\"gallery.index\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:87;a:5:{s:1:\"a\";i:88;s:1:\"b\";s:12:\"gallery.edit\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:88;a:5:{s:1:\"a\";i:89;s:1:\"b\";s:14:\"gallery.status\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:89;a:5:{s:1:\"a\";i:90;s:1:\"b\";s:14:\"gallery.delete\";s:1:\"c\";s:7:\"gallery\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:90;a:5:{s:1:\"a\";i:91;s:1:\"b\";s:13:\"services.menu\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:91;a:5:{s:1:\"a\";i:92;s:1:\"b\";s:15:\"services.create\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:92;a:5:{s:1:\"a\";i:93;s:1:\"b\";s:14:\"services.index\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:93;a:5:{s:1:\"a\";i:94;s:1:\"b\";s:13:\"services.edit\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:94;a:5:{s:1:\"a\";i:95;s:1:\"b\";s:15:\"services.status\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:95;a:5:{s:1:\"a\";i:96;s:1:\"b\";s:15:\"services.delete\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:96;a:5:{s:1:\"a\";i:97;s:1:\"b\";s:11:\"slider.menu\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:97;a:5:{s:1:\"a\";i:98;s:1:\"b\";s:13:\"slider.create\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:98;a:5:{s:1:\"a\";i:99;s:1:\"b\";s:12:\"slider.index\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:99;a:5:{s:1:\"a\";i:100;s:1:\"b\";s:11:\"slider.edit\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:100;a:5:{s:1:\"a\";i:101;s:1:\"b\";s:13:\"slider.status\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:101;a:5:{s:1:\"a\";i:102;s:1:\"b\";s:13:\"slider.delete\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"SuperAdmin\";s:1:\"d\";s:3:\"web\";}}}', 1756514919);
+('construction_cache_spatie.permission.cache', 'a:3:{s:5:\"alias\";a:5:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"group_name\";s:1:\"d\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:102:{i:0;a:5:{s:1:\"a\";i:1;s:1:\"b\";s:9:\"smtp.menu\";s:1:\"c\";s:4:\"smtp\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:5:{s:1:\"a\";i:2;s:1:\"b\";s:12:\"smtp.setting\";s:1:\"c\";s:4:\"smtp\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:5:{s:1:\"a\";i:3;s:1:\"b\";s:9:\"site.menu\";s:1:\"c\";s:4:\"site\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:5:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"site.setting\";s:1:\"c\";s:4:\"site\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:5:{s:1:\"a\";i:5;s:1:\"b\";s:9:\"role.menu\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:5:{s:1:\"a\";i:6;s:1:\"b\";s:10:\"role.index\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:5:{s:1:\"a\";i:7;s:1:\"b\";s:11:\"role.create\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:5:{s:1:\"a\";i:8;s:1:\"b\";s:9:\"role.edit\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:5:{s:1:\"a\";i:9;s:1:\"b\";s:11:\"role.delete\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:5:{s:1:\"a\";i:10;s:1:\"b\";s:16:\"permission.index\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:5:{s:1:\"a\";i:11;s:1:\"b\";s:17:\"permission.create\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:5:{s:1:\"a\";i:12;s:1:\"b\";s:15:\"permission.edit\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:5:{s:1:\"a\";i:13;s:1:\"b\";s:17:\"permission.delete\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:5:{s:1:\"a\";i:14;s:1:\"b\";s:20:\"add.roles.permission\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:5:{s:1:\"a\";i:15;s:1:\"b\";s:20:\"all.roles.permission\";s:1:\"c\";s:4:\"role\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:5:{s:1:\"a\";i:16;s:1:\"b\";s:10:\"admin.menu\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:5:{s:1:\"a\";i:17;s:1:\"b\";s:9:\"all.admin\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:5:{s:1:\"a\";i:18;s:1:\"b\";s:9:\"add.admin\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:5:{s:1:\"a\";i:19;s:1:\"b\";s:9:\"all.users\";s:1:\"c\";s:5:\"admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:5:{s:1:\"a\";i:20;s:1:\"b\";s:17:\"image_preset.menu\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:20;a:5:{s:1:\"a\";i:21;s:1:\"b\";s:18:\"image_preset.index\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:21;a:5:{s:1:\"a\";i:22;s:1:\"b\";s:19:\"image_preset.create\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:5:{s:1:\"a\";i:23;s:1:\"b\";s:17:\"image_preset.edit\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:5:{s:1:\"a\";i:24;s:1:\"b\";s:19:\"image_preset.status\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:5:{s:1:\"a\";i:25;s:1:\"b\";s:19:\"image_preset.delete\";s:1:\"c\";s:12:\"image_preset\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:25;a:5:{s:1:\"a\";i:26;s:1:\"b\";s:11:\"module.menu\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:5:{s:1:\"a\";i:27;s:1:\"b\";s:12:\"module.index\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:5:{s:1:\"a\";i:28;s:1:\"b\";s:13:\"module.create\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:5:{s:1:\"a\";i:29;s:1:\"b\";s:13:\"module.delete\";s:1:\"c\";s:6:\"module\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:29;a:5:{s:1:\"a\";i:30;s:1:\"b\";s:10:\"pages.menu\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:5:{s:1:\"a\";i:31;s:1:\"b\";s:12:\"pages.create\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:5:{s:1:\"a\";i:32;s:1:\"b\";s:11:\"pages.index\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:5:{s:1:\"a\";i:33;s:1:\"b\";s:10:\"pages.edit\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:33;a:5:{s:1:\"a\";i:34;s:1:\"b\";s:12:\"pages.status\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:5:{s:1:\"a\";i:35;s:1:\"b\";s:12:\"pages.delete\";s:1:\"c\";s:5:\"pages\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:5:{s:1:\"a\";i:36;s:1:\"b\";s:9:\"blog.menu\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:5:{s:1:\"a\";i:37;s:1:\"b\";s:10:\"blog.index\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:37;a:5:{s:1:\"a\";i:38;s:1:\"b\";s:11:\"blog.create\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:5:{s:1:\"a\";i:39;s:1:\"b\";s:9:\"blog.edit\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:39;a:5:{s:1:\"a\";i:40;s:1:\"b\";s:11:\"blog.delete\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:40;a:5:{s:1:\"a\";i:41;s:1:\"b\";s:8:\"tag.menu\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:41;a:5:{s:1:\"a\";i:42;s:1:\"b\";s:9:\"tag.index\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:42;a:5:{s:1:\"a\";i:43;s:1:\"b\";s:10:\"tag.create\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:5:{s:1:\"a\";i:44;s:1:\"b\";s:8:\"tag.edit\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:44;a:5:{s:1:\"a\";i:45;s:1:\"b\";s:10:\"tag.delete\";s:1:\"c\";s:3:\"tag\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:45;a:5:{s:1:\"a\";i:46;s:1:\"b\";s:10:\"menus.menu\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:46;a:5:{s:1:\"a\";i:47;s:1:\"b\";s:11:\"menus.index\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:47;a:5:{s:1:\"a\";i:48;s:1:\"b\";s:12:\"menus.create\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:48;a:5:{s:1:\"a\";i:49;s:1:\"b\";s:10:\"menus.edit\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:49;a:5:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"menus.delete\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:50;a:5:{s:1:\"a\";i:51;s:1:\"b\";s:12:\"menus.status\";s:1:\"c\";s:5:\"menus\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:51;a:5:{s:1:\"a\";i:52;s:1:\"b\";s:14:\"menugroup.menu\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:52;a:5:{s:1:\"a\";i:53;s:1:\"b\";s:15:\"menugroup.index\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:53;a:5:{s:1:\"a\";i:54;s:1:\"b\";s:16:\"menugroup.create\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:54;a:5:{s:1:\"a\";i:55;s:1:\"b\";s:14:\"menugroup.edit\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:55;a:5:{s:1:\"a\";i:56;s:1:\"b\";s:16:\"menugroup.delete\";s:1:\"c\";s:9:\"menugroup\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:56;a:5:{s:1:\"a\";i:57;s:1:\"b\";s:17:\"blogcategory.menu\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:57;a:5:{s:1:\"a\";i:58;s:1:\"b\";s:19:\"blogcategory.create\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:58;a:5:{s:1:\"a\";i:59;s:1:\"b\";s:18:\"blogcategory.index\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:59;a:5:{s:1:\"a\";i:60;s:1:\"b\";s:17:\"blogcategory.edit\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:60;a:5:{s:1:\"a\";i:61;s:1:\"b\";s:19:\"blogcategory.delete\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:61;a:5:{s:1:\"a\";i:62;s:1:\"b\";s:19:\"blogcategory.status\";s:1:\"c\";s:12:\"blogcategory\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:62;a:5:{s:1:\"a\";i:63;s:1:\"b\";s:13:\"category.menu\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:63;a:5:{s:1:\"a\";i:64;s:1:\"b\";s:14:\"category.index\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:64;a:5:{s:1:\"a\";i:65;s:1:\"b\";s:15:\"category.create\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:65;a:5:{s:1:\"a\";i:66;s:1:\"b\";s:13:\"category.edit\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:66;a:5:{s:1:\"a\";i:67;s:1:\"b\";s:15:\"category.delete\";s:1:\"c\";s:4:\"post\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:67;a:5:{s:1:\"a\";i:68;s:1:\"b\";s:14:\"megamenu.index\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:68;a:5:{s:1:\"a\";i:69;s:1:\"b\";s:15:\"megamenu.create\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:69;a:5:{s:1:\"a\";i:70;s:1:\"b\";s:13:\"megamenu.edit\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:70;a:5:{s:1:\"a\";i:71;s:1:\"b\";s:15:\"megamenu.delete\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:71;a:5:{s:1:\"a\";i:72;s:1:\"b\";s:15:\"megamenu.status\";s:1:\"c\";s:8:\"megamenu\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:72;a:5:{s:1:\"a\";i:79;s:1:\"b\";s:17:\"testimonials.menu\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:73;a:5:{s:1:\"a\";i:80;s:1:\"b\";s:19:\"testimonials.create\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:74;a:5:{s:1:\"a\";i:81;s:1:\"b\";s:18:\"testimonials.index\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:75;a:5:{s:1:\"a\";i:82;s:1:\"b\";s:17:\"testimonials.edit\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:76;a:5:{s:1:\"a\";i:83;s:1:\"b\";s:19:\"testimonials.status\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:77;a:5:{s:1:\"a\";i:84;s:1:\"b\";s:19:\"testimonials.delete\";s:1:\"c\";s:12:\"testimonials\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:78;a:5:{s:1:\"a\";i:91;s:1:\"b\";s:13:\"services.menu\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:79;a:5:{s:1:\"a\";i:92;s:1:\"b\";s:15:\"services.create\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:80;a:5:{s:1:\"a\";i:93;s:1:\"b\";s:14:\"services.index\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:81;a:5:{s:1:\"a\";i:94;s:1:\"b\";s:13:\"services.edit\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:82;a:5:{s:1:\"a\";i:95;s:1:\"b\";s:15:\"services.status\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:83;a:5:{s:1:\"a\";i:96;s:1:\"b\";s:15:\"services.delete\";s:1:\"c\";s:8:\"services\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:84;a:5:{s:1:\"a\";i:97;s:1:\"b\";s:11:\"slider.menu\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:85;a:5:{s:1:\"a\";i:98;s:1:\"b\";s:13:\"slider.create\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:86;a:5:{s:1:\"a\";i:99;s:1:\"b\";s:12:\"slider.index\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:87;a:5:{s:1:\"a\";i:100;s:1:\"b\";s:11:\"slider.edit\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:88;a:5:{s:1:\"a\";i:101;s:1:\"b\";s:13:\"slider.status\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:89;a:5:{s:1:\"a\";i:102;s:1:\"b\";s:13:\"slider.delete\";s:1:\"c\";s:6:\"slider\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:90;a:5:{s:1:\"a\";i:109;s:1:\"b\";s:10:\"brand.menu\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:91;a:5:{s:1:\"a\";i:110;s:1:\"b\";s:12:\"brand.create\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:92;a:5:{s:1:\"a\";i:111;s:1:\"b\";s:11:\"brand.index\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:93;a:5:{s:1:\"a\";i:112;s:1:\"b\";s:10:\"brand.edit\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:94;a:5:{s:1:\"a\";i:113;s:1:\"b\";s:12:\"brand.status\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:95;a:5:{s:1:\"a\";i:114;s:1:\"b\";s:12:\"brand.delete\";s:1:\"c\";s:5:\"brand\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:96;a:5:{s:1:\"a\";i:115;s:1:\"b\";s:12:\"project.menu\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:97;a:5:{s:1:\"a\";i:116;s:1:\"b\";s:14:\"project.create\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:98;a:5:{s:1:\"a\";i:117;s:1:\"b\";s:13:\"project.index\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:99;a:5:{s:1:\"a\";i:118;s:1:\"b\";s:12:\"project.edit\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:100;a:5:{s:1:\"a\";i:119;s:1:\"b\";s:14:\"project.status\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:101;a:5:{s:1:\"a\";i:120;s:1:\"b\";s:14:\"project.delete\";s:1:\"c\";s:7:\"project\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"SuperAdmin\";s:1:\"d\";s:3:\"web\";}}}', 1757344531);
 
 -- --------------------------------------------------------
 
@@ -124,27 +194,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `type`, `front`, `name`, `slug`, `image`, `text`, `status`) VALUES
-(1, 0, 0, 'Control & automations', 'control-automations', '', NULL, 0),
+(1, 0, 1, 'Control & automations', 'control-automations', '', NULL, 0),
 (2, 0, 0, 'Fire', 'fire', '', NULL, 0),
-(3, 0, 0, 'Low Current Systems', 'low-current-systems', '', NULL, 0),
-(4, 0, 0, 'Data & Networking Solutions', 'data-networking-solutions', '', NULL, 0),
-(5, 0, 0, 'Security Systems', 'security-systems', '', NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `galleries`
---
-
-CREATE TABLE `galleries` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `text` text DEFAULT NULL,
-  `front` tinyint(1) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(3, 0, 1, 'Low Current Systems', 'low-current-systems', '', NULL, 0),
+(4, 0, 1, 'Data & Networking Solutions', 'data-networking-solutions', '', NULL, 0),
+(5, 0, 1, 'Security Systems', 'security-systems', '', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -201,7 +255,7 @@ INSERT INTO `mega_menus` (`id`, `menu_id`, `title`, `links`) VALUES
 (1, 2, 'Control & automations', '1,2,3,4'),
 (2, 2, 'Fire', '6,7,8,9'),
 (3, 2, 'Low Current Systems', '8,9,10,11'),
-(4, 2, 'Data & Networking Solutions', '12'),
+(4, 2, 'Data & Networking Solutions', '12,16'),
 (5, 2, 'Security Systems', '13,14,15');
 
 -- --------------------------------------------------------
@@ -248,9 +302,9 @@ CREATE TABLE `menus` (
 INSERT INTO `menus` (`id`, `parent_id`, `title`, `url`, `type`, `position`, `group_id`, `megamenu`, `status`) VALUES
 (1, 0, 'Company', '#', 2, 1, '1', 0, 0),
 (2, 0, 'Solutions', 'solutions', 2, 2, '1', 1, 0),
-(3, 1, 'About us', '#', 2, 3, '1', 0, 0),
+(3, 1, 'About us', 'about-us', 2, 3, '1', 0, 0),
 (4, 1, 'Our Partners', '#', 2, 5, '1', 0, 0),
-(5, 0, 'Our Portfolio', '#', 2, 4, '1', 0, 0),
+(5, 0, 'Projects', 'projects', 2, 4, '1', 0, 0),
 (6, 1, 'Download Company Profile', '#', 1, 6, '1', 0, 0),
 (7, 1, 'Download Product List', '#', 1, 7, '1', 0, 0),
 (8, 0, 'Blog', 'blogs', 2, 8, '1', 0, 0),
@@ -275,7 +329,19 @@ CREATE TABLE `metainfos` (
 --
 
 INSERT INTO `metainfos` (`id`, `metable_id`, `metable_type`, `meta_description`, `meta_keywords`) VALUES
-(1, 7, 'App\\Models\\Menu', NULL, NULL);
+(1, 7, 'App\\Models\\Menu', NULL, NULL),
+(2, 1, 'App\\Models\\Service', NULL, NULL),
+(3, 3, 'App\\Models\\Menu', NULL, NULL),
+(4, 5, 'App\\Models\\Menu', NULL, NULL),
+(5, 1, 'App\\Models\\Blog', NULL, NULL),
+(6, 2, 'App\\Models\\Blog', NULL, NULL),
+(7, 2, 'App\\Models\\Service', NULL, NULL),
+(8, 3, 'App\\Models\\Service', NULL, NULL),
+(9, 4, 'App\\Models\\Service', NULL, NULL),
+(10, 5, 'App\\Models\\Service', NULL, NULL),
+(11, 8, 'App\\Models\\Service', NULL, NULL),
+(12, 7, 'App\\Models\\Service', NULL, NULL),
+(13, 9, 'App\\Models\\Service', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -371,7 +437,10 @@ CREATE TABLE `modules` (
 --
 
 INSERT INTO `modules` (`id`, `name`, `heading`, `link`, `small_text`, `image`, `text`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Home About', 'About Muassasah Mwad AlTshyd', NULL, NULL, 'upload/module/thumbnail/1841749330256850.jpg', '<p>Welcome to Construction Material Trading official name Muassasah Mwad AlTshyd, Saudi Arabia\'s leading supplier of high-quality MEP, HVAC, Low Current, innovative and Automation solutions provider. We are committed to delivering excellence, innovation, and customer satisfaction while upholding the highest standards of safety and sustainability.</p><p>In this presentation, we\'ll explore our comprehensive range of products, our partnerships with world-class brands, and our dedication to contributing to the Kingdom\'s Vision 2030 through localized procurement and ethical practices</p>', 0, '2025-08-29 00:57:13', '2025-08-29 00:57:13');
+(1, 'Contact Page', 'Convinced yet? Let\'s make something great together.', NULL, '5000', 'upload/module/thumbnail/1830358231602119.jpg', '<p>Satisfied Customers</p>', 0, '2024-09-12 06:36:29', '2024-09-12 06:36:29'),
+(2, 'Contact Form', 'Drop Us a Line', NULL, 'Reach out to us from our contact form and we will get back to you shortly.', 'upload/module/thumbnail/1830358767930576.jpg', NULL, 0, '2024-09-12 06:38:38', '2024-09-12 06:38:38'),
+(3, 'Emails', 'Contact Emails', NULL, '<strong>Support:</strong> support@mastheadtechnologies.com<br><strong>Sales:</strong> sales@mastheadtechnologies.com<br><strong>Hr: </strong>hr@mastheadtechnologies.com', '', NULL, 0, '2024-09-12 06:52:06', '2024-09-12 06:52:06'),
+(4, 'Home About', 'About Muassasah Mwad AlTshyd', NULL, NULL, 'upload/module/thumbnail/1842585632560039.jpg', '<p>Welcome to Construction Material Trading official name Muassasah Mwad AlTshyd, Saudi Arabia\'s leading supplier of high-quality MEP, HVAC, Low Current, innovative and Automation solutions provider. We are committed to delivering excellence, innovation, and customer satisfaction while upholding the highest standards of safety and sustainability.</p><p>We are a trusted partner delivering end-to-end MEP, HVAC, Low Current, and Automation solutions across Saudi Arabia. Through global partnerships and local expertise, we ensure reliability, compliance, and innovation in every project</p>', 0, '2025-08-29 00:57:13', '2025-08-29 00:57:13');
 
 -- --------------------------------------------------------
 
@@ -496,24 +565,12 @@ INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at
 (70, 'megamenu.edit', 'megamenu', 'web', '2025-08-15 02:14:08', '2025-08-15 02:14:08'),
 (71, 'megamenu.delete', 'megamenu', 'web', '2025-08-15 02:14:08', '2025-08-15 02:14:08'),
 (72, 'megamenu.status', 'megamenu', 'web', '2025-08-15 02:14:08', '2025-08-15 02:14:08'),
-(73, 'product.menu', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
-(74, 'product.create', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
-(75, 'product.index', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
-(76, 'product.edit', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
-(77, 'product.status', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
-(78, 'product.delete', 'product', 'web', '2025-08-15 02:20:36', '2025-08-15 02:20:36'),
 (79, 'testimonials.menu', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
 (80, 'testimonials.create', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
 (81, 'testimonials.index', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
 (82, 'testimonials.edit', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
 (83, 'testimonials.status', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
 (84, 'testimonials.delete', 'testimonials', 'web', '2025-08-15 03:15:51', '2025-08-15 03:15:51'),
-(85, 'gallery.menu', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
-(86, 'gallery.create', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
-(87, 'gallery.index', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
-(88, 'gallery.edit', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
-(89, 'gallery.status', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
-(90, 'gallery.delete', 'gallery', 'web', '2025-08-15 03:39:44', '2025-08-15 03:39:44'),
 (91, 'services.menu', 'services', 'web', '2025-08-24 02:21:24', '2025-08-24 02:21:24'),
 (92, 'services.create', 'services', 'web', '2025-08-24 02:21:24', '2025-08-24 02:21:24'),
 (93, 'services.index', 'services', 'web', '2025-08-24 02:21:24', '2025-08-24 02:21:24'),
@@ -525,27 +582,56 @@ INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at
 (99, 'slider.index', 'slider', 'web', '2025-08-24 03:06:09', '2025-08-24 03:06:09'),
 (100, 'slider.edit', 'slider', 'web', '2025-08-24 03:06:09', '2025-08-24 03:06:09'),
 (101, 'slider.status', 'slider', 'web', '2025-08-24 03:06:09', '2025-08-24 03:06:09'),
-(102, 'slider.delete', 'slider', 'web', '2025-08-24 03:06:09', '2025-08-24 03:06:09');
+(102, 'slider.delete', 'slider', 'web', '2025-08-24 03:06:09', '2025-08-24 03:06:09'),
+(109, 'brand.menu', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(110, 'brand.create', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(111, 'brand.index', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(112, 'brand.edit', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(113, 'brand.status', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(114, 'brand.delete', 'brand', 'web', '2025-09-07 03:40:08', '2025-09-07 03:40:08'),
+(115, 'project.menu', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59'),
+(116, 'project.create', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59'),
+(117, 'project.index', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59'),
+(118, 'project.edit', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59'),
+(119, 'project.status', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59'),
+(120, 'project.delete', 'project', 'web', '2025-09-07 04:29:59', '2025-09-07 04:29:59');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `projects`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE `projects` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `stext` varchar(500) DEFAULT NULL,
   `text` text DEFAULT NULL,
   `front` tinyint(1) DEFAULT 0,
+  `client` varchar(100) DEFAULT NULL,
+  `contractor` varchar(100) DEFAULT NULL,
+  `specialist_supplier` varchar(100) DEFAULT NULL,
+  `brand` varchar(11) DEFAULT NULL,
+  `location` varchar(200) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `service_id`, `name`, `slug`, `image`, `stext`, `text`, `front`, `client`, `contractor`, `specialist_supplier`, `brand`, `location`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Al Akaria – Olaya Street, Riyadh', 'al-akaria-olaya-street-riyadh', 'upload/projects/thumbnail/1842599640199663.jpeg', 'We have successfully completed the upgrade of the Fire Alarm system to a new system', '<p>The scope includes the supply of the new fire alarm system, including installation of the fire alarm system (2nd fix) and testing &amp; commissioning with handing over of the system</p>', 0, 'Al-Akaria', 'Idworks Global Company', 'Muassasah Mwad AlTshyd', NULL, 'Al Olaya Street - Riyadh', 0, NULL, '2025-09-07 09:20:03'),
+(2, 2, 'Al Yamama – University Riyadh', 'al-yamama-university-riyadh', 'upload/projects/thumbnail/1842617202763293.jpeg', 'We are in the process of upgrading the existing BMS, Fire, CCTV and ACS System for the entire University. The system includes HVAC, plumbing systems, Lighting control system, upgrading of the legacy Fire alarm system, CCTV and ACS system.', '<p>The scope includes the supply of BMS, CCTV and Fire materials with field devices along with installation, testing &amp; commissioning, and handing over.</p>', 0, 'Al-Yamama University', 'International Contracting Company', 'Muassasah Mwad AlTshyd', NULL, 'Madinah Road - Riyadh', 0, '2025-09-07 09:21:41', '2025-09-07 09:22:16'),
+(3, 2, 'Kimpton IHG Hotel KAFD - Riyadh', 'kimpton-ihg-hotel-kafd-riyadh', 'upload/projects/thumbnail/1842617318677718.jpeg', 'We have completed the handing over of the wireless distress/panic alarm system and the handing over of the Avaya Server for IP telephony', '<p>The scope includes the supply of a wireless panic alarm system, installation of the panic alarm system, and testing &amp; commissioning with handing over of the system</p><p>For the Avaya Server, our scope was testing &amp; commissioning, including handing over</p>', 0, 'KAFD', '3S', 'Construction  Material', NULL, 'KAFD parcel-4.05 at Boulevard Street, Aqiq District', 0, '2025-09-07 09:23:17', '2025-09-07 09:24:42'),
+(4, 2, 'King Khalid International Airport Load Center 3', 'king-khalid-international-airport-load-center-3', 'upload/projects/thumbnail/1842617511033785.jpeg', 'We have successfully completed the completion of Chiller Plant Manager.', '<p>The scope includes the supply of the BMS Materials and testing &amp; commissioning with handing over of the system</p>', 0, 'GACA', 'SSEM', 'Muassasah Mwad AlTshyd', NULL, 'Airport Load Center 3 - Riyadh', 0, '2025-09-07 09:26:12', '2025-09-07 09:26:35'),
+(5, 3, 'Marriott Hotel – Diplomatic Quarter', 'marriott-hotel-diplomatic-quarter', 'upload/projects/thumbnail/1842617584346576.jpeg', 'We have commissioned new HVAC units and upgraded the existing systems', '<p>Our scope included upgrading of the existing AHU and supply of new materials for the VAV and FCUs, including testing &amp; commissioning and handing over.</p>', 0, 'Marriott', 'Anfa Contracting Company', 'Muassasah Mwad AlTshyd', NULL, 'Diplomatic Quarter - Riyadh', 0, '2025-09-07 09:27:45', '2025-09-07 09:27:45'),
+(6, 4, 'Riyadh Cables Factory', 'riyadh-cables-factory', 'upload/projects/thumbnail/1842617667547775.jpeg', 'Completion of the HVAC system in the Riyadh Cable Factory', '<p>Our scope included complete supply of BMS materials along with handing over of the system</p>', 0, 'Riyadh Cables', 'Raneem Al Wusta', 'Muassasah Mwad AlTshyd', NULL, '2nd Industrial City, Kharj Road – Riyadh', 0, '2025-09-07 09:29:04', '2025-09-07 09:29:04');
 
 -- --------------------------------------------------------
 
@@ -657,24 +743,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (70, 1),
 (71, 1),
 (72, 1),
-(73, 1),
-(74, 1),
-(75, 1),
-(76, 1),
-(77, 1),
-(78, 1),
 (79, 1),
 (80, 1),
 (81, 1),
 (82, 1),
 (83, 1),
 (84, 1),
-(85, 1),
-(86, 1),
-(87, 1),
-(88, 1),
-(89, 1),
-(90, 1),
 (91, 1),
 (92, 1),
 (93, 1),
@@ -686,7 +760,19 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (99, 1),
 (100, 1),
 (101, 1),
-(102, 1);
+(102, 1),
+(109, 1),
+(110, 1),
+(111, 1),
+(112, 1),
+(113, 1),
+(114, 1),
+(115, 1),
+(116, 1),
+(117, 1),
+(118, 1),
+(119, 1),
+(120, 1);
 
 -- --------------------------------------------------------
 
@@ -699,9 +785,9 @@ CREATE TABLE `services` (
   `category_id` tinyint(4) NOT NULL DEFAULT 0,
   `name` varchar(100) NOT NULL,
   `slug` varchar(50) DEFAULT NULL,
-  `favorite` tinyint(1) DEFAULT 0,
+  `favorite` tinyint(1) NOT NULL DEFAULT 0,
   `image` varchar(255) DEFAULT NULL,
-  `small_text` varchar(150) DEFAULT NULL,
+  `small_text` varchar(255) DEFAULT NULL,
   `text` mediumtext DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -711,21 +797,22 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `category_id`, `name`, `slug`, `favorite`, `image`, `small_text`, `text`, `status`) VALUES
-(1, 1, 'Building Management System (BMS)', 'building-management-system-bms', 0, NULL, NULL, NULL, 0),
-(2, 1, 'Guest Room Management System', 'guest-room-management-system', 0, NULL, NULL, NULL, 0),
-(3, 1, 'HVAC Control System', 'hvac-control-system', 0, NULL, NULL, NULL, 0),
-(4, 1, 'Lighting Control System', 'lighting-control-system', 0, NULL, NULL, NULL, 0),
-(5, 1, 'Meters & Billing System', 'meters-billing-system', 0, NULL, NULL, NULL, 0),
-(6, 2, 'Fire Alarm System', 'fire-alarm-system', 0, NULL, NULL, NULL, 0),
-(7, 2, 'VESDA System', 'vesda-system', 0, NULL, NULL, NULL, 0),
-(8, 3, 'IP Telephony System', 'ip-telephony-system', 0, NULL, NULL, NULL, 0),
-(9, 3, 'Nurse Call System', 'nurse-call-system', 0, NULL, NULL, NULL, 0),
-(10, 3, 'Public Address System', 'public-address-system', 0, NULL, NULL, NULL, 0),
-(11, 3, 'UPS System', 'ups-system', 0, NULL, NULL, NULL, 0),
-(12, 4, 'Data and Passive Components', 'data-and-passive-components', 0, NULL, NULL, NULL, 0),
-(13, 5, 'CCTV', 'cctv', 0, NULL, NULL, NULL, 0),
-(14, 5, 'ACS', 'acs', 0, NULL, NULL, NULL, 0),
-(15, 5, 'Intrusion Detection System', 'intrusion-detection-system', 0, NULL, NULL, NULL, 0);
+(1, 1, 'Building Management System', 'building-management-system', 0, 'upload/services/thumbnail/1842624297280304.jpg', 'Linking productivity and well-being to controlled comfort, air quality, and lighting reflects widely cited BMS outcomes that enhance occupant experience and performance.', NULL, 0),
+(2, 1, 'Guest Room Management System', 'guest-room-management-system', 0, 'upload/services/thumbnail/1842624591615327.jpg', 'Automated guest room controls for lighting, temperature, and entertainment systems to enhance guest comfort and operational efficiency.', NULL, 0),
+(3, 1, 'HVAC Control System', 'hvac-control-system', 0, 'upload/services/thumbnail/1842624537126337.jpg', 'Centralized heating, ventilation, and air conditioning management to optimize indoor climate while reducing energy consumption and maintenance costs.', NULL, 0),
+(4, 1, 'Lighting Control System', 'lighting-control-system', 0, 'upload/services/thumbnail/1842624820892177.jpg', 'Intelligent lighting management with automated scheduling, occupancy sensing, and dimming controls to improve energy efficiency and user comfort.', NULL, 0),
+(5, 1, 'Meters & Billing System', 'meters-billing-system', 0, 'upload/services/thumbnail/1842624989241559.jpg', 'Real-time monitoring and automated billing for utilities including electricity, water, and gas consumption to enable accurate cost allocation and energy management.', NULL, 0),
+(6, 2, 'Fire Alarm System', 'fire-alarm-system', 0, NULL, 'Comprehensive fire detection and alarm network with smoke sensors, heat detectors, and notification devices to ensure occupant safety and regulatory compliance.', NULL, 0),
+(7, 2, 'VESDA System', 'vesda-system', 0, 'upload/services/thumbnail/1842625289773936.jpg', 'Very Early Smoke Detection Apparatus providing ultra-sensitive air sampling smoke detection for critical areas requiring advanced fire protection.', NULL, 0),
+(8, 3, 'IP Telephony System', 'ip-telephony-system', 0, 'upload/services/thumbnail/1842625156732354.jpg', 'Voice over Internet Protocol communication system enabling scalable, cost-effective telephony with advanced features like unified messaging and mobility.', NULL, 0),
+(9, 3, 'Nurse Call System', 'nurse-call-system', 0, 'upload/services/thumbnail/1842625435510942.jpg', 'Patient-to-staff communication system allowing immediate assistance requests and priority-based response management in healthcare facilities.', NULL, 0),
+(10, 3, 'Public Address System', 'public-address-system', 0, NULL, 'Building-wide audio communication system for announcements, emergency notifications, and background music distribution across multiple zones.', NULL, 0),
+(11, 3, 'UPS System', 'ups-system', 0, NULL, 'Uninterruptible Power Supply providing backup power and voltage regulation to protect critical systems from power outages and electrical disturbances.', NULL, 0),
+(12, 4, 'Data and Passive Components', 'data-and-passive-components', 0, NULL, 'Structured cabling infrastructure including fiber optic and copper networks, patch panels, and passive connectivity components supporting all building systems.', NULL, 0),
+(13, 5, 'CCTV', 'cctv', 0, NULL, 'Closed Circuit Television surveillance system with IP cameras, recording capabilities, and remote monitoring to enhance security and incident management.', NULL, 0),
+(14, 5, 'ACS', 'acs', 0, NULL, 'Access Control System managing entry permissions through card readers, biometric scanners, and electronic locks to secure restricted areas and track personnel movement.', NULL, 0),
+(15, 5, 'Intrusion Detection System', 'intrusion-detection-system', 0, NULL, 'Perimeter and interior security monitoring with motion sensors, door/window contacts, and glass break detectors to detect unauthorized access attempts.', NULL, 0),
+(16, 4, 'IOT Solutions', 'iot-solutions', 0, NULL, 'We harness the power of the Internet of Things (IoT) to create a truly intelligent and unified building ecosystem.', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -747,13 +834,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hYDXYJzroMjZ7PkaEXWsH2yZQcXZmoNc8jhCkDZN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Herd/1.22.1 Chrome/120.0.6099.291 Electron/28.2.5 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoib3pXMkYwTlgySExnbFRoc012c1hHanBDWGl0Nm91SHpiZ2p6UWgxdiI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdC8/aGVyZD1wcmV2aWV3Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1756428004),
-('iK0AmTobFesjF9zwRvQxfVpssRfDXiPkdwW1QoXN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWHJndEdWa2dROXFncW1SUTRCY1M0RzJzeDFnVlJ3dTA4c3o3SGNXVyI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1756428306),
-('JeUoLViis85Yn6HLvmsX9Ai7oQldDViJoanc5WTX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Herd/1.22.1 Chrome/120.0.6099.291 Electron/28.2.5 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYVY4ZE16MVZjbFN6NnY0TEFSelJPNlV4Q2t4a25aWWdaRzU0Y1pXbSI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdC8/aGVyZD1wcmV2aWV3Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1756034264),
-('mzGfjNPPWQpCCcGnuyKhg9crNkT7Q1ZHfF1qg4OZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Herd/1.22.1 Chrome/120.0.6099.291 Electron/28.2.5 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicE1uVUdrU2VCZTNVbWd6NzZrN2h0bFJzYWszeXA1WEg4bGI1R2Z5RSI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdC8/aGVyZD1wcmV2aWV3Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1756427891),
-('Nq5b3rjHqHsaT6sZCWwQILI6AkJSsdyJOYy9v8Rd', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZk9PQXpjMTlyeXcyR2ltdURkaTZUNmJTUkFYaDhpRTdObk5Sd3dDaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9fQ==', 1756036936),
-('pCiUdUsmfUJG8n8dX1LzPA7flcr47IY8pqAHpKKt', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNXJmbEVsZzliaXdyTkVndm0wQUFJa3JMTEI2V24zNWlHZ1Y1emN5TiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9fQ==', 1756435992),
-('TOzhZyXD1Dq0YSZV3UjmogKaErbl8XUTlMspHdBY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOWJHdVdWbFlONXNuSUxpYjBjM3F0YkZvVkJzWWRRMzhYQzdsTGoyTiI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdCI7fX0=', 1756050711);
+('JLJiDbkzPGUxL8UIaOMlaiPV71vDgWcW0jgQ7znX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Herd/1.22.1 Chrome/120.0.6099.291 Electron/28.2.5 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMFVYUnloWTB0a0l4bjV1b0dja3BXZXpiS01iZlBLNTVDRVloNVJsSCI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9sYXJhdmVsX2NvbnN0cnVjdGlvbnMudGVzdC8/aGVyZD1wcmV2aWV3Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757263722),
+('khhnj7XMQJ5Wo6ousBBnLyrimSd59Bo3enR8RBVF', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiU0s1bldyM0hkNFVxUURNQ09ZVm1TTzdvR1p1SHdGRDBmS2pYS2VJSSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMzOiJodHRwOi8vbGFyYXZlbF9jb25zdHJ1Y3Rpb25zLnRlc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1757264559);
 
 -- --------------------------------------------------------
 
@@ -790,7 +872,7 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `logo`, `favicon`, `site_title`, `app_name`, `meta_description`, `meta_keywords`, `about`, `phone`, `address`, `email`, `facebook`, `twitter`, `pinterest`, `instagram`, `youtube`, `copywrite`, `pagination`, `script`, `created_at`, `updated_at`) VALUES
-(1, 'upload/template/thumbnail/1841337489339094.png', 'upload/template/thumbnail/1841318869029999.png', 'Muassasah Mwad AlTshyd', 'Muassasah Mwad AlTshyd', NULL, NULL, 'Welcome to Construction Material Trading official name Muassasah Mwad \r\nAlTshyd, Saudi Arabia\'s leading supplier of high-quality MEP, HVAC, Low \r\nCurrent, innovative and Automation solutions provider', '966-546308237', 'Building No.3242, Nhaound, Al-Aziziyah District, Riyadh-14513, Saudi Arabia', 'sales@consmtest.com', '#', '#', '#', NULL, NULL, NULL, 10, '', '2025-08-15 07:44:08', '2025-08-24 06:31:07');
+(1, 'upload/template/thumbnail/1842618048986219.png', 'upload/template/thumbnail/1841318869029999.png', 'Muassasah Mwad AlTshyd', 'Muassasah Mwad AlTshyd', NULL, NULL, 'Welcome to Construction Material Trading official name Muassasah Mwad AlTshyd, Saudi Arabia\'s leading supplier of high-quality MEP, HVAC, Low Current, innovative and Automation solutions provider.', '966-546308237', 'Building No.3242, Nhaound, Al-Aziziyah District, Riyadh-14513, Saudi Arabia', 'sales@consmtest.com', '#', '#', '#', NULL, NULL, NULL, 10, '', '2025-08-15 07:44:08', '2025-09-07 09:35:25');
 
 -- --------------------------------------------------------
 
@@ -814,8 +896,8 @@ CREATE TABLE `sliders` (
 --
 
 INSERT INTO `sliders` (`id`, `name`, `link`, `title`, `sub_title`, `image`, `text`, `status`) VALUES
-(1, 'Slider-1', NULL, 'A GLOBAL LEADER IN INFRASTRUCTURE', 'TO TAKE CARE OF YOUR WORK', 'upload/slider/thumbnail/1841325484379738.jpg', NULL, 0),
-(2, 'Slider-2', NULL, 'WE WILL BE HAPPY', 'TO TAKE CARE OF YOUR WORK', 'upload/slider/thumbnail/1841325774957390.jpg', NULL, 0);
+(1, 'Slider-1', NULL, 'Precision, Innovation, and Reliability', 'in Every System We Deliver', 'upload/slider/thumbnail/1841325484379738.jpg', '<p>Innovative Low Current &amp; Automation Solutions for a Smarter Saudi Arabia.</p>', 0),
+(2, 'Slider-2', NULL, 'Empowering Smart Buildings with Seamless Automation', 'We are here to take care of all your smart, low-current, and automation needs—making your building more intelligent, safe, and energy efficient.', 'upload/slider/thumbnail/1841325774957390.jpg', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -858,6 +940,19 @@ CREATE TABLE `testimonials` (
   `text` mediumtext DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `name`, `designation`, `image`, `text`, `status`) VALUES
+(1, 'Eng. Faisal Al‑Harbi', 'Facilities Director, Riyadh Commercial Tower', NULL, 'Muassasah Mwad AlTshyd our HVAC, lighting, and metering into a single BMS dashboard. We saw immediate energy savings and far better visibility for reporting.', 0),
+(2, 'Sara Al‑Qahtani', 'Sustainability Lead, Mixed‑Use Development (Jeddah)', NULL, 'Their team delivered a smooth migration to a modern BMS with analytics. Fault detection cut waste and complaints dropped significantly.', 0),
+(3, 'Mohammed Al‑Amri', 'Operations Manager, 5‑Star Hotel (Makkah)', NULL, 'Smart room controls and centralized BMS improved guest comfort while reducing energy during low occupancy hours. Excellent support and training.', 0),
+(4, 'Dr. Hanan Al‑Mutairi', 'Hospital Administrator, Dammam', NULL, 'We rely on Aala Tech for HVAC, IAQ, and emergency integrations. The BMS helps maintain comfort targets and compliance with audit-ready data.', 0),
+(5, 'Omar Al‑Ghamdi', 'Real Estate Asset Manager, KSA Portfolio', NULL, 'Portfolio dashboards and open integrations made budgeting and ESG reporting easier. Clear ROI from optimization and maintenance reduction.', 0),
+(6, 'Eng. Reem Al‑Otaibi', 'MEP Lead, Government Campus (Riyadh)', NULL, 'Seamless integration of access control, fire alarm, and metering with the BMS. Strong engineering discipline and on‑time delivery.', 0),
+(7, 'Khalid Al‑Dosari', 'Factory GM, Eastern Province', NULL, 'Variable frequency drives and BMS sequencing stabilized our loads and reduced downtime. The mobile dashboards are invaluable for on‑call teams.', 0);
 
 -- --------------------------------------------------------
 
@@ -913,6 +1008,13 @@ ALTER TABLE `blogtags`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- Indexes for table `cache`
 --
 ALTER TABLE `cache`
@@ -928,12 +1030,6 @@ ALTER TABLE `cache_locks`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `galleries`
---
-ALTER TABLE `galleries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1014,9 +1110,9 @@ ALTER TABLE `permissions`
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Indexes for table `products`
+-- Indexes for table `projects`
 --
-ALTER TABLE `products`
+ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1086,31 +1182,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogcategories`
 --
 ALTER TABLE `blogcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `blogtags`
 --
 ALTER TABLE `blogtags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `galleries`
---
-ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `image_presets`
@@ -1140,7 +1236,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `metainfos`
 --
 ALTER TABLE `metainfos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1152,7 +1248,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1164,13 +1260,13 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `projects`
 --
-ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `projects`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1182,7 +1278,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `site_settings`
@@ -1206,7 +1302,7 @@ ALTER TABLE `smtp_settings`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -21,23 +21,21 @@ class GenerateModelsWithMigration extends Command
     public function handle()
     {
         $models = [
-            'gallery' => [
-                'category_id' => ['type' => 'integer', 'options' => []],
+            'project' => [
                 'name' => ['type' => 'string', 'options' => ['maxLength' => 255]],
-                'image' => ['type' => 'string', 'options' => ['nullable' => true, 'maxLength' => 255]],
+                'icon' => ['type' => 'string', 'options' => ['nullable' => true, 'maxLength' => 255]],
                 'text' => ['type' => 'text', 'options' => ['nullable' => true]],
-                'front' => ['type' => 'boolean', 'options' => ['default' => 0]],
                 'status' => ['type' => 'boolean', 'options' => ['default' => 0]],
             ],
         ];
 
         foreach ($models as $model => $fields) {
             try {
-                $this->generateModelResources($model, 0);
-                $this->createBladeFiles($model);
+              //  $this->generateModelResources($model, 0);
+                //$this->createBladeFiles($model);
                 $this->createPermissions($model);
-                $this->createComponentWithDummyData($model);
-                $this->addFieldsToMigration($model, $fields);
+               // $this->createComponentWithDummyData($model);
+             //   $this->addFieldsToMigration($model, $fields);
 
                 $this->info("✅ Model, migration, views, permissions & component for '{$model}' created successfully.");
             } catch (Exception $e) {

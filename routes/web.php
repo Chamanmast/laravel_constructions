@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'Home'])->name('home');
 Route::get('/about-us', [IndexController::class, 'About'])->name('about-us');
 Route::get('/solutions', [IndexController::class, 'Services'])->name('solutions');
-Route::get('/solutions/{slug}', [IndexController::class, 'ServiceDetailsBySlug'])->name('service.detailsn');
-Route::get('/solutions/{service}', [IndexController::class, 'ServiceDetails'])->name('service.details');
+Route::get('/solutions/{slug}', [IndexController::class, 'ServiceDetailsBySlug'])->name('service.details');
+// Route::get('/solutions/{service}', [IndexController::class, 'ServiceDetails'])->name('service.details');
 Route::get('/blogs', [IndexController::class, 'Blogs'])->name('blogs');
 Route::get('/blog/{blog_slug}', [IndexController::class, 'BlogDetails'])->name('blog.details');
-Route::get('/portfolio', [IndexController::class, 'Portfolio'])->name('our-portfolio');
-Route::get('/portfolio/{id}', [IndexController::class, 'PortfolioDetails'])->name('portfolio.details');
+Route::get('/projects', [IndexController::class, 'Project'])->name('projects');
+Route::get('/project/{id}', [IndexController::class, 'ProjectDetails'])->name('project.details');
 Route::get('/contact-us', [IndexController::class, 'Contact'])->name('contact-us');
 Route::post('/contact-us', [IndexController::class, 'ContactSend'])->name('contact.send');
 

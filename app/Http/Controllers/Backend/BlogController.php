@@ -33,7 +33,7 @@ class BlogController extends Controller
     {
         // Viewing is safe, doesn't need try/catch
         $blog = Blog::latest()->with(['category:id,category_name'])
-            ->get(['id', 'blogcat_id', 'popular', 'post_title', 'post_image', 'status', 'created_at']);
+            ->get(['id', 'blogcat_id', 'front', 'post_title', 'post_image', 'status', 'created_at']);
 
         return view('backend.blog.all_blog', compact('blog'));
     }
@@ -67,11 +67,11 @@ class BlogController extends Controller
 
             Blog::create([
                 'blogcat_id' => $request->blogcat_id,
-                'popular' => $request->popular,
                 'user_id' => Auth::user()->id,
                 'post_title' => $request->post_title,
                 'post_slug' => Str::slug($request->post_title),
                 'post_image' => $save_url,
+                'front' => $request->front ? $request->front : 0,
                 'short_descp' => $request->short_descp,
                 'long_descp' => $request->long_descp,
                 'post_tags' => $post_tags,
@@ -111,9 +111,9 @@ class BlogController extends Controller
 
             $blog->update([
                 'blogcat_id' => $request->blogcat_id,
-                'popular' => $request->popular,
                 'post_title' => $request->post_title,
                 'post_slug' => Str::slug($request->post_title),
+                'front' => $request->front ? $request->front : 0,
                 'post_image' => $save_url,
                 'short_descp' => $request->short_descp,
                 'long_descp' => $request->long_descp,

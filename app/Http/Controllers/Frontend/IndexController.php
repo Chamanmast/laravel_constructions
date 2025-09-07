@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Menu;
+use App\Models\Service;
+use App\Models\Category;
+use App\Models\Portfolio;
+use App\Models\Project;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
@@ -19,7 +23,7 @@ class IndexController extends Controller
     public function __construct()
     {
         // Retrieve the pagination value from the site settings and set it
-        $this->paginate = SiteSetting::find(1)->paginate;
+        $this->paginate = SiteSetting::find(1)->pagination;
     }
 
     /**
@@ -71,14 +75,14 @@ class IndexController extends Controller
     public function Blogs()
     {
         // Get the site settings
-        $template = SiteSetting::Select('paginate')->find(1);
+        $template = SiteSetting::Select('pagination')->find(1);
 
         // Retrieve the blog posts with pagination
         $blogs = Blog::select('id', 'blogcat_id', 'post_title', 'post_slug', 'post_image', 'short_descp', 'user_id', 'created_at')
             ->with(['category:id,category_name'])
             ->where('status', 0)
             ->latest()
-            ->paginate($template->paginate);
+            ->paginate($template->pagination);
 
         // Return the view with the blogs and site settings
         return view('blogs', compact('blogs', 'template'));
@@ -113,9 +117,9 @@ class IndexController extends Controller
 
     public function ServiceDetailsBySlug(Request $request, string $slug)
     {
-        dd($slug);
+
         // Retrieve the specific blog post by its slug
-        $service = Service::where('id', $id)
+        $service = Service::where('slug', $slug)
             ->where('status', 0)
             ->first();
 
@@ -124,6 +128,23 @@ class IndexController extends Controller
         return view('servicedetails', compact('service'));
     }
 
+     public function Project()
+    {
+        // Get active categories and portfolio items
+
+
+        $projects = Project::active(0)->get();
+        // Return the view with the categories and portfolio items
+        return view('project', compact('projects'));
+    }
+    public function ProjectDetails(Request $request, int $id)
+    {
+        // Retrieve the specific portfolio by its id
+        $project = Project::active(0)->find($id);
+
+        // Return the view with the portfolio post details
+        return view('projectdetails', compact('project'));
+    }
     /**
      * Display the contact us page view
      *

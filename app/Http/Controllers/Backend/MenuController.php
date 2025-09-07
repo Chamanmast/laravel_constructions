@@ -12,14 +12,12 @@ use Illuminate\Support\Str;
 class MenuController extends Controller
 {
     use CommonTrait;
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $menus = Menu::all();
-
+        $menus = Menu::all();       
         return view('backend.menu.all_menu', compact('menus'));
     }
 
@@ -28,11 +26,11 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $type = ['Page', 'Url', 'External Page', 'Category'];
-        $menugroup = Menugroup::pluck('title', 'id');
-        $menus = Menu::pluck('title', 'id');
-
-        return view('backend.menu.add_menu', compact('menus', 'type', 'menugroup'));
+        
+        $type= ['Page', 'Url', 'External Page', 'Category'];
+        $menugroup= Menugroup::pluck('title','id');
+        $menus= Menu::pluck('title','id');
+        return view('backend.menu.add_menu',compact('menus','type', 'menugroup'));
     }
 
     /**
@@ -40,36 +38,37 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|unique:menus|max:255',
-            'type' => 'required',
-            'group_id' => 'nullable|exists:menugroups,id',
-        ]);
+        // $validated = $request->validate([
+        //     'title' => 'required|unique:menus|max:255',
+        // ]);
+        $groups = $request->group_ids;
+        if (is_array($groups)) {
+            $groupids = implode(",", $groups);
+        }
+       $menu= Menu::insert([
+            'parent_id' => ($request->parent_id!=null) ? $request->parent_id :0 ,
+            'title' => $request->title,
+            'url' => Str::slug($request->title),
+            'type' => $request->type,
+            'position'=> count(menu::all())+1,
+            'group_id' => $groupids,
+            'megamenu'=>$request->megamenu ? 1:0
 
-        return $this->executeWithNotification(
-            function () use ($request) {
-                $groups = $request->group_ids;
-                if (is_array($groups)) {
-                    $groupids = implode(',', $groups);
-                }
-                $position = Menu::max('position') + 1;
-                $menu = Menu::create([
-                    'parent_id' => $request->parent_id ?? 0,
-                    'title' => $request->title,
-                    'url' => Str::slug($request->title),
-                    'type' => $request->type,
-                    'position' => $position,
-                    'group_id' => $groupids,
-                    'megamenu' => $request->megamenu ? 1 : 0,
-                ]);
-                $menu->meta()->create([
-                    'meta_description' => $request->meta_description,
-                    'meta_keywords' => $request->meta_keywords,
-                ]);
-            },
-            'Menu Added Successfully',
-            'Failed to add menu.'
+        ]);
+       
+        $notification = array(
+            'message' => 'Menu Added Successfully',
+            'alert-type' => 'success',
         );
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Menu $menu)
+    {
+        //
     }
 
     /**
@@ -77,11 +76,11 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
+       
         $type = ['Page', 'Url', 'External Page', 'Category'];
         $menugroup = Menugroup::pluck('title', 'id');
-        $menus = Menu::pluck('title', 'id');
-
-        return view('backend.menu.edit_menu', compact('menu', 'menus', 'type', 'menugroup'));
+        $menus =  Menu::pluck('title', 'id');
+        return view('backend.menu.edit_menu', compact('menu','menus', 'type', 'menugroup'));
     }
 
     /**
@@ -89,35 +88,45 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        // $validated = $request->validate([
+        //     'title' => 'required|max:255',
+        // ]);
+        
+        $groups = $request->group_ids;
+        if (is_array($groups)) {
+            $groupids = implode(",", $groups);
+        }
+        
+        $menu->update([
+            'parent_id' => ($request->parent_id != null) ? $request->parent_id : 0,
+            'title' => $request->title,
+            'url' => $request->url,
+            'type' => $request->type,
+            'position' => $request->position,
+            'group_id' => $groupids,
+            'megamenu'=> $request->megamenu
 
-        $request->validate([
-            'title' => 'required|max:255|unique:menus,title,'.$menu->id,
-            'type' => 'required',
-            'group_id' => 'nullable|exists:menugroups,id',
         ]);
-
-        return $this->executeWithNotification(
-            function () use ($request, $menu) {
-                $groups = $request->group_ids;
-                if (is_array($groups)) {
-                    $groupids = implode(',', $groups);
-                }
-                $menu->update([
-                    'parent_id' => $request->parent_id ?? 0,
-                    'title' => $request->title,
-                    'url' => $request->url ?? Str::slug($request->title),
-                    'type' => $request->type,
-                    'position' => $request->position ?? $menu->position,
-                    'group_id' => $groupids,
-                    'megamenu' => $request->megamenu ? 1 : 0,
-                ]);
-                $menu->meta()->updateOrCreate([], [
-                    'meta_description' => $request->meta_description,
-                    'meta_keywords' => $request->meta_keywords,
-                ]);
-            },
-            'Menu Updated Successfully',
-            'Failed to update menu.'
-        );
+        if($request->meta_description)
+        {
+        $menu->meta()->updateOrCreate([], [
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+        ]);
     }
+        $notification = array(
+            'message' => 'Menu Updated Successfully',
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Menu $menu)
+    {
+        //
+    }
+    
 }

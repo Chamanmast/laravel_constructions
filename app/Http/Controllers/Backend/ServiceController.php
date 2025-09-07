@@ -24,7 +24,7 @@ class ServiceController extends Controller
 
     public function __construct()
     {
-        $this->image_preset = ImagePresets::whereIn('id', [4])->get();
+        $this->image_preset = ImagePresets::whereIn('id', [4,8])->get();
         $this->image_preset_main = ImagePresets::find(14);
     }
 
@@ -62,14 +62,14 @@ class ServiceController extends Controller
             $image = $request->file('image');
             $save_url = $this->imageGenrator($image, $this->image_preset_main, $this->image_preset, $this->path);
         } else {
-            $save_url = '';
+            $save_url = NULL;
         }
 
         $service = Service::insert([
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'favorite' => $request->favorite,
+            'favorite' => $request->favorite ? $request->favorite : 0,
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
@@ -138,7 +138,7 @@ class ServiceController extends Controller
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'favorite' => $request->favorite,
+            'favorite' => $request->favorite ? $request->favorite : 0,
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,

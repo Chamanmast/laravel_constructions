@@ -53,11 +53,11 @@
             </div>
         </div>
     </div>
-    {{-- Popular Checkbox --}}
+    {{-- Front Checkbox --}}
     <div class="form-check form-check-primary form-check-inline">
-        <input type="checkbox" name="popular" id="form-check-default" value="1" class="form-check-input"
-            {{ $blog->popular == 1 ? 'checked' : '' }}>
-        <label for="form-check-default" class="form-check-label">Popular</label>
+        <input type="checkbox" name="front" id="form-check-default" value="1" class="form-check-input"
+            {{ isset($blog) && $blog->front == 1 ? 'checked' : '' }}>
+        <label for="form-check-default" class="form-check-label">Home Page</label>
     </div>
 
     {{-- Short Description --}}

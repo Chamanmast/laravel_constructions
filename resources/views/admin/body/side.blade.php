@@ -53,8 +53,8 @@
                      ['route' => 'menugroup.create', 'label' => 'Add Menu Group', 'permission' => 'menugroup.create'],
                      ['route' => 'menugroup.index', 'label' => 'Show Menu Group', 'permission' => 'menugroup.index'],
 
-                     ['route' => 'megamenu.create', 'label' => 'Add Menu Group', 'permission' => 'megamenu.create'],
-                     ['route' => 'megamenu.index', 'label' => 'Show Menu Group', 'permission' => 'megamenu.index'],
+                     ['route' => 'megamenu.create', 'label' => 'Add Mega Menu', 'permission' => 'megamenu.create'],
+                     ['route' => 'megamenu.index', 'label' => 'Show Mega Menu', 'permission' => 'megamenu.index'],
                  ]" :activeRoutes="['admin/menus', 'admin/menugroup', 'admin/megamenu']" />
 
              <x-backend.backend_component.side-menu-item permission="pages.menu" routeId="pages" icon="menu"
@@ -115,15 +115,12 @@
                  label="Services" :submenu="[
                      ['route' => 'services.create', 'label' => 'Add Services', 'permission' => 'services.create'],
                      ['route' => 'services.index', 'label' => 'Show Services', 'permission' => 'services.index'],
-                     ['route' => 'product.create', 'label' => 'Add Product', 'permission' => 'product.create'],
-                     ['route' => 'product.index', 'label' => 'Show Product', 'permission' => 'product.index'],
-                 ]" :activeRoutes="['admin/services','admin/product']" />
+                     ['route' => 'brand.create', 'label' => 'Add Brand', 'permission' => 'brand.create'],
+                     ['route' => 'brand.index', 'label' => 'Show Brand', 'permission' => 'brand.index'],
+                     ['route' => 'project.create', 'label' => 'Add Project', 'permission' => 'project.create'],
+                     ['route' => 'project.index', 'label' => 'Show Project', 'permission' => 'project.index'],
+                 ]" :activeRoutes="['admin/services','admin/brand','admin/project']" />
 
-             <x-backend.backend_component.side-menu-item permission="gallery.menu" routeId="gallery" icon="menu"
-                 label="Gallery" :submenu="[
-                     ['route' => 'gallery.create', 'label' => 'Add Gallery', 'permission' => 'gallery.create'],
-                     ['route' => 'gallery.index', 'label' => 'Show Gallery', 'permission' => 'gallery.index'],
-                 ]" :activeRoutes="['admin/gallery']" />
 
 
              <x-backend.backend_component.side-menu-item permission="blog.menu" routeId="blog" icon="menu"

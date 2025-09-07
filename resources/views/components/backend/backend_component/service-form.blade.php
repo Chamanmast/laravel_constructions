@@ -38,13 +38,13 @@
 
 
     {{-- Small Text Input --}}
-    <div class="col-sm-12">
+    <div class="col-sm-12 mb-3">
         <x-form.input-label for="small_text" value="Small Text" />
-        <x-form.textarea name="small_text" :value="$service->small_text ?? null" maxlength="150" rows="2" placeholder="Text" />
+        <x-form.textarea name="small_text" :value="$service->small_text ?? null"  placeholder="Text" />
     </div>
 
     {{-- Image Upload --}}
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-sm-10">
             <x-form.input-label for="image" value="Icon Image" />
             <x-form.file-input name="image" :value="$service->image ?? null" placeholder="Main Thumbnail" />

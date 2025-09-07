@@ -45,7 +45,8 @@
 <body>
     <div class="content-wrapper">
         <!-- header-top area start -->
-        <x-include.header-area :$template :$menus />
+
+        <x-include.header-area :$template :$menus :home="Route::is('home')"  />
         <!-- header-top area end -->
 
 
