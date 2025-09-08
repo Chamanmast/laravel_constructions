@@ -28,15 +28,7 @@
                 <h2><strong>Products </strong></h2>
             </div>
             <section id="our-portfolios" class="portfolio section-padding mt-5-am team-area ptb-80">
-                <div class="">
-                    <ul class="portfolio mt-5">
 
-                        <li class="filter active" data-filter="all">All</li>
-                        @foreach($categories as $cat)
-                        <li class="filter" data-filter=".{{Str::slug(strtolower($cat->name), '_')}}">{{$cat->name}} </li>
-                        @endforeach
-                    </ul>
-                </div>
                 <div class="portfolio_sec portfolio-inner" id="MixItUp8C6820">
                     <ul class="portfolio-posts">
                         @foreach($products as $product)
@@ -52,7 +44,7 @@
                         }
                         @endphp
 
-                        <x-portfolio-single :cat="$product->categorylist($product->categories_ids)" :page="'product'" :id="$product->id" :name="$product->name" :text="$product->small_text" :image="asset($small_img)" />
+                        <x-portfolio-single  :page="'product'" :id="$product->id" :name="$product->name" :text="$product->small_text" :image="asset($small_img)" />
                         @endforeach
                     </ul>
                 </div>

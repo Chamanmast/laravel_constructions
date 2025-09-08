@@ -22,7 +22,7 @@ Route::get('/solutions/{slug}', [IndexController::class, 'ServiceDetailsBySlug']
 Route::get('/blogs', [IndexController::class, 'Blogs'])->name('blogs');
 Route::get('/blog/{blog_slug}', [IndexController::class, 'BlogDetails'])->name('blog.details');
 Route::get('/projects', [IndexController::class, 'Project'])->name('projects');
-Route::get('/project/{id}', [IndexController::class, 'ProjectDetails'])->name('project.details');
+Route::get('/project/{slug}', [IndexController::class, 'ProjectDetails'])->name('project.details');
 Route::get('/contact-us', [IndexController::class, 'Contact'])->name('contact-us');
 Route::post('/contact-us', [IndexController::class, 'ContactSend'])->name('contact.send');
 

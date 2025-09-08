@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <h6 class="card-title fw-bold">Edit {{ Str::title($name) }} </h6>
                         {{-- resources/views/components/backend/backend_component/project-form.blade.php --}}
-                        <x-backend.backend_component.project-form :$project :$categories :isEdit="true" />
+                        <x-backend.backend_component.project-form :$project :$brands :$categories :isEdit="true" />
 
                     </div>
                 </div>
@@ -228,6 +228,12 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+               $(".taggings").select2({
+                placeholder: $(this).data('placeholder'),
+                closeOnSelect: false,
+                tags: true,
+                allowClear: true,
+            });
         </script>
 
     @stop

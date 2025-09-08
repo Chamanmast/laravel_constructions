@@ -27,10 +27,10 @@ class Service extends Model
 
         return $this->belongsTo(Category::class, 'category_id');
     }
-     public function brands(): HasMany
-    {
 
-        return $this->hasMany(Brand::class);
+     public function brands($ids)
+    {
+        return Brand::whereIn('id', explode(',', $ids))->get();
     }
 
     public function meta()

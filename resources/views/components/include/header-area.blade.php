@@ -61,7 +61,7 @@
                             @endphp
                             @if ($menu->parent_id === 0)
                                 <li class="{{ implode(' ', array_filter($navClasses)) }}">
-                                    <a href="{{ $menu->getUrl() }}"
+                                    <a href="{{  $menu->getUrl() }}"
                                         class="{{ implode(' ', array_filter($linkClasses)) }}"
                                         @if ($hasDropdown) data-bs-toggle="dropdown" aria-expanded="false"  role="button" @endif
                                         @if ($menu->type == 1) target="_blank" @endif>
@@ -74,7 +74,7 @@
                                             @foreach ($menu->children as $child)
                                                 <li>
                                                     <a class="dropdown-item {{ active_class($child->url) }} fs-12"
-                                                        href="{{ $child->getUrl() }}"
+                                                        href="{{ $child->attachment ? asset('storage/' . $child->attachment) : $child->getUrl() }}"
                                                         @if ($child->type == 1) target="_blank" @endif>
                                                         {{ $child->title }}
                                                     </a>

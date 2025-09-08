@@ -6,6 +6,7 @@
         $testimonials = App\Models\Testimonial::active(0)->get();
         $blogs = App\Models\Blog::select('post_title','post_slug','post_image','short_descp')->active(0)->front(1)->get();
         $module = App\Models\Module::select('heading', 'image', 'text')->find(4);
+        $vision = App\Models\Module::select('heading', 'image', 'text')->find(7);
         $categories = App\Models\Category::with('services:category_id,name,slug,image,small_text')->select('id','name')->whereFront(1)->whereType(0)->get();
 
 $projects = App\Models\Project::active(0)->get();
@@ -22,7 +23,7 @@ $projects = App\Models\Project::active(0)->get();
     <x-home.home-service  :$categories/>
     <x-home.home-testimonials :$testimonials />
     {{-- <x-home.home-blog  :$blogs /> --}}
-     <x-home.home-vision   />
+     <x-home.home-vision  :$vision  />
      <x-home.home-projects  :$projects />
     {{-- <x-home.home-call   /> --}}
     @section('script')

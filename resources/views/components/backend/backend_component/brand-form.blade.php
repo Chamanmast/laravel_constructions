@@ -3,15 +3,8 @@
 <x-form.form :route="$isEdit ? route('brand.update', $brand->id) : route('brand.store')" :isEdit="$isEdit">
 
     <div class="row">
-        <div class="col-6">
-            {{-- brand Type --}}
-            <div class="mb-3">
-                <x-form.input-label for="service_id" value="Service Type" />
-                <x-form.select name="service_id" :options="$categories" :selected="$brand->service_id ?? null" placeholder="Select Service Type" />
-                <x-form.input-error :messages="$errors->get('service_id')" class="mt-2" />
-            </div>
-        </div>
-        <div class="col-6">
+
+        <div class="col-12">
 
             {{-- Name --}}
             <div class="mb-3">

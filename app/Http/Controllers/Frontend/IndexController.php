@@ -128,7 +128,7 @@ class IndexController extends Controller
         return view('servicedetails', compact('service'));
     }
 
-     public function Project()
+    public function Project()
     {
         // Get active categories and portfolio items
 
@@ -137,10 +137,11 @@ class IndexController extends Controller
         // Return the view with the categories and portfolio items
         return view('project', compact('projects'));
     }
-    public function ProjectDetails(Request $request, int $id)
+    public function ProjectDetails(Request $request, string $slug)
     {
+
         // Retrieve the specific portfolio by its id
-        $project = Project::active(0)->find($id);
+        $project = Project::where('slug', $slug)->where('status', 0)->first();
 
         // Return the view with the portfolio post details
         return view('projectdetails', compact('project'));
@@ -182,7 +183,7 @@ class IndexController extends Controller
 
         $temp = SiteSetting::select('site_title', 'email')->find(1);
 
-        $subject = 'Enquriy Form '.$temp->site_title;
+        $subject = 'Enquriy Form ' . $temp->site_title;
         // Prepare the data to be sent in the email
         $data = [
             'name' => $request->name,

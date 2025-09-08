@@ -1,4 +1,4 @@
-<x-main-layout>
+ <x-main-layout>
     @section('title', breadcrumb())
     @section('style')
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
@@ -18,7 +18,7 @@
                         <h6 class="card-title fw-bold">Add Service</h6>
 
                         {{-- resources/views/components/backend/backend_component/service-form.blade.php --}}
-                        <x-backend.backend_component.service-form :$categories :isEdit="false" />
+                        <x-backend.backend_component.service-form :$brands :$categories :isEdit="false" />
 
                     </div>
                 </div>
@@ -29,7 +29,7 @@
     @section('script')
         <script src="{{ asset('backend/assets/src/plugins/src/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>
         <script src="{{ asset('backend/assets/src/plugins/src/bootstrap-maxlength/custom-bs-maxlength.js') }}">
-          
+
         <script>
             $('textarea.textareamax').maxlength({
                 alwaysShow: true,
@@ -240,10 +240,10 @@
 
         <script>
                 $(document).ready(function() {
-                   
+
                     $('#iconchecker').on('change', function() {
                         var selectedValue = $(this).val();
-                       
+
                         $('#icon').html('<i class="fas fa-' + selectedValue + '" aria-hidden="true"></i>');
 
                     });

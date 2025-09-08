@@ -11,10 +11,6 @@ class Brand extends Model
 {
     protected $guarded = [];
 
-    public function service(): BelongsTo
-    {
-        return $this->belongsTo(Service::class, 'service_id');
-    }
 
     public function scopeActive($query, $status)
     {

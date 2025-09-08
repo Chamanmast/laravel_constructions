@@ -47,7 +47,6 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'service_id' => 'required',
             'name' => 'required|unique:Brands|max:200',
             'image'=>  'mimes:jpeg,jpg,png|max:2048',
         ]);
@@ -60,7 +59,6 @@ class BrandController extends Controller
 
 
        $brand= Brand::insert([
-            'service_id' => $request->service_id,
             'name' => $request->name,
             'image' =>  $save_url,
             'small_text' => $request->small_text,
@@ -124,7 +122,6 @@ class BrandController extends Controller
     #dd($categories_ids);
 
         $brand->update([
-            'service_id' => $request->service_id,
             'name' => $request->name,
             'image' =>  $save_url,
             'small_text' => $request->small_text,

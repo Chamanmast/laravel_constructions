@@ -1,7 +1,7 @@
 {{-- resources/views/components/backend/backend_component/menu-form.blade.php --}}
 
 {{-- Include the reusable form component --}}
-<x-form.form :route="$isEdit ? route('menus.update', $menu->id) : route('menus.store')" :isEdit="$isEdit">
+<x-form.form :route="$isEdit ? route('menus.update', $menu->id) : route('menus.store')" :isEdit="$isEdit" >
 
     {{-- Menu Group --}}
 
@@ -79,9 +79,13 @@
                 class="form-check-input me-2" role="switch" id="flexSwitchCheckChecked">
         </div>
     </div>
+     <div class="col-sm-12">
+            <x-form.file-input name="attachment" :value="$menu->attachment ?? ''" placeholder="Attachment" />
+
+    </div>
     {{-- Submit Button --}}
 
     <x-form.button type="submit" >
-        {{ $isEdit ? 'Update' : 'Submit' }}        
+        {{ $isEdit ? 'Update' : 'Submit' }}
     </x-form.button>
 </x-form.form>

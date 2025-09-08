@@ -3,7 +3,7 @@
        $template = App\Models\SiteSetting::select('site_title', 'meta_description', 'meta_keywords')->find(1);
 
         $popular = App\Models\Blog::select('post_image', 'post_title', 'post_slug', 'short_descp', 'created_at')
-            ->popular(1)
+
             ->active(0)
             ->get();
         $category = App\Models\Blogcategory::select('category_name')->withCount('blogs')->get();

@@ -226,8 +226,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
-    <script>
+
         $(".taggings").select2({
             placeholder: $(this).data('placeholder'),
             closeOnSelect: false,

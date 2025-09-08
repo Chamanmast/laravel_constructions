@@ -4,7 +4,7 @@
 <head>
     @php
         $template = App\Models\SiteSetting::select('site_title', 'logo', 'favicon', 'email', 'phone')->find(1);
-        $menus = App\Models\Menu::select('id', 'parent_id', 'url', 'title', 'type', 'megamenu')
+        $menus = App\Models\Menu::select('id', 'parent_id', 'url', 'title', 'type', 'megamenu','attachment')
             ->where('group_id', 'like', '%1%')
             ->with([
                 'children.children', // Load up to 3 levels

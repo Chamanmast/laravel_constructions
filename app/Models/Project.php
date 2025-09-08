@@ -17,4 +17,9 @@ class Project extends Model
     {
         return $query->where('status', $status);
     }
+
+    public function brands($ids)
+    {
+        return Brand::whereIn('id', explode(',', $ids))->get();
+    }
 }

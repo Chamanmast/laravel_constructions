@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ImagePresets;
 use App\Models\Service;
@@ -24,7 +25,7 @@ class ServiceController extends Controller
 
     public function __construct()
     {
-        $this->image_preset = ImagePresets::whereIn('id', [4,8])->get();
+        $this->image_preset = ImagePresets::whereIn('id', [4, 8])->get();
         $this->image_preset_main = ImagePresets::find(14);
     }
 
@@ -44,8 +45,8 @@ class ServiceController extends Controller
     public function create()
     {
         $categories = Category::type(0)->pluck('name', 'id');
-
-        return view('backend.services.add_service', compact('categories'));
+        $brands = Brand::pluck('name', 'id');
+        return view('backend.services.add_service', compact('categories', 'brands'));
     }
 
     /**
@@ -64,7 +65,7 @@ class ServiceController extends Controller
         } else {
             $save_url = NULL;
         }
-
+        $brands = $this->postBrandToString($request->brands ?? []);
         $service = Service::insert([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -73,6 +74,7 @@ class ServiceController extends Controller
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
+            'brands'=>$brands,
             'status' => 0,
         ]);
         $service->meta()->create([
@@ -103,8 +105,8 @@ class ServiceController extends Controller
     {
         //
         $categories = Category::type(0)->pluck('name', 'id');
-
-        return view('backend.services.edit_service', compact('service', 'categories'));
+        $brands = Brand::pluck('name', 'id');
+        return view('backend.services.edit_service', compact('service', 'categories', 'brands'));
     }
 
     /**
@@ -120,7 +122,7 @@ class ServiceController extends Controller
         if ($request->file('image') != null) {
             if (file_exists($service->image)) {
                 $img = explode('.', $service->image);
-                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                 unlink($small_img);
                 unlink($service->image);
             }
@@ -133,7 +135,7 @@ class ServiceController extends Controller
                 $save_url = '';
             }
         }
-
+        $brands = $this->postBrandToString($request->brands ?? []);
         $service->update([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -142,6 +144,7 @@ class ServiceController extends Controller
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
+            'brands' => $brands,
             'status' => 0,
         ]);
         $service->meta()->updateOrCreate([], [
@@ -156,6 +159,10 @@ class ServiceController extends Controller
         return redirect()->back()->with($notification);
     }
 
+     protected function postBrandToString($brands)
+    {
+        return is_array($brands) ? implode(',', $brands) : '';
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -171,7 +178,7 @@ class ServiceController extends Controller
             foreach ($blogs as $blog) {
                 if (file_exists($blog->image)) {
                     $img = explode('.', $blog->image);
-                    $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                    $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                     unlink($small_img);
                     unlink($blog->image);
                 }
@@ -180,7 +187,7 @@ class ServiceController extends Controller
             $blogs = service::find($request->id);
             if (file_exists($blogs->image)) {
                 $img = explode('.', $blogs->image);
-                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                 unlink($small_img);
                 unlink($blogs->image);
             }

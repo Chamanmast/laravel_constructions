@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ImagePresets;
 use App\Models\Project;
@@ -50,8 +51,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
-
-        return view('backend.project.add_project', compact('categories'));
+        $brands = Brand::pluck('name', 'id');
+        return view('backend.project.add_project', compact('categories', 'brands'));
     }
 
     /**
@@ -66,6 +67,7 @@ class ProjectController extends Controller
         ]);
 
         return $this->executeWithNotification(function () use ($request) {
+            $brands = $this->postBrandToString($request->brand ?? []);
             $save_url = '';
             if ($request->hasFile('image')) {
                 $save_url = $this->imageGenrator(
@@ -87,7 +89,7 @@ class ProjectController extends Controller
                 'client' => $request->client,
                 'contractor' => $request->contractor,
                 'specialist_supplier' => $request->specialist_supplier,
-                'brand' => $request->brand,
+                'brand' => $brands,
                 'location' => $request->location,
             ]);
         }, 'project Added Successfully', 'Failed to add category.');
@@ -101,14 +103,18 @@ class ProjectController extends Controller
         //
     }
 
+    protected function postBrandToString($brands)
+    {
+        return is_array($brands) ? implode(',', $brands) : '';
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project)
     {
         $categories = Service::pluck('name', 'id');
-
-        return view('backend.project.edit_project', compact('categories', 'project'));
+        $brands = Brand::pluck('name', 'id');
+        return view('backend.project.edit_project', compact('categories', 'project', 'brands'));
     }
 
     /**
@@ -123,7 +129,7 @@ class ProjectController extends Controller
 
         return $this->executeWithNotification(function () use ($request, $project) {
             $save_url = $project->image;
-
+            $brands = $this->postBrandToString($request->brand ?? []);
             if ($request->hasFile('image')) {
                 $this->deleteprojectImages($project->image);
                 $save_url = $this->imageGenrator(
@@ -135,7 +141,7 @@ class ProjectController extends Controller
             }
 
             $project->update([
-               'service_id' => $request->service_id,
+                'service_id' => $request->service_id,
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
                 'image' => $save_url,
@@ -145,7 +151,7 @@ class ProjectController extends Controller
                 'client' => $request->client,
                 'contractor' => $request->contractor,
                 'specialist_supplier' => $request->specialist_supplier,
-                'brand' => $request->brand,
+                'brand' => $brands,
                 'location' => $request->location,
             ]);
         }, 'project Updated Successfully', 'Failed to update project.');
@@ -172,7 +178,7 @@ class ProjectController extends Controller
         $extension = $img_parts[1];
 
         foreach ($this->image_preset as $preset) {
-            $preset_path = public_path($base_name.'_'.$preset->name.'.'.$extension);
+            $preset_path = public_path($base_name . '_' . $preset->name . '.' . $extension);
             if (file_exists($preset_path)) {
                 @unlink($preset_path);
             }

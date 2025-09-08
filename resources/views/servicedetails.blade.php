@@ -2,7 +2,7 @@
 
     @php
         $template = App\Models\SiteSetting::select('site_title', 'meta_description', 'meta_keywords')->find(1);
-
+        $logos =$service->brands($service->brands);
         //$banner =App\Models\Pagebanner::select('image','name')->where('status',0)->where('menu_id',2)->first();
 
     @endphp
@@ -17,5 +17,5 @@
     <x-include.breadcrumb :name="$service->name" />
     <x-service.form :sname="$service->name" :stext="$service->small_text" />
 
-    <x-service.brands :logos="$service->brands" />
+    <x-service.brands :logos="$logos" />
 </x-front-layout>

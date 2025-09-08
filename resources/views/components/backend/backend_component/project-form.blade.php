@@ -2,7 +2,16 @@
 <x-form.form :route="$isEdit ? route('project.update', $project->id) : route('project.store')" :isEdit="$isEdit" hasFiles>
 
     <div class="row mb-3">
-        <div class="col-6">
+        <div class="col-4">
+
+            {{-- Name --}}
+            <div class="mb-3">
+                <x-form.input-label for="brand" value="Brands" />
+                <x-form.select name="brand[]" :options="$brands" :selected="isset($project) ? explode(',', $project->brand) : []" multiple
+                    class="taggings" /><x-form.input-error :messages="$errors->get('brand')" class="mt-2" />
+            </div>
+        </div>
+        <div class="col-4">
             {{--  Category --}}
             <div class="mb-3">
                 <x-form.input-label for="service_id" value=" Category" />
@@ -11,7 +20,7 @@
             </div>
 
         </div>
-        <div class="col-6">
+        <div class="col-4">
             {{-- Name --}}
             <div class="mb-3">
                 <x-form.input-label for="name" value="Name" />
@@ -44,24 +53,24 @@
     <div class="row mb-3">
         <div class="col-3">
             <x-form.input-label for="client" value="Client" />
-            <x-form.text-input name="client" :value="$project->client ?? ''"  placeholder="Client" />
+            <x-form.text-input name="client" :value="$project->client ?? ''" placeholder="Client" />
             <x-form.input-error :messages="$errors->get('client')" class="mt-2" />
         </div>
         <div class="col-3">
             <x-form.input-label for="specialist_supplier" value="Specialist Supplier" />
-            <x-form.text-input name="specialist_supplier" :value="$project->specialist_supplier ?? ''"  placeholder="Specialist Supplier" />
+            <x-form.text-input name="specialist_supplier" :value="$project->specialist_supplier ?? ''" placeholder="Specialist Supplier" />
             <x-form.input-error :messages="$errors->get('specialist_supplier')" class="mt-2" />
 
         </div>
         <div class="col-3">
 
             <x-form.input-label for="contractor" value="Contractor" />
-            <x-form.text-input name="contractor" :value="$project->contractor ?? ''"  placeholder="Contractor" />
+            <x-form.text-input name="contractor" :value="$project->contractor ?? ''" placeholder="Contractor" />
             <x-form.input-error :messages="$errors->get('contractor')" class="mt-2" />
         </div>
         <div class="col-3">
             <x-form.input-label for="location" value="Location" />
-            <x-form.text-input name="location" :value="$project->location ?? ''"  placeholder="Location" />
+            <x-form.text-input name="location" :value="$project->location ?? ''" placeholder="Location" />
             <x-form.input-error :messages="$errors->get('location')" class="mt-2" />
         </div>
 

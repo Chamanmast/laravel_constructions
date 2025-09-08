@@ -81,7 +81,8 @@
                 <h2 class="display-4 mb-3">{{ $sname }}</h2>
 
                 <p class="mb-6">{{ $stext }}</p>
-                <a href="#" class="btn btn-primary rounded-pill mt-2">Our Partner</a> <a href="#"
+                <a href="#brands" class="btn btn-primary rounded-pill mt-2">Our Partner</a>
+                <a href="{{ route('about-us') }}"
                     class="btn btn-outline-primary rounded-pill mt-2">Company Profile</a>
                 <!--/.row -->
             </div>

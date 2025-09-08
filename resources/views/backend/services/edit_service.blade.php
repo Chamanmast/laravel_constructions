@@ -22,9 +22,8 @@
                     <div class="card-body">
                         <h6 class="card-title fw-bold">Edit Service</h6>
 
-
                         {{-- resources/views/components/backend/backend_component/service-form.blade.php --}}
-                        <x-backend.backend_component.service-form :$service :$categories :isEdit="true" />
+                        <x-backend.backend_component.service-form  :$brands :$service :$categories :isEdit="true" />
 
                     </div>
                 </div>

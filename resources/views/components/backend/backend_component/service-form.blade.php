@@ -4,13 +4,21 @@
     novalidate="novalidate" files="true">
 
     <div class="row">
-        <div class="col-6">
+         <div class="col-4">
+            {{-- Name --}}
+            <div class="mb-3">
+                <x-form.input-label for="brand" value="Brands" />
+                <x-form.select name="brand[]" :options="$brands" :selected="isset($project) ? explode(',', $project->brand) : []" multiple
+                    class="taggings" /><x-form.input-error :messages="$errors->get('brand')" class="mt-2" />
+            </div>
+        </div>
+        <div class="col-4">
                {{-- Category Select --}}
             <x-form.input-label for="category_id" value="Category" />
             <x-form.select name="category_id" :options="$categories" :selected="$service->category_id ?? null" />
             <x-form.input-error :messages="$errors->get('category_id')" class="pt-3" />
         </div>
-        <div class="col-6">
+        <div class="col-4">
             {{-- Name Input --}}
             <x-form.input-label for="name" value="Name" />
             <x-form.text-input name="name" :value="$service->name ?? null" placeholder="Name" />
