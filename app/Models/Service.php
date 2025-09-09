@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
@@ -28,7 +27,7 @@ class Service extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-     public function brands($ids)
+    public function brands($ids)
     {
         return Brand::whereIn('id', explode(',', $ids))->get();
     }

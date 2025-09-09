@@ -31,11 +31,11 @@ class GenerateModelsWithMigration extends Command
 
         foreach ($models as $model => $fields) {
             try {
-              //  $this->generateModelResources($model, 0);
-                //$this->createBladeFiles($model);
+                $this->generateModelResources($model, 0);
+                $this->createBladeFiles($model);
                 $this->createPermissions($model);
-               // $this->createComponentWithDummyData($model);
-             //   $this->addFieldsToMigration($model, $fields);
+                $this->createComponentWithDummyData($model);
+                $this->addFieldsToMigration($model, $fields);
 
                 $this->info("✅ Model, migration, views, permissions & component for '{$model}' created successfully.");
             } catch (Exception $e) {

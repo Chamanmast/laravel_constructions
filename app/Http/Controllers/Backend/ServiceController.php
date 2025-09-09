@@ -46,6 +46,7 @@ class ServiceController extends Controller
     {
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
+
         return view('backend.services.add_service', compact('categories', 'brands'));
     }
 
@@ -63,7 +64,7 @@ class ServiceController extends Controller
             $image = $request->file('image');
             $save_url = $this->imageGenrator($image, $this->image_preset_main, $this->image_preset, $this->path);
         } else {
-            $save_url = NULL;
+            $save_url = null;
         }
         $brands = $this->postBrandToString($request->brands ?? []);
         $service = Service::insert([
@@ -74,7 +75,7 @@ class ServiceController extends Controller
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
-            'brands'=>$brands,
+            'brands' => $brands,
             'status' => 0,
         ]);
         $service->meta()->create([
@@ -106,6 +107,7 @@ class ServiceController extends Controller
         //
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
+
         return view('backend.services.edit_service', compact('service', 'categories', 'brands'));
     }
 
@@ -122,7 +124,7 @@ class ServiceController extends Controller
         if ($request->file('image') != null) {
             if (file_exists($service->image)) {
                 $img = explode('.', $service->image);
-                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
+                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
                 unlink($small_img);
                 unlink($service->image);
             }
@@ -159,10 +161,11 @@ class ServiceController extends Controller
         return redirect()->back()->with($notification);
     }
 
-     protected function postBrandToString($brands)
+    protected function postBrandToString($brands)
     {
         return is_array($brands) ? implode(',', $brands) : '';
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -178,7 +181,7 @@ class ServiceController extends Controller
             foreach ($blogs as $blog) {
                 if (file_exists($blog->image)) {
                     $img = explode('.', $blog->image);
-                    $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
+                    $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
                     unlink($small_img);
                     unlink($blog->image);
                 }
@@ -187,7 +190,7 @@ class ServiceController extends Controller
             $blogs = service::find($request->id);
             if (file_exists($blogs->image)) {
                 $img = explode('.', $blogs->image);
-                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
+                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
                 unlink($small_img);
                 unlink($blogs->image);
             }

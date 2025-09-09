@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Brand;
 use App\Models\Menu;
-use App\Models\Service;
-use App\Models\Category;
 use App\Models\Portfolio;
 use App\Models\Project;
+use App\Models\Service;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
@@ -127,16 +127,28 @@ class IndexController extends Controller
         // Return the view with the blog post details
         return view('servicedetails', compact('service'));
     }
+    public function Brands()
+    {
 
+        // Retrieve the specific blog post by its slug
+        $logos = Brand::select('name', 'image')
+            ->where('status', 0)
+            ->get();
+
+        // dd($service);
+        // Return the view with the blog post details
+        return view('brands', compact('logos'));
+    }
     public function Project()
     {
         // Get active categories and portfolio items
 
-
         $projects = Project::active(0)->get();
+
         // Return the view with the categories and portfolio items
         return view('project', compact('projects'));
     }
+
     public function ProjectDetails(Request $request, string $slug)
     {
 
@@ -146,6 +158,7 @@ class IndexController extends Controller
         // Return the view with the portfolio post details
         return view('projectdetails', compact('project'));
     }
+
     /**
      * Display the contact us page view
      *

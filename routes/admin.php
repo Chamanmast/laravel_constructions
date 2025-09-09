@@ -10,15 +10,14 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Backend\BlogcategoryController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogtagController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\ImagePresetsController;
 use App\Http\Controllers\Backend\MegaMenuController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\MenugroupController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\PageController;
-use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\ServiceController;
@@ -104,7 +103,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/project/status', [ProjectController::class, 'StatusUpdate'])->middleware('can:project.status')->name('project.status');
     Route::post('/project/delete', [ProjectController::class, 'Delete'])->middleware('can:project.delete')->name('project.delete');
 
-   // brand All Routes
+    // brand All Routes
     Route::resource('brand', BrandController::class)->middleware('can:brand.index, brand.create, brand.update');
     Route::post('/brand/status', [BrandController::class, 'StatusUpdate'])->middleware('can:brand.status')->name('brand.status');
     Route::post('/brand/delete', [BrandController::class, 'Delete'])->middleware('can:brand.delete')->name('brand.delete');

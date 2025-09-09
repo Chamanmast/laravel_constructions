@@ -19,6 +19,7 @@ Route::get('/about-us', [IndexController::class, 'About'])->name('about-us');
 Route::get('/solutions', [IndexController::class, 'Services'])->name('solutions');
 Route::get('/solutions/{slug}', [IndexController::class, 'ServiceDetailsBySlug'])->name('service.details');
 // Route::get('/solutions/{service}', [IndexController::class, 'ServiceDetails'])->name('service.details');
+Route::get('/brands', [IndexController::class, 'Brands'])->name('brands');
 Route::get('/blogs', [IndexController::class, 'Blogs'])->name('blogs');
 Route::get('/blog/{blog_slug}', [IndexController::class, 'BlogDetails'])->name('blog.details');
 Route::get('/projects', [IndexController::class, 'Project'])->name('projects');
