@@ -2,20 +2,19 @@
     @php
         $template = App\Models\SiteSetting::select('site_title', 'meta_description', 'meta_keywords')->find(1);
 
-        $banner = App\Models\Pagebanner::select('image', 'name')->where('status', 0)->where('menu_id', 2)->first();
-        #dd($banner);
+        $pagename = 'Thank You';
     @endphp
     @section('main')
-    @section('title', 'Thank You')
+    @section('title', $pagename)
     @section('meta_description', $template->meta_description)
     @section('meta_keywords', $template->meta_keywords)
     @section('style')
-        {{ pagebanner(asset($banner->image)) }}
+
     @stop
     <div class="blogCntr">
-        <div class="bannerimg">
-            <h3>Thank you</h3>
-        </div>
+        <x-include.breadcrumb :name="$pagename" />
+
+
         <div class="wrapper">
             <div class="blog_details">
                 <h1 class="site-header__title" data-lead-id="site-header-title">THANK YOU!</h1>
@@ -24,13 +23,13 @@
                 <div class="main-content">
 
 
-                  <p>Your inquiry has been received.</p>
+                    <p>Your inquiry has been received.</p>
 
-                  <h3>We appreciate your interest and will get back to you shortly.</h3>
+                    <h3>We appreciate your interest and will get back to you shortly.</h3>
 
                 </div>
                 <div class="main-content">
-                <a href="{{route('home')}}" class="enquirybtn">Return to Homepage</a>
+                    <a href="{{ route('home') }}" class="enquirybtn">Return to Homepage</a>
                 </div>
             </div>
         </div>

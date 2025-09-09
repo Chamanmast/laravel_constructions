@@ -260,6 +260,12 @@
                     $('#icon').html('<i class="fas fa-' + selectedValue + '" aria-hidden="true"></i>');
 
                 });
+                $(".taggings").select2({
+                placeholder: $(this).data('placeholder'),
+                closeOnSelect: false,
+                tags: true,
+                allowClear: true,
+            });
             });
         </script>
     @stop

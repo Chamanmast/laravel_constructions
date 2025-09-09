@@ -8,7 +8,7 @@
             {{-- Name --}}
             <div class="mb-3">
                 <x-form.input-label for="brand" value="Brands" />
-                <x-form.select name="brand[]" :options="$brands" :selected="isset($project) ? explode(',', $project->brand) : []" multiple
+                <x-form.select name="brand[]" :options="$brands" :selected="isset($service) ? explode(',', $service->brands) : []" multiple
                     class="taggings" /><x-form.input-error :messages="$errors->get('brand')" class="mt-2" />
             </div>
         </div>

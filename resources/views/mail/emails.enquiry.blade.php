@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Muassasah Mwad AlTshyd</title>
+    <title> {{ $template->site_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="color-scheme" content="light">
@@ -83,6 +83,11 @@
                                                                                         role="presentation"
                                                                                         style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
                                                                                         <tbody>
+                                                                                             <tr>
+                                                                                                <td>Service</td>
+                                                                                                <td>{{ $contact['service'] }}
+                                                                                                </td>
+                                                                                            </tr>
                                                                                             <tr>
                                                                                                 <td>Name</td>
                                                                                                 <td>{{ $contact['name'] }}
