@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
+use App\Mail\EnquiryMail;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Menu;
@@ -11,6 +13,7 @@ use App\Models\Project;
 use App\Models\Service;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -114,7 +117,19 @@ class IndexController extends Controller
         // Return the view with the blog post details
         return view('servicedetails', compact('service'));
     }
+    public function Servicesubmit(Request $request)
+    {
+        dd($request);
 
+
+        $temp = SiteSetting::select('site_title', 'email')->find(1);
+        // Send the enquiry email
+        Mail::to($temp->email) // Replace with your email
+            ->send(new EnquiryMail($data));
+
+
+        return back()->with('success', 'Your enquiry has been sent successfully!');
+    }
     public function ServiceDetailsBySlug(Request $request, string $slug)
     {
 
@@ -205,14 +220,10 @@ class IndexController extends Controller
             'message' => $request->message,
         ];
 
-        ContactEnquiry::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message,
-        ]);
+
 
         // Send the contact email
-        // Mail::to($temp->email)->send(new ContactMail($data));
+        Mail::to($temp->email)->send(new ContactMail($data));
 
         // Prepare a notification message
         $notification = [

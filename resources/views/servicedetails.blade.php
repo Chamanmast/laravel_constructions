@@ -18,4 +18,22 @@
     <x-service.form :sname="$service->name" :stext="$service->small_text" />
 
     <x-service.brands :logos="$logos" />
+
+    @section('script')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const f = document.getElementById('service-enquiry-form');
+    if (!f) return console.log('service form not found');
+    console.log('form action:', f.getAttribute('action'));
+    console.log('form method:', f.method);
+    console.log('has csrf token:', !!f.querySelector('input[name="_token"]'));
+    f.addEventListener('submit', function (e) {
+        console.log('submit event fired');
+        // do not prevent default here — only logging
+    });
+    const btn = f.querySelector('input[type="submit"], button[type="submit"]');
+    if (btn) btn.addEventListener('click', () => console.log('submit clicked'));
+});
+</script>
+    @stop
 </x-front-layout>

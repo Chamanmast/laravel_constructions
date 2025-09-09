@@ -8,70 +8,89 @@
                     <div class="card-title">
                         <h2>Get In Touch</h2>
                     </div>
-                    <form class="contact-form needs-validation" method="post" action="#" novalidate="">
+                    <form class="needs-validation" method="POST" action="{{ route('service.enquiry') }}" novalidate>
+                        @csrf
+
                         <div class="messages"></div>
+
                         <div class="row gx-4">
+
+                            <!-- First Name -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_name" type="text" name="name" class="form-control"
-                                        placeholder="Jane" required="">
+                                    <input id="form_name" type="text" name="name"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        placeholder="First Name" value="{{ old('name') }}" required>
                                     <label for="form_name">First Name *</label>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please enter your first name. </div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- /column -->
+
+                            <!-- Email -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_email" type="email" name="email" class="form-control"
-                                        placeholder="jane.doe@example.com" required="">
+                                    <input id="form_email" type="email" name="email"
+                                        class="form-control @error('email') is-invalid @enderror" placeholder="Email"
+                                        value="{{ old('email') }}" required>
                                     <label for="form_email">Email *</label>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please provide a valid email address. </div>
-                                </div>
-                            </div>
-                            <!-- /column -->
-                            <div class="col-md-6">
-                                <div class="form-floating mb-4">
-                                    <input id="form_lastname" type="text" name="phone" class="form-control"
-                                        placeholder="phone" required="">
-                                    <label for="form_lastname">Phone *</label>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please enter your mobile no. </div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <!-- /column -->
+                            <!-- Phone -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_lastname" type="text" name="company" class="form-control"
-                                        placeholder="company" required="">
-                                    <label for="form_lastname">Company *</label>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please enter your company name. </div>
+                                    <input id="form_phone" type="text" name="phone"
+                                        class="form-control @error('phone') is-invalid @enderror" placeholder="Phone"
+                                        value="{{ old('phone') }}" required>
+                                    <label for="form_phone">Phone *</label>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- /column -->
+
+                            <!-- Company -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-4">
+                                    <input id="form_company" type="text" name="company"
+                                        class="form-control @error('company') is-invalid @enderror"
+                                        placeholder="Company" value="{{ old('company') }}" required>
+                                    <label for="form_company">Company *</label>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    @error('company')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Message -->
                             <div class="col-12">
                                 <div class="form-floating mb-4">
-                                    <textarea id="form_message" name="message" class="form-control" placeholder="Your message" style="height: 150px"
-                                        required=""></textarea>
+                                    <textarea id="form_message" name="message" class="form-control @error('message') is-invalid @enderror"
+                                        placeholder="Your message" style="height: 150px" required>{{ old('message') }}</textarea>
                                     <label for="form_message">Write your Message *</label>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please enter your messsage. </div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    @error('message')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- /column -->
 
-                            <!-- /column -->
+                            <!-- Submit Button -->
                             <div class="col-12">
-                                <input type="submit" class="btn w-100 btn-primary rounded-pill btn-send mb-3"
-                                    value="Send">
-
+                                <input type="submit" class="btn w-100 btn-primary rounded-pill mb-3"
+                                    value="Submit">
                             </div>
-                            <!-- /column -->
+
                         </div>
-                        <!-- /.row -->
                     </form>
                 </div>
 
@@ -82,8 +101,7 @@
 
                 <p class="mb-6">{{ $stext }}</p>
                 <a href="#brands" class="btn btn-primary rounded-pill mt-2">Our Partner</a>
-                <a href="{{ route('about-us') }}"
-                    class="btn btn-outline-primary rounded-pill mt-2">Company Profile</a>
+                <a href="{{ route('about-us') }}" class="btn btn-outline-primary rounded-pill mt-2">Company Profile</a>
                 <!--/.row -->
             </div>
             <!--/column -->
