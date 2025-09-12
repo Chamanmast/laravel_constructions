@@ -38,7 +38,7 @@ class EnquiryMail extends Mailable
     {
        $contact = $this->data;
         return new Content(
-            view: 'emails.enquiry',
+            view: 'mail.emails_enquiry',
             with: ['contact' => $this->data],
         );
     }

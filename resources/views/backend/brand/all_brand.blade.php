@@ -49,7 +49,7 @@
 
                                         <td class="text-center">
                                             <button type="button"
-                                                onClick="statusFunction( {{ $brand->id }} ,'brand')"
+                                                onClick="statusFunction( {{ $brand->id }} ,'Brand')"
                                                 class="shadow-none badge badge-light-{{ $brand->status == 1 ? 'danger' : 'success' }} warning changestatus{{ $brand->id }}  bs-tooltip"
                                                 data-toggle="tooltip" data-placement="top" title="Status"
                                                 data-original-title="Status">{{ $brand->status == 1 ? 'Deactive' : 'Active' }}</button>
@@ -66,7 +66,7 @@
                                                 </a>
 
                                                 <a href="javascript:void(0)"
-                                                    onClick="deleteFunction({{ $brand->id }},'brand')"
+                                                    onClick="deleteFunction({{ $brand->id }},'Brand')"
                                                     class="action-btn btn-edit bs-tooltip me-2 delete{{ $brand->id }}"
                                                     data-toggle="tooltip" data-placement="top" title="Delete"
                                                     data-bs-original-title="Delete">
@@ -83,7 +83,7 @@
                         </table>
                         @if ($brands->count() != 0)
                             <div class="ms-3">
-                                <button id="deleteall" onClick="deleteAllFunction('brand')"
+                                <button id="deleteall" onClick="deleteAllFunction('Brand')"
                                     class="btn btn-danger mb-2 me-4">
                                     <span class="btn-text-inner">Delete Selected</span>
                                 </button>
@@ -205,8 +205,7 @@
 
             }
 
-            function deleteFunction(id) {
-
+            function deleteFunction(id,table) {
                 // event.preventDefault(); // prevent form submit
                 // var form = event.target.form; // storing the form
                 const swalWithBootstrapButtons = Swal.mixin({

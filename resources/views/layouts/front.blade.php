@@ -21,6 +21,23 @@
     <meta name="description" content="@yield('meta_description')" />
     <meta name="keywords" content="@yield('meta_keywords')" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="robots" content="index, follow">
+
+	<meta property="og:title" content="@yield('title')">
+	
+	<meta property="og:description" content="From HVAC control to fire alarms & security, our automation and low‑current solutions help buildings become smarter, safer, more efficient.">
+	
+	<meta property="og:type" content="website">
+	
+	<meta property="og:url" content="{{ route('home')}}">
+	
+	
+	
+	<meta name="twitter:title" content="@yield('title')">
+	
+	<meta name="twitter:description" content="@yield('meta_description')">
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset($template->favicon) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,7 +48,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/colors/sky.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom1.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link

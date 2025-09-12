@@ -3,6 +3,7 @@
     @php
         $template = App\Models\SiteSetting::select('site_title', 'meta_description', 'meta_keywords')->find(1);
         $logos =$service->brands($service->brands);
+		$projects =$service->projects($service->projects);
         //$banner =App\Models\Pagebanner::select('image','name')->where('status',0)->where('menu_id',2)->first();
 
     @endphp
@@ -15,25 +16,13 @@
 
     @stop
     <x-include.breadcrumb :name="$service->name" />
+	
     <x-service.form :sname="$service->name" :stext="$service->small_text" />
 
-    <x-service.brands :logos="$logos" />
-
+    <x-service.brands :logos="$logos" :sname="$service->name" />
+	<x-home.home-projects :$projects />
+	
     @section('script')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const f = document.getElementById('service-enquiry-form');
-    if (!f) return console.log('service form not found');
-    console.log('form action:', f.getAttribute('action'));
-    console.log('form method:', f.method);
-    console.log('has csrf token:', !!f.querySelector('input[name="_token"]'));
-    f.addEventListener('submit', function (e) {
-        console.log('submit event fired');
-        // do not prevent default here — only logging
-    });
-    const btn = f.querySelector('input[type="submit"], button[type="submit"]');
-    if (btn) btn.addEventListener('click', () => console.log('submit clicked'));
-});
-</script>
+
     @stop
 </x-front-layout>

@@ -117,15 +117,13 @@ class IndexController extends Controller
         // Return the view with the blog post details
         return view('servicedetails', compact('service'));
     }
-    public function Servicesubmit(Request $request)
+    public function ServiceEnquiry(Request $request)
     {
-        dd($request);
-
 
         $temp = SiteSetting::select('site_title', 'email')->find(1);
         // Send the enquiry email
         Mail::to($temp->email) // Replace with your email
-            ->send(new EnquiryMail($data));
+            ->send(new EnquiryMail($request));
 
 
         return back()->with('success', 'Your enquiry has been sent successfully!');
@@ -195,45 +193,56 @@ class IndexController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function ContactSend(Request $request)
-    {
-        // Validate the incoming request data
-        $validated = $request->validate([
-            'name' => 'required|max:100',
-            'email' => 'required|max:50',
-            'message' => 'required',
-            'captcha' => 'required',
+
+
+public function ContactSend(Request $request)
+{
+    // Validate the incoming request data
+    $validated = $request->validate([
+        'name' => 'required|string|max:100',
+        'email' => 'required|email|max:50',
+        'message' => 'required|string',
+        'captcha' => 'required',
+    ]);
+
+    // Verify CAPTCHA
+    if (!validateCaptcha($request->input('captcha'))) {
+        return back()->withErrors(['captcha' => 'Incorrect CAPTCHA answer.'])->withInput();
+    }
+
+    // Retrieve site settings
+    $siteSetting = SiteSetting::select('site_title', 'email')->find(1);
+
+    if (!$siteSetting) {
+        return back()->withErrors(['site' => 'Site settings not found.'])->withInput();
+    }
+
+    // Prepare email data
+    $subject = 'Enquiry Form - ' . $siteSetting->site_title;
+    $data = [
+        'name' => $validated['name'],
+        'subject' => $subject,
+        'email' => $validated['email'],
+        'message' => $validated['message'],
+    ];
+
+    try {
+        // Send the email
+        $recipient = $siteSetting->email; // Or use $siteSetting->email if dynamic
+        Mail::to($recipient)->send(new ContactMail($data));
+
+        // Return thank you view with notification
+        return view('thankyou')->with([
+            'message' => 'Thank you for contacting us!',
+            'alert-type' => 'success'
         ]);
 
-        if (! validateCaptcha($request->input('captcha'))) {
-            return back()->withErrors(['captcha' => 'Incorrect CAPTCHA answer.']);
-        }
-
-        $temp = SiteSetting::select('site_title', 'email')->find(1);
-
-        $subject = 'Enquriy Form ' . $temp->site_title;
-        // Prepare the data to be sent in the email
-        $data = [
-            'name' => $request->name,
-            'subject' => $subject,
-            'email' => $request->email,
-            'message' => $request->message,
-        ];
-
-
-
-        // Send the contact email
-        Mail::to($temp->email)->send(new ContactMail($data));
-
-        // Prepare a notification message
-        $notification = [
-            'message' => 'Thank You for contacting us',
-            'alert-type' => 'success',
-        ];
-
-        // Return the contact us view with the notification
-        return view('thankyou')->with($notification);
+    } catch (\Exception $e) {
+        // Handle email sending errors
+        return back()->withErrors(['email' => 'Failed to send your message. Please try again later.'])->withInput();
     }
+}
+
 
     public function Thankyou()
     {

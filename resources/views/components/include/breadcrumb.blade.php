@@ -1,5 +1,5 @@
 <section class="wrapper bg-soft-primary">
-      <div class="container pt-14 pb-12 pt-md-18 pb-md-14 text-center">
+      <div class="container pt-16 pb-6 pt-md-16 pb-md-8 text-center">
         <div class="row">
           <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6 mx-auto">
             <h1 class="fs-40 mb-3">{{ $name }}</h1>

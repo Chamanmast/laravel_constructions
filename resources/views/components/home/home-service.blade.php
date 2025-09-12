@@ -1,6 +1,6 @@
 <section class="wrapper bg-gradient-reverse-primary">
     <div class="container py-10 py-md-14">
-          <h2 class="fs-16 text-uppercase text-muted mb-3 text-center">Core Services </h2>
+          <h2 class="display-4 text-uppercase text-dark mb-3 text-center">Core Services </h2>
             <p class=" mb-5 text-center">Muassasah Mwad AlTshyd delivers advanced control and automation solutions that boost efficiency, enhance safety, and empower smart building operations. Leveraging industry-leading technologies and extensive expertise, our systems are engineered to integrate smoothly with modern infrastructures. From energy optimization to intelligent security and customized automation, we offer scalable, future-proof solutions tailored to the specific requirements of your project — all provided seamlessly under one roof</p>
         <div class="row gx-lg-8 gx-xl-12 gy-10 mb-8 align-items-center">
             <div class="card">

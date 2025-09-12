@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Menu;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,30 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/clear-cache', function () {
+   $exitCode = Artisan::call('optimize:clear');
+    return '<h1>Cache facade value cleared</h1>';
+});
+Route::get('/update', function () {
+    $menu = Menu::find(7);
+
+    if ($menu) {
+        // Update the attachment column
+        $menu->attachment = 'upload/company_profile.pdf'; // Set your desired value here
+        $menu->save();
+
+        return "Attachment updated successfully.";
+    } else {
+        return "Menu with ID 7 not found.";
+    }
+});
+
 
 Route::get('/', [IndexController::class, 'Home'])->name('home');
 Route::get('/about-us', [IndexController::class, 'About'])->name('about-us');
 Route::get('/solutions', [IndexController::class, 'Services'])->name('solutions');
 Route::get('/solutions/{slug}', [IndexController::class, 'ServiceDetailsBySlug'])->name('service.details');
-Route::post('/service/enquiry', [IndexController::class, 'Servicesubmit'])->name('service.enquiry');// Route::get('/solutions/{service}', [IndexController::class, 'ServiceDetails'])->name('service.details');
+Route::post('/solutions/enquery', [IndexController::class, 'ServiceEnquiry'])->name('service.enquiry');
 Route::get('/brands', [IndexController::class, 'Brands'])->name('brands');
 Route::get('/blogs', [IndexController::class, 'Blogs'])->name('blogs');
 Route::get('/blog/{blog_slug}', [IndexController::class, 'BlogDetails'])->name('blog.details');
@@ -28,6 +48,5 @@ Route::get('/contact-us', [IndexController::class, 'Contact'])->name('contact-us
 Route::post('/contact-us', [IndexController::class, 'ContactSend'])->name('contact.send');
 
 Route::get('/thank-you', [IndexController::class, 'Thankyou'])->name('thank-you');
-
 require __DIR__.'/admin.php';
 // require __DIR__ . '/auth.php';

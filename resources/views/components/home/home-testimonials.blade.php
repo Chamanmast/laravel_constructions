@@ -13,7 +13,7 @@
                         style="top: -0.7rem; right: -1.7rem;"></div>
                     <div class="shape rounded-circle bg-line red rellax w-16 h-16" data-rellax-speed="1"
                         style="bottom: -0.5rem; left: -1.4rem;"></div>
-                    <div class="swiper-container dots-closer mb-6" data-margin="0" data-dots="true" data-items-md="2"
+                    <div class="swiper-container dots-closer mb-6" data-margin="0" data-loop="true" data-autoplay="true" data-dots="false" data-items-md="2"
                         data-items-xs="1">
                         <div class="swiper">
                             <div class="swiper-wrapper">

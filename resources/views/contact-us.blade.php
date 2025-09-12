@@ -1,6 +1,6 @@
 <x-front-layout>
     @php
-       $template = App\Models\SiteSetting::select('site_title','meta_description','meta_keywords')->find(1);
+       $template = App\Models\SiteSetting::select('site_title','meta_description','meta_keywords','address','email','phone')->find(1);
         $modal1 = App\Models\Module::select('heading', 'small_text', 'image','text')->find(1);
         $modal2 = App\Models\Module::select('heading', 'small_text', 'image')->find(2);
         $url = Route::getCurrentRoute()->uri;
@@ -38,9 +38,9 @@
                             </div>
                             <!--/column -->
                             <div class="col-md-10">
-                                <div class="card bg-pale-primary text-center counter-wrapper">
+                                <div class="card bg-pale-primary text-center ">
                                     <div class="card-body py-11">
-                                        <h3 class="counter text-nowrap">{{$modal1->small_text}}+</h3>
+                                        <h3 class="counter text-nowrap"></h3>
                                         {!!$modal1->text!!}
 
                                     </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <h5 class="mb-1">Address</h5>
-                        <address>{!! $template->company_address !!}</address>
+                        <address>{!! $template->address !!}</address>
                     </div>
                 </div>
                 <div class="d-flex flex-row">
@@ -74,7 +74,7 @@
                     </div>
                     <div>
                         <h5 class="mb-1">Phone</h5>
-                        <p><a href="tel:{{ '+91' . $template->email }}">+91-{{ $template->email }}</p>
+                        <p><a href="tel:{{ '+' . $template->phone }}">+{{ $template->phone }}</p>
                     </div>
                 </div>
                 <div class="d-flex flex-row">

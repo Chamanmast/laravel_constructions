@@ -22,10 +22,9 @@
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start py-1">
                 <div class="offcanvas-header d-lg-none">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset($modal->logo) }}" srcset="{{ asset($modal->logo) }} 4x"
+                        <img src="{{ asset($modal->logo) }}" srcset="{{ asset($modal->logo) }} 2x"
                             alt="{{ $modal->site_title }}" />
-                        <span class="text-dark fs-14 fw-bold">
-                            {{ $modal->site_title }}</span></a>
+                        </a>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -74,7 +73,7 @@
                                             @foreach ($menu->children as $child)
                                                 <li>
                                                     <a class="dropdown-item {{ active_class($child->url) }} fs-12"
-                                                        href="{{ $child->attachment ? asset('storage/' . $child->attachment) : $child->getUrl() }}"
+                                                        href="{{ $child->attachment ? asset($child->attachment) : $child->getUrl() }}"
                                                         @if ($child->type == 1) target="_blank" @endif>
                                                         {{ $child->title }}
                                                     </a>
@@ -144,7 +143,7 @@
                     <div class="d-lg-none mt-auto pt-6 pb-6 order-4">
                         <a href="mailto:{{ $modal->email }}"
                             class="link-inverse text-dark fs-12">{{ $modal->email }}</a>
-                        <br /> <a href="tel:{{ '+91' . $phone }}" class="fs-12  text-dark">+91-{{ $phone }}</a>
+                        <br /> <a href="tel:{{ '+91' . $phone }}" class="fs-12  text-dark">+{{ $modal->phone }}</a>
                         <br />
                         <nav class="nav social social-dark mt-4">
                             <a href="{{ $modal->twitter }}"><i class="uil uil-multiply fw-bold"></i></a>

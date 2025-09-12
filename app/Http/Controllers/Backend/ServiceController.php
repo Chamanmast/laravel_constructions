@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Project;
 use App\Models\Category;
 use App\Models\ImagePresets;
 use App\Models\Service;
@@ -46,8 +47,8 @@ class ServiceController extends Controller
     {
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
-
-        return view('backend.services.add_service', compact('categories', 'brands'));
+		$projects = Project::pluck('name', 'id');
+        return view('backend.services.add_service', compact('categories', 'brands','projects'));
     }
 
     /**
@@ -64,9 +65,10 @@ class ServiceController extends Controller
             $image = $request->file('image');
             $save_url = $this->imageGenrator($image, $this->image_preset_main, $this->image_preset, $this->path);
         } else {
-            $save_url = null;
+            $save_url = NULL;
         }
         $brands = $this->postBrandToString($request->brands ?? []);
+		$projects = $this->postBrandToString($request->projects ?? []);
         $service = Service::insert([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -75,7 +77,8 @@ class ServiceController extends Controller
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
-            'brands' => $brands,
+            'brands'=>$brands,
+			'projects' => $projects,
             'status' => 0,
         ]);
         $service->meta()->create([
@@ -107,8 +110,8 @@ class ServiceController extends Controller
         //
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
-
-        return view('backend.services.edit_service', compact('service', 'categories', 'brands'));
+		$projects = Project::pluck('name', 'id');
+        return view('backend.services.edit_service', compact('service', 'categories', 'brands','projects'));
     }
 
     /**
@@ -124,7 +127,7 @@ class ServiceController extends Controller
         if ($request->file('image') != null) {
             if (file_exists($service->image)) {
                 $img = explode('.', $service->image);
-                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                 unlink($small_img);
                 unlink($service->image);
             }
@@ -138,6 +141,7 @@ class ServiceController extends Controller
             }
         }
         $brands = $this->postBrandToString($request->brands ?? []);
+		$projects = $this->postBrandToString($request->projects ?? []);
         $service->update([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -147,6 +151,7 @@ class ServiceController extends Controller
             'small_text' => $request->small_text,
             'text' => $request->text,
             'brands' => $brands,
+			'projects' => $projects,
             'status' => 0,
         ]);
         $service->meta()->updateOrCreate([], [
@@ -161,11 +166,10 @@ class ServiceController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    protected function postBrandToString($brands)
+     protected function postBrandToString($brands)
     {
         return is_array($brands) ? implode(',', $brands) : '';
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -181,7 +185,7 @@ class ServiceController extends Controller
             foreach ($blogs as $blog) {
                 if (file_exists($blog->image)) {
                     $img = explode('.', $blog->image);
-                    $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                    $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                     unlink($small_img);
                     unlink($blog->image);
                 }
@@ -190,7 +194,7 @@ class ServiceController extends Controller
             $blogs = service::find($request->id);
             if (file_exists($blogs->image)) {
                 $img = explode('.', $blogs->image);
-                $small_img = $img[0].'_'.$this->image_preset[0]->name.'.'.$img[1];
+                $small_img = $img[0] . '_' . $this->image_preset[0]->name . '.' . $img[1];
                 unlink($small_img);
                 unlink($blogs->image);
             }

@@ -18,7 +18,7 @@
                         <h6 class="card-title fw-bold">Add Service</h6>
 
                         {{-- resources/views/components/backend/backend_component/service-form.blade.php --}}
-                        <x-backend.backend_component.service-form :$brands :$categories :isEdit="false" />
+                        <x-backend.backend_component.service-form :$brands :$projects :$categories :isEdit="false" />
 
                     </div>
                 </div>
@@ -247,6 +247,12 @@
                         $('#icon').html('<i class="fas fa-' + selectedValue + '" aria-hidden="true"></i>');
 
                     });
+                    $(".taggings").select2({
+                placeholder: $(this).data('placeholder'),
+                closeOnSelect: false,
+                tags: true,
+                allowClear: true,
+            });
                 });
         </script>
     @stop

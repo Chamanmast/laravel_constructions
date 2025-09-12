@@ -84,22 +84,22 @@
                                                                                         style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td>Name</td>
+                                                                                                <td>Name:</td>
                                                                                                 <td>{{ $contact['name'] }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <td>Email</td>
+                                                                                                <td>Email:</td>
                                                                                                 <td>{{ $contact['email'] }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <td>Subject</td>
+                                                                                                <td>Subject:</td>
                                                                                                 <td>{{ $contact['subject'] }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <td>Message</td>
+                                                                                                <td>Message:</td>
                                                                                                 <td>{{ $contact['message'] }}
                                                                                                 </td>
                                                                                             </tr>

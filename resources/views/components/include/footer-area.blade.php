@@ -29,9 +29,9 @@
       <div class="row gy-6 gy-lg-0">
         <div class="col-md-4 col-lg-3">
           <div class="widget">
-            <img class="mb-4" src="{{asset($modal->logo)}}" srcset="{{asset($modal->logo)}} 1x" alt="" />
+             <h4 class="widget-title text-white mb-3">About Company</h4>
             <p class="fs-12">{!! $modal->about !!}</p>
-            <p class="mb-4">© {{ date('Y') }} {{ $modal->site_title }}  <br class="d-none d-lg-block" />All rights reserved.</p>
+            <p class="mb-4">© {{ date('Y') }} {{ $modal->copywrite }}  <br class="d-none d-lg-block" />All rights reserved.</p>
             <nav class="nav social social-white">
                 <a href="{{ $modal->facebook }}" class="uil uil-facebook-f" target="_blank"></a>
                 <a href="{{ $modal->twitter }}" class="uil uil-twitter" target="_blank"></a>
@@ -74,12 +74,12 @@
             <div class="newsletter-wrapper">
               <!-- Begin Mailchimp Signup Form -->
               <div id="mc_embed_signup2">
-                <form action="" method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" class="validate dark-fields" target="_blank" novalidate>
+                <form action="#" method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" class="validate dark-fields" target="_blank" novalidate>
                   <div id="mc_embed_signup_scroll2">
                     <div class="mc-field-group input-group form-floating">
                       <input type="email" value="" name="EMAIL" class="required email form-control" placeholder="Email Address" id="mce-EMAIL2">
                       <label for="mce-EMAIL2">Email Address</label>
-                      <input type="submit" value="Join" name="subscribe" id="mc-embedded-subscribe2" class="btn btn-primary">
+                      <input type="submit" disabled value="Join" name="subscribe" id="mc-embedded-subscribe2" class="btn btn-primary">
                     </div>
                     <div id="mce-responses2" class="clear">
                       <div class="response" id="mce-error-response2" style="display:none"></div>

@@ -4,6 +4,7 @@
     } else {
         $small_img = asset('/upload/no_image.jpg'); # code...
     }
+	$style=1;
     if($style==0){
         $newstyle='col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start';
     } elseif($style==1)
@@ -20,10 +21,14 @@
         <div class="row h-100">
             <div
                 class="{{$newstyle}}">
-                <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{$title}}</h2>
-                <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{$stitle}}</p>
-                <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="{{$link}}"
-                        class="btn btn-lg btn-outline-white rounded-pill">Read More</a></div>
+                <h2 class="display-1 fs-46 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{$title}}</h2>
+                <p class="lead fs-18 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{$stitle}}</p>
+                <div class="animate__animated animate__slideInUp animate__delay-3s">
+				<a href="{{route('home')}}/upload/company_profile.pdf" target="_blank"
+                        class="btn btn-lg btn-outline-white rounded-pill">Company Profile</a>
+						<a href="{{route('contact-us')}}"
+                        class="btn btn-lg btn-white rounded-pill">Get In Touch</a>
+						</div>
             </div>
             <!--/column -->
         </div>

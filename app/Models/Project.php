@@ -13,8 +13,7 @@ class Project extends Model
     {
         return $this->belongsTo(Service::class);
     }
-
-    public function scopeActive($query, $status)
+     public function scopeActive($query, $status)
     {
         return $query->where('status', $status);
     }

@@ -1,4 +1,5 @@
-<section class="wrapper bg-light">
+<div class="divider-icon my-8"><i class="uil uil-heart"></i></div>
+	<section class="wrapper bg-light">
   <div class="container py-14 py-md-16 text-center">
     <div class="row">
       <div class="col-md-10 col-lg-10 col-xl-10 mx-auto text-center">
