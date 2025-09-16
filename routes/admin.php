@@ -100,7 +100,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/services/delete', [ServiceController::class, 'Delete'])->middleware('can:services.delete')->name('services.delete');
     Route::get('/services/branddetails/{id}', [ServiceController::class, 'barndDetails'])->name('branddetails.edit');
     Route::put('/services/branddetails/{id}', [ServiceController::class, 'brandDetailsSubmit'])->name('branddetails.update');
-
     // project All Routes
     Route::resource('project', ProjectController::class)->middleware('can:project.index, project.create, project.update');
     Route::post('/project/status', [ProjectController::class, 'StatusUpdate'])->middleware('can:project.status')->name('project.status');

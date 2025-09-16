@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,7 +11,9 @@ use Illuminate\Queue\SerializesModels;
 class EnquiryMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $data;
+
     /**
      * Create a new message instance.
      */
@@ -36,7 +37,8 @@ class EnquiryMail extends Mailable
      */
     public function content(): Content
     {
-       $contact = $this->data;
+        $contact = $this->data;
+
         return new Content(
             view: 'mail.emails_enquiry',
             with: ['contact' => $this->data],

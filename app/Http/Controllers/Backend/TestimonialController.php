@@ -61,11 +61,11 @@ class TestimonialController extends Controller
             $save_url = '';
         }
         $socials = implode(',', $request->social);
-        Testimonial::insert([            
+        Testimonial::insert([
             'name' => $request->name,
             'designation' => $request->designation,
             'image' => $save_url,
-            'text' => $request->text,          
+            'text' => $request->text,
             'status' => 0,
         ]);
         $notification = [
@@ -115,10 +115,10 @@ class TestimonialController extends Controller
         }
         $socials = implode(',', $request->social);
         // dd($socials);
-        $testimonial->update([           
+        $testimonial->update([
             'name' => $request->name,
             'designation' => $request->designation,
-            'image' => $save_url,           
+            'image' => $save_url,
             'text' => $request->text,
 
         ]);

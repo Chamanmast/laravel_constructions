@@ -3,67 +3,43 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
 use App\Models\Brand;
-use App\Models\Service;
 use App\Traits\CommonTrait;
 use Illuminate\Http\Request;
 
-
 class BrandDetailsController extends Controller
 {
-
     use CommonTrait;
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
-    {
-
-    }
+    public function show(Brand $brand) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
-    {
-
-    }
+    public function edit(Brand $brand) {}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Brand $brand)
-    {
-
-
-
-    }
+    public function update(Request $request, Brand $brand) {}
 
     /**
      * Remove the specified resource from storage.
@@ -73,8 +49,5 @@ class BrandDetailsController extends Controller
         //
     }
 
-    public function delete(Request $request)
-    {
-
-    }
+    public function delete(Request $request) {}
 }

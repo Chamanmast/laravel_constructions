@@ -93,18 +93,18 @@ function breadcrumb()
         $n = explode('/', Route::getCurrentRoute()->uri);
         // dd($n );
         if (count($n) == 2) {
-            $url = 'Show ' . ucfirst(Str::headline(ucfirst($n[1])));
+            $url = 'Show '.ucfirst(Str::headline(ucfirst($n[1])));
         } elseif (count($n) == 3 || count($n) == 5) {
-            $url = ucfirst($n[2]) . ' ' . ucfirst(Str::headline(ucfirst($n[1])));
+            $url = ucfirst($n[2]).' '.ucfirst(Str::headline(ucfirst($n[1])));
         } else {
             if ($n[2] === 'admin') {
-                $url = ucfirst($n[1]) . ' ' . ucfirst(Str::headline(ucfirst($n[2])));
+                $url = ucfirst($n[1]).' '.ucfirst(Str::headline(ucfirst($n[2])));
             } else {
 
                 if ($n[2] === 'branddetails') {
-                    $url = ucfirst($n[2]) . ' ' . ucfirst(Str::headline(ucfirst($n[1])));
+                    $url = ucfirst($n[2]).' '.ucfirst(Str::headline(ucfirst($n[1])));
                 } else {
-                    $url = ucfirst($n[3]) . ' ' . ucfirst(Str::headline(ucfirst($n[1])));
+                    $url = ucfirst($n[3]).' '.ucfirst(Str::headline(ucfirst($n[1])));
                 }
             }
         }

@@ -2,7 +2,7 @@
 
 <x-form.form :route="$isEdit ? route('services.update', $service->id) : route('services.store')" method="{{ $isEdit ? 'put' : 'post' }}" class="forms-sample needs-validation"
 novalidate="novalidate" files="true">
-	
+
 	<div class="row">
 		<div class="col-6">
             {{-- Name --}}
@@ -10,7 +10,11 @@ novalidate="novalidate" files="true">
                 <x-form.input-label for="projects" value="Projects" />
                 <x-form.select name="projects[]" :options="$projects" :selected="isset($service) ? explode(',', $service->projects) : []" multiple
 				class="taggings" /><x-form.input-error :messages="$errors->get('projects')" class="mt-2" />
+<<<<<<< Updated upstream
 				
+=======
+
+>>>>>>> Stashed changes
 			</div>
 		</div>
 		<div class="col-6">
@@ -23,7 +27,7 @@ novalidate="novalidate" files="true">
 		</div>
 	</div>
     <div class="row">
-		
+
         <div class="col-6">
 			{{-- Category Select --}}
             <x-form.input-label for="category_id" value="Category" />
@@ -36,7 +40,7 @@ novalidate="novalidate" files="true">
             <x-form.text-input name="name" :value="$service->name ?? null" placeholder="Name" />
             <x-form.input-error :messages="$errors->get('name')" class="pt-3" />
 		</div>
-		
+
 	</div>
     <div class="row">
         <div class="col-sm-6">
@@ -44,7 +48,7 @@ novalidate="novalidate" files="true">
                 <x-form.input-label for="type" value="Meta Description" />
                 <x-form.textarea name="meta_description" :value="$menu->meta->meta_description ?? ''" class="meta_des" :rows="5"
 				placeholder="Meta Description" />
-				
+
 			</div>
 		</div>
         <div class="col-sm-6">
@@ -55,14 +59,14 @@ novalidate="novalidate" files="true">
 			</div>
 		</div>
 	</div>
-	
-	
+
+
     {{-- Small Text Input --}}
     <div class="col-sm-12 mb-3">
         <x-form.input-label for="small_text" value="Small Text" />
         <x-form.textarea name="small_text" :value="$service->small_text ?? null"  placeholder="Text" />
 	</div>
-	
+
     {{-- Image Upload --}}
     <div class="row mb-3">
         <div class="col-sm-10">
@@ -76,14 +80,14 @@ novalidate="novalidate" files="true">
 			class="img-thumbnail img-fluid img-responsive w-10">
 		</div>
 	</div>
-	
+
     {{-- Textarea Input --}}
     <div class="mb-3">
         <x-form.input-label for="text" value="Text" />
         <x-form.textarea name="text" :value="$service->text ?? null" placeholder="Text" id="editor" />
 	</div>
-	
+
     {{-- Submit Button --}}
     <x-form.button>{{ $isEdit ? 'Update' : 'Submit' }}</x-form.button>
-	
+
 </x-form.form>

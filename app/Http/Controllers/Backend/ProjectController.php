@@ -52,6 +52,7 @@ class ProjectController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
+
         return view('backend.project.add_project', compact('categories', 'brands'));
     }
 
@@ -107,6 +108,7 @@ class ProjectController extends Controller
     {
         return is_array($brands) ? implode(',', $brands) : '';
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -114,6 +116,7 @@ class ProjectController extends Controller
     {
         $categories = Service::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
+
         return view('backend.project.edit_project', compact('categories', 'project', 'brands'));
     }
 
@@ -178,7 +181,7 @@ class ProjectController extends Controller
         $extension = $img_parts[1];
 
         foreach ($this->image_preset as $preset) {
-            $preset_path = public_path($base_name . '_' . $preset->name . '.' . $extension);
+            $preset_path = public_path($base_name.'_'.$preset->name.'.'.$extension);
             if (file_exists($preset_path)) {
                 @unlink($preset_path);
             }

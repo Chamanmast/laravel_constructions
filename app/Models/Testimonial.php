@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Testimonial extends Model
 {
     protected $guarded = [];
-	  public $timestamps = false;
+
+    public $timestamps = false;
 
     public function scopeActive($query, $status)
     {

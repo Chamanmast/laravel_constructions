@@ -47,16 +47,20 @@
                             </thead>
 
                             <tbody>
+								@php
+								$i=1;
+								@endphp
                                 @forelse ($branddeatils as $branddetail)
                                 @php
-                                    $brand =App\Models\Brand::find($branddetail->id);
+								
+                                    $brand =App\Models\Brand::find($branddetail->brand_id);
                                 @endphp
                                     <tr class="brand-{{ $brand->id }}">
                                         <td style="width:1%"><span class="form-check form-check-primary">
                                                 <input class="form-check-input mixed_child " value="{{ $brand->id }}"
                                                     type="checkbox"></span></td>
                                         <td>
-                                            {{ $brand->id }}
+                                            {{ $i++ }}
                                         </td>
                                        <td>
                                             {{ $brand->name }}

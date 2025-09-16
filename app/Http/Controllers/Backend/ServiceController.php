@@ -167,12 +167,21 @@ class ServiceController extends Controller
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
         ]);
+<<<<<<< HEAD
+        if($request->brands!='')
+        {
+=======
+>>>>>>> be2ec65000a2a50dc58ea20a155e4de3bcfaf952
         foreach ($request->brands as $brand) {
             BrandDetails::updateOrCreate([
                 'service_id' => $service->id,
                 'brand_id' => $brand
             ]);
         }
+<<<<<<< HEAD
+       }
+=======
+>>>>>>> be2ec65000a2a50dc58ea20a155e4de3bcfaf952
         $notification = [
             'message' => 'Services Updated Successfully',
             'alert-category_id' => 'success',

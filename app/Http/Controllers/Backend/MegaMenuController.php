@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
 use App\Models\Megamenu;
 use App\Models\Menu;
 use App\Models\Service;
@@ -17,6 +16,7 @@ class MegaMenuController extends Controller
     public function index()
     {
         $megamenus = MegaMenu::all();
+
         return view('backend.megamenu.all_megamenu', compact('megamenus'));
     }
 
@@ -26,9 +26,10 @@ class MegaMenuController extends Controller
     public function create()
     {
         $megamenu = Megamenu::all();
-        $menus = Menu::where('megamenu',1)->pluck('title', 'id');
+        $menus = Menu::where('megamenu', 1)->pluck('title', 'id');
         $services = Service::pluck('name', 'id');
-        return view('backend.megamenu.add_megamenu', compact('megamenu','menus','services'));
+
+        return view('backend.megamenu.add_megamenu', compact('megamenu', 'menus', 'services'));
     }
 
     /**
@@ -37,22 +38,22 @@ class MegaMenuController extends Controller
     public function store(Request $request)
     {
 
-        $links=implode(',',$request->links);
+        $links = implode(',', $request->links);
         $validated = $request->validate([
-            'title' =>'required|unique:mega_menus|max:255',
-            'links' =>'required',
+            'title' => 'required|unique:mega_menus|max:255',
+            'links' => 'required',
         ]);
-
 
         megamenu::insert([
             'menu_id' => $request->menu_id,
             'title' => $request->title,
-            'links' => $links
+            'links' => $links,
         ]);
-        $notification = array(
+        $notification = [
             'message' => 'Mega Menu Section Added Successfully',
             'alert-type' => 'success',
-        );
+        ];
+
         return redirect()->back()->with($notification);
     }
 
@@ -71,7 +72,8 @@ class MegaMenuController extends Controller
     {
         $menus = Menu::pluck('title', 'id');
         $services = Service::pluck('name', 'id');
-        return view('backend.megamenu.edit_megamenu', compact('megamenu','menus','services'));
+
+        return view('backend.megamenu.edit_megamenu', compact('megamenu', 'menus', 'services'));
     }
 
     /**
@@ -80,18 +82,18 @@ class MegaMenuController extends Controller
     public function update(Request $request, Megamenu $megamenu)
     {
 
-        $links=implode(',',$request->links);
-
+        $links = implode(',', $request->links);
 
         $megamenu->update([
             'menu_id' => $request->menu_id,
             'title' => $request->title,
             'links' => $links,
         ]);
-        $notification = array(
+        $notification = [
             'message' => 'Mega Menu Section Updated Successfully',
             'alert-type' => 'success',
-        );
+        ];
+
         return redirect()->back()->with($notification);
     }
 

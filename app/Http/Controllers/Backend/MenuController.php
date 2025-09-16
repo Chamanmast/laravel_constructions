@@ -6,19 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Menugroup;
 use App\Traits\CommonTrait;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
     use CommonTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $menus = Menu::all();
+
         return view('backend.menu.all_menu', compact('menus'));
     }
 
@@ -31,6 +33,7 @@ class MenuController extends Controller
         $type = ['Page', 'Url', 'External Page', 'Category'];
         $menugroup = Menugroup::pluck('title', 'id');
         $menus = Menu::pluck('title', 'id');
+
         return view('backend.menu.add_menu', compact('menus', 'type', 'menugroup'));
     }
 
@@ -44,7 +47,7 @@ class MenuController extends Controller
         ]);
         $groups = $request->group_ids;
         if (is_array($groups)) {
-            $groupids = implode(",", $groups);
+            $groupids = implode(',', $groups);
         }
         if ($request->hasFile('attachment')) {
             $filePath = $request->file('attachment')->store('attachment', 'public');
@@ -57,13 +60,14 @@ class MenuController extends Controller
             'position' => count(menu::all()) + 1,
             'group_id' => $groupids,
             'megamenu' => $request->megamenu ? 1 : 0,
-            'attachment' => $filePath
+            'attachment' => $filePath,
         ]);
 
-        $notification = array(
+        $notification = [
             'message' => 'Menu Added Successfully',
             'alert-type' => 'success',
-        );
+        ];
+
         return redirect()->back()->with($notification);
     }
 
@@ -83,7 +87,8 @@ class MenuController extends Controller
 
         $type = ['Page', 'Url', 'External Page', 'Category'];
         $menugroup = Menugroup::pluck('title', 'id');
-        $menus =  Menu::pluck('title', 'id');
+        $menus = Menu::pluck('title', 'id');
+
         return view('backend.menu.edit_menu', compact('menu', 'menus', 'type', 'menugroup'));
     }
 
@@ -92,27 +97,27 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-         $validated = $request->validate([
-        'attachment' => 'nullable|file|mimes:pdf,doc,docx|max:5048',
-    ]);
+        $validated = $request->validate([
+            'attachment' => 'nullable|file|mimes:pdf,doc,docx|max:5048',
+        ]);
 
         $groups = $request->group_ids;
         if (is_array($groups)) {
-            $groupids = implode(",", $groups);
+            $groupids = implode(',', $groups);
         }
- // Handle file upload if a new file is provided
-    if ($request->hasFile('attachment')) {
-        // Optionally delete the old file
-        if ($menu->attachment && Storage::disk('public')->exists($menu->attachment)) {
-            Storage::disk('public')->delete($menu->attachment);
+        // Handle file upload if a new file is provided
+        if ($request->hasFile('attachment')) {
+            // Optionally delete the old file
+            if ($menu->attachment && Storage::disk('public')->exists($menu->attachment)) {
+                Storage::disk('public')->delete($menu->attachment);
+            }
+
+            // Store new file
+            $filePath = $request->file('attachment')->store('attachment', 'public');
+
+            // Update file path in the menu
+            $menu->attachment = $filePath;
         }
-
-        // Store new file
-        $filePath = $request->file('attachment')->store('attachment', 'public');
-
-        // Update file path in the menu
-        $menu->attachment = $filePath;
-    }
         $menu->update([
             'parent_id' => ($request->parent_id != null) ? $request->parent_id : 0,
             'title' => $request->title,
@@ -120,7 +125,7 @@ class MenuController extends Controller
             'type' => $request->type,
             'position' => $request->position,
             'group_id' => $groupids,
-            'megamenu' => $request->megamenu
+            'megamenu' => $request->megamenu,
         ]);
         if ($request->meta_description) {
             $menu->meta()->updateOrCreate([], [
@@ -128,10 +133,11 @@ class MenuController extends Controller
                 'meta_keywords' => $request->meta_keywords,
             ]);
         }
-        $notification = array(
+        $notification = [
             'message' => 'Menu Updated Successfully',
             'alert-type' => 'success',
-        );
+        ];
+
         return redirect()->back()->with($notification);
     }
 
