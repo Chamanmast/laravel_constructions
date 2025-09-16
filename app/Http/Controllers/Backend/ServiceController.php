@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\BrandDetails;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\ImagePresets;
@@ -47,8 +48,8 @@ class ServiceController extends Controller
     {
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
-		$projects = Project::pluck('name', 'id');
-        return view('backend.services.add_service', compact('categories', 'brands','projects'));
+        $projects = Project::pluck('name', 'id');
+        return view('backend.services.add_service', compact('categories', 'brands', 'projects'));
     }
 
     /**
@@ -68,7 +69,7 @@ class ServiceController extends Controller
             $save_url = NULL;
         }
         $brands = $this->postBrandToString($request->brands ?? []);
-		$projects = $this->postBrandToString($request->projects ?? []);
+        $projects = $this->postBrandToString($request->projects ?? []);
         $service = Service::insert([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -77,10 +78,16 @@ class ServiceController extends Controller
             'image' => $save_url,
             'small_text' => $request->small_text,
             'text' => $request->text,
-            'brands'=>$brands,
-			'projects' => $projects,
+            'brands' => $brands,
+            'projects' => $projects,
             'status' => 0,
         ]);
+        foreach ($request->brands as $brand) {
+            BrandDetails::updateOrCreate([
+                'service_id' => $service->id,
+                'brand_id' => $brand
+            ]);
+        }
         $service->meta()->create([
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
@@ -110,8 +117,10 @@ class ServiceController extends Controller
         //
         $categories = Category::type(0)->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
-		$projects = Project::pluck('name', 'id');
-        return view('backend.services.edit_service', compact('service', 'categories', 'brands','projects'));
+        $projects = Project::pluck('name', 'id');
+        $branddeatils = BrandDetails::where('service_id', $service->id)->get();
+
+        return view('backend.services.edit_service', compact('service', 'categories', 'brands', 'projects', 'branddeatils'));
     }
 
     /**
@@ -141,7 +150,7 @@ class ServiceController extends Controller
             }
         }
         $brands = $this->postBrandToString($request->brands ?? []);
-		$projects = $this->postBrandToString($request->projects ?? []);
+        $projects = $this->postBrandToString($request->projects ?? []);
         $service->update([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -151,13 +160,19 @@ class ServiceController extends Controller
             'small_text' => $request->small_text,
             'text' => $request->text,
             'brands' => $brands,
-			'projects' => $projects,
+            'projects' => $projects,
             'status' => 0,
         ]);
         $service->meta()->updateOrCreate([], [
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
         ]);
+        foreach ($request->brands as $brand) {
+            BrandDetails::updateOrCreate([
+                'service_id' => $service->id,
+                'brand_id' => $brand
+            ]);
+        }
         $notification = [
             'message' => 'Services Updated Successfully',
             'alert-category_id' => 'success',
@@ -166,7 +181,7 @@ class ServiceController extends Controller
         return redirect()->back()->with($notification);
     }
 
-     protected function postBrandToString($brands)
+    protected function postBrandToString($brands)
     {
         return is_array($brands) ? implode(',', $brands) : '';
     }
@@ -176,6 +191,29 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         //
+    }
+    public function barndDetails(int $id)
+    {
+        $brand = Brand::select('id', 'name')->find($id);
+        $brandDetail = BrandDetails::where('id', $id)->first();
+
+        return view('backend.services.edit_branddetails', compact('brandDetail', 'brand'));
+    }
+    public function brandDetailsSubmit(Request $request, $id)
+    {
+        return $this->executeWithNotification(function () use ($request, $id) {
+
+            $brandDetail = BrandDetails::where('id', $id)->first();
+
+            $brandDetail->update([
+                'location' => $request->location,
+                'protocol' => $request->protocol,
+                'eestablished_since' => $request->eestablished_since,
+                'worldwide' => $request->worldwide,
+                'controller' => $request->controller,
+                'status' => $request->status,
+            ]);
+        }, 'Brand Detail Updated Successfully', 'Failed to update Brand Detail.');
     }
 
     public function delete(Request $request)

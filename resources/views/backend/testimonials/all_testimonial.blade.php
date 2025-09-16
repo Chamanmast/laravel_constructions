@@ -32,7 +32,7 @@
                                             <input
                                                 class="form-check-input mixed_child " value="{{ $testimonial->id }}"
                                                 type="checkbox"></span></td>
-                                    <
+
                                     <td>{{ $testimonial->id }}</td>
                                     <td>@php
                                         if (!empty($testimonial->image)) {

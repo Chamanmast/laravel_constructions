@@ -94,10 +94,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/category/status', [CategoryController::class, 'StatusUpdate'])->middleware('can:category.status')->name('category.status');
     Route::post('/category/delete', [CategoryController::class, 'Delete'])->middleware('can:category.delete')->name('category.delete');
 
-    // ervice All Routes
+    // Service All Routes
     Route::resource('services', ServiceController::class)->middleware('can:services.index, services.create, services.update');
     Route::post('/services/status', [ServiceController::class, 'StatusUpdate'])->middleware('can:services.status')->name('services.status');
     Route::post('/services/delete', [ServiceController::class, 'Delete'])->middleware('can:services.delete')->name('services.delete');
+    Route::get('/services/branddetails/{id}', [ServiceController::class, 'barndDetails'])->name('branddetails.edit');
+    Route::put('/services/branddetails/{id}', [ServiceController::class, 'brandDetailsSubmit'])->name('branddetails.update');
 
     // project All Routes
     Route::resource('project', ProjectController::class)->middleware('can:project.index, project.create, project.update');

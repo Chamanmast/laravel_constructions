@@ -8,6 +8,17 @@
             href="{{ asset('backend/assets/src/plugins/css/light/tomSelect/custom-tomSelect.css') }}">
         <link rel="stylesheet" type="text/css"
             href="{{ asset('backend/assets/src/plugins/css/dark/tomSelect/custom-tomSelect.css') }}">
+
+        <link href="{{ asset('backend/assets/src/plugins/src/table/datatable/datatables.css') }}" rel="stylesheet"
+            type="text/css">
+        <link href="{{ asset('backend/assets/src/plugins/css/light/table/datatable/dt-global_style.css') }}"
+            rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/assets/src/plugins/css/light/table/datatable/custom_dt_miscellaneous.css') }}"
+            rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/assets/src/plugins/css/dark/table/datatable/dt-global_style.css') }}" rel="stylesheet"
+            type="text/css">
+        <link href="{{ asset('backend/assets/src/plugins/css/dark/table/datatable/custom_dt_miscellaneous.css') }}"
+            rel="stylesheet" type="text/css">
     @stop
     <div class="seperator-header layout-top-spacing">
         <a href="{{ route('services.index') }}">
@@ -15,16 +26,67 @@
         </a>
     </div>
     <div class="page-content">
-
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title fw-bold">Edit Service</h6>
-
                         {{-- resources/views/components/backend/backend_component/service-form.blade.php --}}
-                        <x-backend.backend_component.service-form  :$brands :$projects  :$service :$categories :isEdit="true" />
+                        <x-backend.backend_component.service-form :$brands :$projects :$service :$categories
+                            :isEdit="true" />
 
+
+                        <table id="html5-extension" class="table dt-table-hover mt-4">
+                            <thead>
+                                <tr>
+                                    <th>-</th>
+                                    <th>ID</th>
+                                    <th>Brand Name</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @forelse ($branddeatils as $branddetail)
+                                @php
+                                    $brand =App\Models\Brand::find($branddetail->id);
+                                @endphp
+                                    <tr class="brand-{{ $brand->id }}">
+                                        <td style="width:1%"><span class="form-check form-check-primary">
+                                                <input class="form-check-input mixed_child " value="{{ $brand->id }}"
+                                                    type="checkbox"></span></td>
+                                        <td>
+                                            {{ $brand->id }}
+                                        </td>
+                                       <td>
+                                            {{ $brand->name }}
+                                        </td>
+
+                                         <td class="text-center">
+                                            <div class="action-btns">
+                                             <a href="{{ route('branddetails.update', $brand->id) }}"
+                                                    class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
+                                                    data-placement="top" title="Edit" data-bs-original-title="Edit">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                                <a href="javascript:void(0)"
+                                                    onClick="#"
+                                                    class="action-btn btn-edit bs-tooltip me-2 delete{{ $brand->id }}"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete"
+                                                    data-bs-original-title="Delete">
+                                                    <i data-feather="trash-2"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+
+                                @endforelse ($branddeatils as $brand)
+
+
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -35,16 +97,15 @@
 
         <script src="{{ asset('backend/assets/src/plugins/src/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>
         <script src="{{ asset('backend/assets/src/plugins/src/bootstrap-maxlength/custom-bs-maxlength.js') }}"></script>
-        <script src="{{ asset('backend/assets/src/plugins/src/tomSelect/tom-select.base.js') }}"></script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/datatables.js') }}"></script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/button-ext/dataTables.buttons.min.js') }}">
+        </script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/button-ext/jszip.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/button-ext/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/src/plugins/src/table/datatable/custom_miscellaneous.js') }}"></script>
 
         <script>
-            new TomSelect("#select-beast", {
-                create: true,
-                sortField: {
-                    field: "text",
-                    direction: "asc"
-                }
-            });
             $('textarea.textareamax').maxlength({
                 alwaysShow: true,
                 threshold: 150,
@@ -261,11 +322,11 @@
 
                 });
                 $(".taggings").select2({
-                placeholder: $(this).data('placeholder'),
-                closeOnSelect: false,
-                tags: true,
-                allowClear: true,
-            });
+                    placeholder: $(this).data('placeholder'),
+                    closeOnSelect: false,
+                    tags: true,
+                    allowClear: true,
+                });
             });
         </script>
     @stop
